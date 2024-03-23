@@ -33,7 +33,7 @@ function HeroMobile() {
       button: "Shop Now",
     },
     {
-      original: "/background2.jpg",
+      original: "/back-5.jpg",
       description: (
         <div className="flex flex-col justify-start items-start text-black font-bold">
           <span className="text-lg">Easy, Fresh & Convenient</span>
@@ -48,7 +48,22 @@ function HeroMobile() {
       button: "Shop Now",
     },
     {
-      original: "/background4.jpg",
+      original: "/back-1.jpg",
+      description: (
+        <div className="flex flex-col justify-start items-start text-black font-bold">
+          <span className="text-lg">Easy, Fresh & Convenient</span>
+          <br />
+          <span className="text-4xl mb-2">Stock Up on</span>
+          <span className="text-4xl">Daily Essentials</span>
+          <br />
+          <span className="text-2xl mb-2">Save Big on Your</span>
+          <span className="text-2xl">Favorite Brands</span>
+        </div>
+      ),
+      button: "Shop Now",
+    },
+    {
+      original: "/back-55.jpg",
       description: (
         <div className="flex flex-col justify-start items-start text-black font-bold">
           <span className="text-lg">Easy, Fresh & Convenient</span>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchForm from "@/components/SearchForm";
 import Link from "next/link";
@@ -15,7 +15,7 @@ function LaptopHeader() {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
-      setIsScrolled(currentScrollY > 700 && currentScrollY > prevScrollY);
+      setIsScrolled(currentScrollY > 400 && currentScrollY > prevScrollY);
       setPrevScrollY(currentScrollY);
     };
 
@@ -54,7 +54,7 @@ function LaptopHeader() {
               <FavoriteIcon className="text-white w-7 h-7"/>
             </Link>
             <Link href="" className="flex justify-center items-center">
-              <AddShoppingCartIcon className="text-white w-7 h-7" />
+              <ShoppingCartOutlinedIcon className="text-white w-7 h-7" />
               <div className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
                 0
               </div>

@@ -33,7 +33,7 @@ function HeroLaptop() {
       button: "Shop Now",
     },
     {
-      original: "/background2.jpg",
+      original: "/back-5.jpg",
       description: (
         <div className="flex flex-col justify-start items-start text-black font-bold">
           <span className="text-2xl">Easy, Fresh & Convenient</span>
@@ -48,7 +48,22 @@ function HeroLaptop() {
       button: "Shop Now",
     },
     {
-      original: "/background4.jpg",
+      original: "/back-1.jpg",
+      description: (
+        <div className="flex flex-col justify-start items-start text-black font-bold">
+          <span className="text-2xl">Easy, Fresh & Convenient</span>
+          <br />
+          <span className="text-7xl mb-2">Stock Up on</span>
+          <span className="text-7xl">Daily Essentials</span>
+          <br />
+          <span className="text-4xl mb-2">Save Big on Your</span>
+          <span className="text-4xl">Favorite Brands</span>
+        </div>
+      ),
+      button: "Shop Now",
+    },
+    {
+      original: "/back-55.jpg",
       description: (
         <div className="flex flex-col justify-start items-start text-black font-bold">
           <span className="text-2xl">Easy, Fresh & Convenient</span>
@@ -96,7 +111,7 @@ function HeroLaptop() {
               <p className="text-xs mb-2 text-center md:mb-6 md:text-xl">
                 {slides[currentIndex].description}
               </p>
-              <button className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white">
+              <button className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 border-white hover:bg-white">
                 {slides[currentIndex].button}
               </button>
             </div>

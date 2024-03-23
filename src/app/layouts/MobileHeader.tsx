@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import HambuerguerIcon from "@/components/HambuergerIcon";
 import SearchForm from "@/components/SearchForm";
 import AboveHeaderMobile from "@/components/AboveHeaderMobile";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 function MobileHeader() {
   return (
@@ -26,7 +26,7 @@ function MobileHeader() {
           </div>
           <div className="flex justify-center items-center">
             <div className="flex justify-center items-center">
-              <AddShoppingCartIcon className="text-white w-7 h-7" />
+              <ShoppingCartOutlinedIcon className="text-white w-7 h-7" />
               <div className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
                 0
               </div>
