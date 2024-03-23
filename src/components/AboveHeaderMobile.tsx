@@ -3,8 +3,8 @@ import React from "react";
 import TextTransition, { presets } from "react-text-transition";
 
 const TEXTS = [
-  "Lorem ipsum dolor sit amet consectetur.",
-  "Lorem ipsum dolor eee eee  ee.",
+  "Shop on the go, download our app.",
+  "Get 20% off your first order..",
 ];
 
 const AboveHeaderMobile = () => {
