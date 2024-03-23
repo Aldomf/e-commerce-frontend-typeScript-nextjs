@@ -22,7 +22,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Games</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Games</p>
         </Link>
         <Link
           href=""
@@ -37,7 +37,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Beauty</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Beauty</p>
         </Link>
         <Link
           href=""
@@ -52,7 +52,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Toys</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Toys</p>
         </Link>
         <Link
           href=""
@@ -67,7 +67,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Books</p>
+          <p className="font-bold  mt-8 text-3xl text-[#363F46]">Books</p>
         </Link>
         <Link
           href=""
@@ -82,7 +82,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Health</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Health</p>
         </Link>
         <Link
           href=""
@@ -97,7 +97,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Electronics</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Electronics</p>
         </Link>
         <Link
           href=""
@@ -112,7 +112,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Fashion</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Fashion</p>
         </Link>
         <Link
           href=""
@@ -127,7 +127,7 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold text-xl mt-8">Sport</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Sport</p>
         </Link>
       </div>
     </div>

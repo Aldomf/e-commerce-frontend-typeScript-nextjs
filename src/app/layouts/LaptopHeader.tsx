@@ -6,6 +6,7 @@ import SearchForm from "@/components/SearchForm";
 import Link from "next/link";
 import AboveHeaderLaptop from "@/components/AboveHeaderLaptop";
 import SubHeaderLaptop from "@/components/SubHeaderLaptop";
+import { FaLocationDot } from "react-icons/fa6";
 
 function LaptopHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -28,7 +29,13 @@ function LaptopHeader() {
 
   return (
     <>
-      <div className={`fixed top-0 left-0 right-0 z-10 transition-opacity duration-500 ${isScrolled ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+      <div
+        className={`fixed top-0 left-0 right-0 z-10 transition-opacity duration-500 ${
+          isScrolled
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100 pointer-events-auto"
+        }`}
+      >
         <AboveHeaderLaptop />
         <div className="flex justify-between items-center w-full bg-[#a3c9bc] py-6 px-4 lg:px-10 xl:px-16">
           <Link href="/" className="flex justify-center items-center">
@@ -51,17 +58,20 @@ function LaptopHeader() {
           </div>
           <div className="flex justify-center items-center">
             <Link href="" className="mr-4 lg:mr-6 xl:mr-8">
-              <FavoriteIcon className="text-white w-7 h-7"/>
+              <FaLocationDot className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
+            </Link>
+            <Link href="" className="mr-4 lg:mr-6 xl:mr-8">
+              <FavoriteIcon className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
             </Link>
             <Link href="" className="flex justify-center items-center">
-              <ShoppingCartOutlinedIcon className="text-white w-7 h-7" />
+              <ShoppingCartOutlinedIcon className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
               <div className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
                 0
               </div>
             </Link>
           </div>
         </div>
-        <SubHeaderLaptop/>
+        <SubHeaderLaptop />
       </div>
     </>
   );

@@ -6,7 +6,7 @@ function BestDeals() {
   return (
     <div className="flex flex-col items-center my-6 mb-12 px-8 sm:px-16 lg:mb-16">
       <h2 className="font-bold text-3xl mb-6 lg:text-5xl">Best Deals</h2>
-      <div className="sm:grid sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-2 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="sm:grid sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-2 lg:gap-10 lg:grid-cols-4 xl:grid-cols-5">
         <ProductCard />
         <ProductCard />
         <ProductCard />

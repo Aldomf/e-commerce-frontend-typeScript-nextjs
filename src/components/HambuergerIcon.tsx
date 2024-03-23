@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import { FaLocationDot } from "react-icons/fa6";
 
 export default function HambuergerIcon() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -46,7 +47,8 @@ export default function HambuergerIcon() {
                 <div className="text-white flex justify-center items-center">
                   Log In <AccountCircleIcon className="ml-2 w-10 h-10"/>
                 </div>
-                <div>
+                <div className="flex">
+                <FaLocationDot className="text-white mr-4 w-7 h-7" />
                   <FavoriteIcon className="text-white mr-4 w-7 h-7" />
                 </div>
               </div>

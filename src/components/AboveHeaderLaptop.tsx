@@ -4,8 +4,8 @@ import TextTransition, { presets } from "react-text-transition";
 import Link from "next/link";
 
 const TEXTS = [
-  "Lorem ipsum dolor sit amet consectetur.",
-  "Lorem ipsum dolor eee eee  ee.",
+  "Shop on the go, download our app.",
+  "Get 20% off your first order..",
 ];
 
 function AboveHeaderLaptop() {
@@ -22,8 +22,8 @@ function AboveHeaderLaptop() {
   return (
     <div className="py-3 px-4 lg:px-10 xl:px-16 bg-[#6ca08e] text-white flex justify-between font-light">
       <div className="flex items-center">
-        <Link href="" className="mr-10">About Us</Link>
-        <Link href="">Customer Support</Link>
+        <Link href="" className="mr-10 hover:text-[#363F46] transition duration-500 ease-in-out">About Us</Link>
+        <Link href="" className="hover:text-[#363F46] transition duration-500 ease-in-out">Customer Support</Link>
       </div>
       <div className="flex items-center justify-center">
         <TextTransition springConfig={presets.molasses}>
@@ -31,7 +31,7 @@ function AboveHeaderLaptop() {
         </TextTransition>
       </div>
       <div>
-        <Link href="" className="flex items-center justify-center">
+        <Link href="" className="flex items-center justify-center hover:text-[#363F46] transition duration-300 ease-in-out">
           <AccountCircleIcon className="mr-2 w-8 h-8" /> Log in
         </Link>
       </div>

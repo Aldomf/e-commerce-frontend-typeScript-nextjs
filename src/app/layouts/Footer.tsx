@@ -13,7 +13,7 @@ function Footer() {
       <div className="text-white bg-[#a3c9bc] py-10 flex flex-col items-center">
         <div className="border-b-2 border-white w-[90%] mb-8 md:flex md:justify-between md:items-start">
           <div className="mb-14">
-            <div className="flex justify-center items-center mb-2">
+            <Link href="" className="flex justify-center items-center mb-2">
               <h1 className="mr-1 roboto font-semibold text-xl lg:text-4xl">
                 ShipShop
               </h1>
@@ -25,13 +25,13 @@ function Footer() {
                 height={50}
                 priority
               />
-            </div>
+            </Link>
             <div className="flex flex-col justify-center items-center mb-6 lg:mb-16">
               <p className="font-semibold text-lg mb-4 lg:text-2xl">
                 Need Help?
               </p>
               <p>
-                Visit our <span className="underline">Customer Support</span>{" "}
+                Visit our <Link href="" className="underline">Customer Support</Link>{" "}
                 <br />
                 for assistance or call us at
               </p>
@@ -39,15 +39,15 @@ function Footer() {
             </div>
             <div className="flex justify-center items-center text-xl md:text-2xl">
               <Link href="">
-                <FaFacebookF className="mr-4" />
+                <FaFacebookF className="mr-4 hover:text-[#363F46] transition duration-500 ease-in-out" />
               </Link>
               <Link href="">
-                <FaInstagram className="mr-4" />
+                <FaInstagram className="mr-4 hover:text-[#363F46] transition duration-500 ease-in-out" />
               </Link>
               <Link href="">
-                <FaTwitter className="mr-4" />
+                <FaTwitter className="mr-4 hover:text-[#363F46] transition duration-500 ease-in-out" />
               </Link>
-              <Link href="">
+              <Link href="" className="hover:text-[#363F46] transition duration-500 ease-in-out">
                 <FaYoutube />
               </Link>
             </div>
@@ -56,75 +56,75 @@ function Footer() {
             <h3 className="font-semibold text-lg mb-4 lg:text-2xl">
               Categories
             </h3>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Electronics
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Games
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Health
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Fashion
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Beauty
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Accessories
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Toys
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Office
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Pets
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Books
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Sport
             </Link>
-            <Link href="">Most Popular</Link>
+            <Link href="" className="hover:text-[#363F46] transition duration-500 ease-in-out">Most Popular</Link>
           </div>
           <div className="flex flex-col justify-center items-center mb-14">
             <h3 className="font-semibold text-lg mb-4 lg:text-2xl">Info</h3>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               FAQ
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               About Us
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Customer Support
             </Link>
-            <Link href="">Locations</Link>
+            <Link href="" className="hover:text-[#363F46] transition duration-500 ease-in-out">Locations</Link>
           </div>
           <div className="flex flex-col justify-center items-center mb-8">
             <h3 className="font-semibold text-lg mb-4 lg:text-2xl">
               My Choice
             </h3>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               Favorites
             </Link>
-            <Link href="" className="mb-4">
+            <Link href="" className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out">
               My Orders
             </Link>
           </div>
         </div>
         <div className="w-full flex flex-col items-center">
           <div className="flex flex-col items-center mb-14 md:flex-row md:justify-center md:items-center">
-            <Link href="" className="underline mb-4 md:mb-0 md:mr-16">
+            <Link href="" className="underline mb-4 md:mb-0 md:mr-16 hover:text-[#363F46] transition duration-500 ease-in-out">
               Shipping & Returns
             </Link>
-            <Link href="" className="underline mb-4 md:mb-0 md:mr-16">
+            <Link href="" className="underline mb-4 md:mb-0 md:mr-16 hover:text-[#363F46] transition duration-500 ease-in-out">
               Terms & Conditions
             </Link>
-            <Link href="" className="underline">
+            <Link href="" className="underline hover:text-[#363F46] transition duration-500 ease-in-out">
               Payment Methods
             </Link>
           </div>

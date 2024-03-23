@@ -42,7 +42,7 @@ function SectionFour() {
                 <span className="font-bold mt-4 text-2xl">off</span>
               </div>
               <br />
-              <span className="font-bold text-lg mb-4 md:mb-8 md:text-2xl">Lorem ipsum dolor</span>
+              <span className="font-bold text-lg mb-4 md:mb-8 md:text-2xl">Fashion Trends</span>
               <Link
                 href=""
                 className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white"

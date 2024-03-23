@@ -35,7 +35,7 @@ function NewsLetter() {
           <input
             type="button"
             value="Subscribe"
-            className="bg-[#A3C9BC] font-bold text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white lg:ml-4"
+            className="bg-[#A3C9BC] font-bold text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white lg:ml-4 cursor-pointer"
           />
         </div>
       </form>
