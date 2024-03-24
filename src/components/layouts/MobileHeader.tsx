@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import HambuerguerIcon from "@/components/HambuergerIcon";
-import SearchForm from "@/components/SearchForm";
-import AboveHeaderMobile from "@/components/AboveHeaderMobile";
+import HambuerguerIcon from "@/components/homapage/HambuergerIcon";
+import SearchForm from "@/components/homapage/SearchForm";
+import AboveHeaderMobile from "@/components/homapage/AboveHeaderMobile";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 function MobileHeader() {

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import HamburguerMenuAdmin from "@/components/HamburguerMenuAdmin";
-import { SideBar } from "@/components/SideBar";
+import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
+import { SideBar } from "@/components/homapage/SideBar";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";

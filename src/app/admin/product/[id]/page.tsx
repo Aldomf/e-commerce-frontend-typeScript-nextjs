@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { SideBar } from "@/components/SideBar";
+import { SideBar } from "@/components/homapage/SideBar";
 import { useMediaQuery } from "react-responsive";
-import HamburguerMenuAdmin from "@/components/HamburguerMenuAdmin";
+import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";

@@ -1,10 +1,10 @@
 "use client";
-import { SideBar } from "@/components/SideBar";
+import { SideBar } from "@/components/homapage/SideBar";
 import DataTable, { createTheme } from "react-data-table-component";
 import React, { MouseEvent, useEffect, useState } from "react";
 import { Order, OrderStatus, Status, } from "@/interfaces/interfaces";
 import { useMediaQuery } from "react-responsive";
-import HamburguerMenuAdmin from "@/components/HamburguerMenuAdmin";
+import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
 
 function AdminUser() {
   // createTheme creates a new theme named solarized that overrides the build in dark theme

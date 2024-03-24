@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import SubFooter from "@/components/SubFooter";
+import SubFooter from "@/components/homapage/SubFooter";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa6";

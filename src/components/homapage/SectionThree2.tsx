@@ -16,7 +16,7 @@ function SectionThree2() {
       <div className="flex justify-center items-center text-white relative">
         <div className="flex flex-col justify-center items-start p-8 lg:p-0 lg:w-[750px] pt-16 lg:pl-0 lg:pt-20">
           <span className="font-bold text-lg lg:text-3xl xl:mb-0">
-            Save Time & Mony
+            Save Time & Money
           </span>
           <div className="flex mb-4">
             <span className="font-bold text-4xl md:text-5xl lg:text-8xl">

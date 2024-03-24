@@ -2,9 +2,9 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { SideBar } from "@/components/SideBar";
+import { SideBar } from "@/components/homapage/SideBar";
 import { useMediaQuery } from "react-responsive";
-import HamburguerMenuAdmin from "@/components/HamburguerMenuAdmin";
+import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
 import { Toaster, toast } from "react-hot-toast";
 import { z, object, string, number, boolean } from "zod";
 

@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import SearchForm from "@/components/SearchForm";
+import SearchForm from "@/components/homapage/SearchForm";
 import Link from "next/link";
-import AboveHeaderLaptop from "@/components/AboveHeaderLaptop";
-import SubHeaderLaptop from "@/components/SubHeaderLaptop";
+import AboveHeaderLaptop from "@/components/homapage/AboveHeaderLaptop";
+import SubHeaderLaptop from "@/components/homapage/SubHeaderLaptop";
 import { FaLocationDot } from "react-icons/fa6";
 
 function LaptopHeader() {
