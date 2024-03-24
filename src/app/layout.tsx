@@ -4,8 +4,6 @@ import { Inter } from "next/font/google";
 import { Roboto } from "next/font/google";
 import "./globals.css";
 import { useMediaQuery } from "react-responsive";
-import HeroLaptop from "@/components/homapage/HeroLaptop";
-import HeroMobile from "@/components/homapage/HeroMobile";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import Footer from "@/components/layouts/Footer";
@@ -33,7 +31,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
-        {isTabletOrLarger ? <HeroLaptop /> : <HeroMobile />}
         {children}
         <Footer />
       </body>
