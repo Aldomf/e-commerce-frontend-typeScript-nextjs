@@ -14,12 +14,16 @@ import SectionThree2 from '@/components/homapage/SectionThree2';
 import HeroMobile from '@/components/homapage/HeroMobile';
 import HeroLaptop from '@/components/homapage/HeroLaptop';
 import { useMediaQuery } from 'react-responsive';
+import MobileHeader from '@/components/layouts/MobileHeader';
+import LaptopHeader from '@/components/layouts/LaptopHeader';
+import Footer from '@/components/layouts/Footer';
 
 function HomePage() {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
   return (
     <>
+    {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
     {isTabletOrLarger ? <HeroLaptop /> : <HeroMobile />}
       <SectionOne/>
       <BestDeals/>
@@ -32,6 +36,7 @@ function HomePage() {
       <SectionFour/>
       <NewProducts/>
       <NewsLetter/>
+      <Footer />
     </>
   );
 }
