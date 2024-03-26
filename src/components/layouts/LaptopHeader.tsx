@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -7,8 +7,17 @@ import Link from "next/link";
 import AboveHeaderLaptop from "@/components/homapage/AboveHeaderLaptop";
 import SubHeaderLaptop from "@/components/homapage/SubHeaderLaptop";
 import { FaLocationDot } from "react-icons/fa6";
+import CartListSideBar from "../homapage/CartListSideBar";
 
 function LaptopHeader() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [prevScrollY, setPrevScrollY] = useState(0);
 
@@ -26,6 +35,24 @@ function LaptopHeader() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [prevScrollY]);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        buttonRef.current &&
+        !buttonRef.current.contains(e.target as Node) &&
+        !sidebarRef.current?.contains(e.target as Node)
+      ) {
+        setIsSidebarOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -60,19 +87,28 @@ function LaptopHeader() {
             <Link href="" className="mr-4 lg:mr-6 xl:mr-8">
               <FaLocationDot className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
             </Link>
-            <Link href="" className="mr-4 lg:mr-6 xl:mr-8">
+            <Link href="" className=" mr-4 lg:mr-6 xl:mr-8">
               <FavoriteIcon className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
             </Link>
-            <Link href="" className="flex justify-center items-center">
+            <button
+              ref={buttonRef}
+              className="flex justify-center items-center"
+              onClick={toggleSidebar}
+            >
               <ShoppingCartOutlinedIcon className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
-              <div className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
+              <span className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
                 0
-              </div>
-            </Link>
+              </span>
+            </button>
           </div>
         </div>
         <SubHeaderLaptop />
       </div>
+      <CartListSideBar
+        isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}
+        ref={sidebarRef}
+      />
     </>
   );
 }
