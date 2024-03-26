@@ -29,7 +29,7 @@ function Category() {
               ""
             )}
             <div className="lg:w-[80%]">
-              <div className="px-6 sm:grid sm:grid-cols-2 sm:gap-4 md:grid-cols-3 md:gap-5 lg:gap-3 xl:gap-10 lg:grid-cols-4 xl:grid-cols-5">
+              <div className="px-6 ssm:grid ssm:grid-cols-2 ssm:gap-4 md:grid-cols-3 md:gap-5 lg:gap-3 xl:gap-10 lg:grid-cols-4 xl:grid-cols-5">
                 <ProductCard />
                 <ProductCard />
                 <ProductCard />
