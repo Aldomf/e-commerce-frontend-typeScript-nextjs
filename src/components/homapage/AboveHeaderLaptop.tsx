@@ -31,7 +31,7 @@ function AboveHeaderLaptop() {
         </TextTransition>
       </div>
       <div>
-        <Link href="" className="flex items-center justify-center hover:text-[#363F46] transition duration-300 ease-in-out">
+        <Link href="/login" className="flex items-center justify-center hover:text-[#363F46] transition duration-300 ease-in-out">
           <AccountCircleIcon className="mr-2 w-8 h-8" /> Log in
         </Link>
       </div>
