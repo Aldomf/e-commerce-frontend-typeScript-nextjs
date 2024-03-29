@@ -3,7 +3,8 @@ import { useMediaQuery } from 'react-responsive';
 import LaptopHeader from '@/components/layouts/LaptopHeader';
 import MobileHeader from '@/components/layouts/MobileHeader';
 import Footer from '@/components/layouts/Footer';
-import Image from 'next/image'
+import Image from 'next/image';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 
 function Product() {
@@ -39,18 +40,21 @@ function Product() {
           <section className="flex h-full w-[50%] flex-col">
             <div className="m-2">
               <h3 className="text-3xl font-bold">Hand Cream</h3>
-              <p className="">SKU: 099</p>
+              <p className="font-extralight mt-1">SKU: 099</p>
             </div>
-            <div className="m-2">
-              <p className="text-xl text-red-500">$2.99</p>
+            <div className="m-2 mt-3">
+              <p className="text-xl text-[#eb1414]">$2.99</p>
             </div>
-            <div className="m-2 flex flex-col">
-              <label htmlFor="quantity" className="mb-1 text-sm">Quantity</label>
+            <div className="m-2 mt-3 flex flex-col">
+              <label htmlFor="quantity" className="mb-1 text-sm font-extralight">Quantity</label>
               <input className="w-20 border border-gray-300 px-3 py-2" type="number" id="quantity" name="quantity" placeholder="1" min="1" step="1" required />
             </div>
             <div className="m-2 mt-8">
-              <button className="bg-red-500 rounded-xl w-72 h-9 font-light text-white hover:opacity-75 transition-opacity">
+              <button className="bg-[#a3c9bc] rounded-3xl w-72 h-10 font-light hover:opacity-75 transition-opacity text-white">
                 Add to Cart
+              </button>
+              <button>
+                <FavoriteBorderIcon className="text-[#a3c9bc] w-11 h-11 hover:text-[#363F46] transition duration-400 ease-in-out ml-3" />
               </button>
             </div>
           </section>
