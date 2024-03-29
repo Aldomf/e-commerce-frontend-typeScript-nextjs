@@ -279,7 +279,7 @@ const UpdateProductForm = () => {
       console.log("Form data:", formData);
 
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5NjY5MSwiZXhwIjoxNzEwODAwMjkxfQ.Y5r47wfqIZRN_ytucTNODiKGrjms8uOCHeZnT8vxQ4U";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMTYwMDYwNiwiZXhwIjoxNzExNjA0MjA2fQ.2DtWMDqjJ7oDJFjQpI60vfJVidhEcQVNr5A_icNQUQQ";
 
       const response = await axios.patch(
         `http://localhost:4000/api/product/${productId}`,

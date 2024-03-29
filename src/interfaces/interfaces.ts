@@ -20,7 +20,7 @@ export interface Product {
   id: number;
   imageUrl: string;
   name: string;
-  description?: string; // Optional field
+  description: string;
   price: string;
   priceWithDiscount: string;
   category: {
@@ -34,6 +34,33 @@ export interface Product {
   inStock: boolean;
   new: boolean;
   sale: boolean;
+}
+
+export interface ProductWithoutCategory {
+  id: number;
+  imageUrl: string;
+  name: string;
+  description: string;
+  price: string;
+  priceWithDiscount: string;
+  discountActive: boolean;
+  discountPercentage: number;
+  hot: boolean;
+  inStock: boolean;
+  new: boolean;
+  sale: boolean;
+}
+
+export interface Categories {
+  id: number;
+  name: string;
+  description?: string;
+}
+export interface Category {
+  id: number;
+  name: string;
+  description?: string;
+  products: ProductWithoutCategory[]
 }
 
 export interface Order {

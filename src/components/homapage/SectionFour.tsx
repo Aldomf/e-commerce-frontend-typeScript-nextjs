@@ -21,7 +21,7 @@ function SectionFour() {
               </span>
               <br />
               <Link
-                href=""
+                href="category/29"
                 className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white"
               >
                 Shop Now
@@ -44,7 +44,7 @@ function SectionFour() {
               <br />
               <span className="font-bold text-lg mb-4 md:mb-8 md:text-2xl">Fashion Trends</span>
               <Link
-                href=""
+                href="category/21"
                 className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white"
               >
                 Shop Now

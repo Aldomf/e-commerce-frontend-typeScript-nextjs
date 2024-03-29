@@ -202,7 +202,7 @@ const CreateProduct: React.FC = () => {
       console.log("Form data:", formData);
 
       const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5NjY5MSwiZXhwIjoxNzEwODAwMjkxfQ.Y5r47wfqIZRN_ytucTNODiKGrjms8uOCHeZnT8vxQ4U";
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMTYwMzk4NywiZXhwIjoxNzExNjA3NTg3fQ.lbeK7aMwEhzuOb4RNIzacr8SmJ81LOrzO1VkF7yTmCk";
 
       const response = await axios.post(
         "http://localhost:4000/api/product/create",
