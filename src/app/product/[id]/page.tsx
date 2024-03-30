@@ -5,7 +5,8 @@ import MobileHeader from '@/components/layouts/MobileHeader';
 import Footer from '@/components/layouts/Footer';
 import Image from 'next/image';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-
+import LaptopSidebar from "@/components/product/DropDownProduct_Laptop";
+import Link from "next/link";
 
 function Product() {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
@@ -16,12 +17,13 @@ function Product() {
         <nav>
           <div className="flex justify-between">
             <div className="flex">
-              <h3>home /</h3>
-              <h3>hand cream</h3>
+              <Link href="#">Home</Link>
+              <span> / </span>
+              <p>hand cream</p>
             </div>
             <div className="flex">
-              <h3> prev </h3>
-              <h3> next </h3>
+              <p> prev </p>
+              <p> next </p>
             </div>
           </div>
         </nav>
@@ -56,10 +58,13 @@ function Product() {
               <button>
                 <FavoriteBorderIcon className="text-[#a3c9bc] w-11 h-11 hover:text-[#363F46] transition duration-400 ease-in-out ml-3" />
               </button>
+              <div className="mt-12 text-2xl">
+                {isTabletOrLarger ? <LaptopSidebar /> : ""}
+              </div>
             </div>
           </section>
         </div>
-        <div className="mt-12 mb-8 w-[50%] font-extralight">I'm a product description. This is a great place to "sell" your product and grab buyers' attention. Describe your product clearly and concisely. Use unique keywords. Write your own description instead of using manufacturers' copy.</div>
+        <div className="mt-12 mb-8 w-[50%] text-sm font-extralight">I'm a product description. This is a great place to "sell" your product and grab buyers' attention. Describe your product clearly and concisely. Use unique keywords. Write your own description instead of using manufacturers' copy.</div>
       </article>
       <Footer />
     </>
