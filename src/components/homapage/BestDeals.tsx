@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
-import { useProduct } from "@/context/productContext";
+import { useProduct } from "@/context/ProductContext";
 
 function BestDeals() {
   const { products } = useProduct();

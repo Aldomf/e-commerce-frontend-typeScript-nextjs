@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
-import { SideBar } from "@/components/homapage/SideBar";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
+import { SideBar } from "@/components/admin/SideBar";
 import { useMediaQuery } from "react-responsive";
 import Pagination from "@/components/homapage/Pagination";
 import { useRouter } from "next/navigation";

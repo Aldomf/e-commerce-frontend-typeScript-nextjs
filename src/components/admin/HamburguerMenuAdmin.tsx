@@ -6,6 +6,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CategoryIcon from "@mui/icons-material/Category";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import { BiSolidExit } from "react-icons/bi";
 
 export default function Header() {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -117,21 +118,17 @@ export default function Header() {
             <p>Orders</p>
           </li>
         </Link>
+        <Link href="/">
+          <li
+            className={`my-8 flex justify-center items-center cursor-pointer`}
+          >
+            <BiSolidExit className="mr-2 text-4xl" />
+            <p>Exit</p>
+          </li>
+        </Link>
       </ul>
           </div>
         </section>
-
-        <ul className="DESKTOP-MENU hidden space-x-8 lg:flex">
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="/portfolio">Portfolio</a>
-          </li>
-          <li>
-            <a href="/contact">Contact</a>
-          </li>
-        </ul>
       </nav>
       <style>{`
       .hideMenuNav {

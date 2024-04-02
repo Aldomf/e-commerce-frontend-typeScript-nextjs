@@ -2,6 +2,7 @@ import React from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Image from "next/image";
 import { Product } from '@/interfaces/interfaces';
+import { useAddProduct } from "@/context/AddProductContext";
 
 interface ProductCardProps {
   products: Product[]; // Specify that the products prop is an array of Product
@@ -9,6 +10,7 @@ interface ProductCardProps {
 }
 
 function ProductCard({ products, label }: ProductCardProps) {
+  const { handleAddToCart } = useAddProduct();
   // Check if products are available
   if (!products || products.length === 0) {
     return <div>No products available</div>;
@@ -63,7 +65,7 @@ function ProductCard({ products, label }: ProductCardProps) {
                   </div>
                 )}
               </div>
-              <button className="w-10 h-10 rounded-full border-2 border-black flex justify-center items-center hover:bg-[#a3c9bc] transition duration-300 ease-in-out">
+              <button className="w-10 h-10 rounded-full border-2 border-black flex justify-center items-center hover:bg-[#a3c9bc] transition duration-300 ease-in-out" onClick={() => handleAddToCart(product.id)}>
                 <AddShoppingCartIcon />
               </button>
             </div>

@@ -5,8 +5,11 @@ import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import Footer from "@/components/layouts/Footer";
 import ProductCard from '@/components/homapage/ProductCard';
+import CartListSideBar from '@/components/homapage/CartListSideBar';
+import { useAddProduct } from '@/context/AddProductContext';
 
 function Wishlist() {
+  const { toggleSidebar, isSidebarOpen } = useAddProduct();
     const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
   return (
     <>
@@ -22,6 +25,8 @@ function Wishlist() {
         </div>
     </div>
     <Footer />
+    <CartListSideBar isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}/>
     </>
   )
 }

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from 'next/navigation';
-import { useProduct } from "@/context/productContext"; 
+import { useProduct } from "@/context/ProductContext"; 
 
 function SubHeaderLaptop() {
   const pathname = usePathname()

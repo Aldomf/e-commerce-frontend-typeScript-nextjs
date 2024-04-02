@@ -5,8 +5,10 @@ import SearchForm from "@/components/homapage/SearchForm";
 import AboveHeaderMobile from "@/components/homapage/AboveHeaderMobile";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import Link from "next/link";
+import { useAddProduct } from "@/context/AddProductContext";
 
 function MobileHeader() {
+  const { toggleSidebar, updatedCartList } = useAddProduct();
   return (
     <>
       <AboveHeaderMobile />
@@ -33,7 +35,7 @@ function MobileHeader() {
               >
                 <ShoppingCartOutlinedIcon className="text-white w-7 h-7" />
                 <div className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
-                  0
+                  {updatedCartList.length}
                 </div>
               </Link>
             </div>

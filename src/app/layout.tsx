@@ -1,8 +1,11 @@
-"use client"
+"use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Roboto } from "next/font/google";
-import { ProductProvider } from "@/context/productContext";
+import { ProductProvider } from "@/context/ProductContext";
+import { AuthProvider } from "@/context/AuthContext";
+import { AddProductProvider } from "@/context/AddProductContext";
+import { UserProvider } from "@/context/UserContext";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -26,7 +29,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.variable}>
-        <ProductProvider>{children}</ProductProvider>
+        <AuthProvider>
+          <UserProvider>
+            <AddProductProvider>
+              <ProductProvider>{children}</ProductProvider>
+            </AddProductProvider>
+          </UserProvider>
+        </AuthProvider>
       </body>
     </html>
   );

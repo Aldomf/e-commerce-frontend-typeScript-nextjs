@@ -10,8 +10,10 @@ import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import Footer from "@/components/layouts/Footer";
+import { useAddProduct } from "@/context/AddProductContext";
 
 function CartList() {
+  const { sumOfPrices } = useAddProduct();
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -42,7 +44,6 @@ function CartList() {
             My cart
           </h2>
           <div>
-            <ProductCart />
             <ProductCart />
           </div>
           <div className="flex flex-col text-[#EC1C1C] font-light border-b border-black py-4 md:border-none">
@@ -112,13 +113,13 @@ function CartList() {
           <div className="flex flex-col border-b border-black py-4 ">
             <div className="flex justify-between text-xl mb-4">
               <p>Subtotal</p>
-              <p>$5.99</p>
+              <p>${sumOfPrices}</p>
             </div>
           </div>
           <div className="flex flex-col py-4 ">
             <div className="flex justify-between text-2xl mb-4">
               <p>Total</p>
-              <p>$5.99</p>
+              <p>${sumOfPrices}</p>
             </div>
             <div className="flex flex-col items-center">
               <button className="text-white font-semibold text-lg flex items-center justify-center bg-[#a3c9bc] w-full py-2 rounded-full">

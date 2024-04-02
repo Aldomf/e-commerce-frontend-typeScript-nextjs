@@ -4,13 +4,16 @@ import MobileSidebar from "@/components/category/MobileSideBar";
 import ProductCard from "@/components/homapage/ProductCard";
 import React from "react";
 import { useParams } from "next/navigation";
-import { useProduct } from "@/context/productContext"; 
+import { useProduct } from "@/context/ProductContext"; 
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import Footer from "@/components/layouts/Footer";
+import { useAddProduct } from "@/context/AddProductContext";
+import CartListSideBar from "@/components/homapage/CartListSideBar";
 
 function Category() {
+  const { toggleSidebar, isSidebarOpen } = useAddProduct();
   const params = useParams<{ id: string }>();
   const categoryId = params.id;
   const categoryIdNumber = parseInt(categoryId, 10);
@@ -53,6 +56,8 @@ function Category() {
         </div>
       </div>
       <Footer />
+      <CartListSideBar isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}/>
     </>
   );
 }

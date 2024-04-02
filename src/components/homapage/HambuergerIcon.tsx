@@ -4,11 +4,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import UserAccount from "../login-signup-forms/UserAccount";
 import { FaLocationDot } from "react-icons/fa6";
-import { useProduct } from "@/context/productContext";
+import { useProduct } from "@/context/ProductContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function HambuergerIcon() {
   const [isNavOpen, setIsNavOpen] = useState(false);
+
+  const { token } = useAuth();
 
   const pathname = usePathname();
 
@@ -47,12 +51,17 @@ export default function HambuergerIcon() {
           <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
             <div className="absolute top-0 flex justify-between w-full px-4 md:px-10 pt-16">
               <div className="flex justify-between items-center w-full">
-                <Link
-                  href="/login"
-                  className="text-white flex justify-center items-center"
-                >
-                  Log In <AccountCircleIcon className="ml-2 w-10 h-10" />
-                </Link>
+              {token ? (
+                  <UserAccount />
+                ) : (
+                  <Link
+                    href="/login"
+                    className="text-white flex justify-center items-center"
+                  >
+                    Log In{" "}
+                    <AccountCircleIcon className="ml-2 w-10 h-10" />
+                  </Link>
+                )}
                 <div className="flex">
                   <Link href="">
                     <FaLocationDot className="text-white mr-4 w-7 h-7" />

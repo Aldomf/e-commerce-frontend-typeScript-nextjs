@@ -8,8 +8,11 @@ import AboveHeaderLaptop from "@/components/homapage/AboveHeaderLaptop";
 import SubHeaderLaptop from "@/components/homapage/SubHeaderLaptop";
 import { FaLocationDot } from "react-icons/fa6";
 import CartListSideBar from "../homapage/CartListSideBar";
+import { useAddProduct } from "@/context/AddProductContext";
 
 function LaptopHeader() {
+  const { updatedCartList } = useAddProduct();
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -97,7 +100,7 @@ function LaptopHeader() {
             >
               <ShoppingCartOutlinedIcon className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
               <span className="w-4 h-4 bg-white text-[#a3c9bc] flex items-center justify-center rounded-full p-3">
-                0
+                {updatedCartList.length}
               </span>
             </button>
           </div>

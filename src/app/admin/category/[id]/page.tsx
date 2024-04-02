@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
-import { SideBar } from "@/components/homapage/SideBar";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
+import { SideBar } from "@/components/admin/SideBar";
 import { useMediaQuery } from "react-responsive";
 import { useRouter, useParams } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
@@ -9,6 +9,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import axios from "axios";
 import { z, object, string } from "zod";
+import { useAuth } from "@/context/AuthContext";
 
 const productSchema = object({
   name: string()
@@ -27,6 +28,7 @@ const productSchema = object({
 });
 
 function UpdateCategory() {
+  const { token } = useAuth();
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const categoryId = params.id;
@@ -44,15 +46,8 @@ function UpdateCategory() {
     // Fetch current category information
     const fetchCategory = async () => {
       try {
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc4OTI0NiwiZXhwIjoxNzEwNzkyODQ2fQ.CO9P8IgDvZKMBZOHUxpuRZ8DLWzLyCFQs4S_JwSCGYU";
         const response = await axios.get(
-          `http://localhost:4000/api/category/${categoryId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`, // Set the Authorization header
-            },
-          }
+          `http://localhost:4000/api/category/${categoryId}`
         );
         const { name, description } = response.data;
         setName(name);
@@ -72,8 +67,6 @@ function UpdateCategory() {
 
     if (confirmDelete) {
       try {
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5MzAxMywiZXhwIjoxNzEwNzk2NjEzfQ.QVcL6jgCHCoKKFSHfiT9TWuIjJ7Vyp6fpB-KPIDO4qA"; // Replace with your actual token
         await axios.delete(`http://localhost:4000/api/category/${categoryId}`, {
           headers: {
             Authorization: `Bearer ${token}`, // Set the Authorization header
@@ -95,8 +88,6 @@ function UpdateCategory() {
     e.preventDefault();
     try {
       const validationResult = productSchema.parse({ name, description });
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5MzAxMywiZXhwIjoxNzEwNzk2NjEzfQ.QVcL6jgCHCoKKFSHfiT9TWuIjJ7Vyp6fpB-KPIDO4qA"; // Replace with your actual token
       const response = await axios.patch(
         `http://localhost:4000/api/category/${categoryId}`,
         {

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useAddProduct } from "@/context/AddProductContext";
 
-function ProductCart() {
+function ProductCartSideBar() {
   const {
     updatedCartList,
     handleDeleteFromCart,
@@ -31,9 +31,14 @@ function ProductCart() {
                     className="h-full w-full object-cover"
                   />
                 </div>
-                <div className="flex flex-col justify-between">
-                  <h3 className="md:mb-2">{product.name}</h3>
-                  <div className="flex items-center">
+                <div className="flex flex-col justify-between max-w-28">
+                  <h3 className="">
+                    {product.name.length > 13
+                      ? `${product.name.substring(0, 13)}...`
+                      : product.name}
+                  </h3>
+
+                  <div className="">
                     {product.discountActive ? (
                       <>
                         <p className="line-through text-sm text-[#ADB5BD] pr-3">{`$${product.price}`}</p>
@@ -91,7 +96,7 @@ function ProductCart() {
               </div>
               <div className="flex flex-col justify-between items-end md:flex-row-reverse md:items-start">
                 <button
-                  className="ml-4"
+                  className="ml-2"
                   onClick={() => handleDeleteFromCart(product.id)}
                 >
                   <svg
@@ -124,4 +129,4 @@ function ProductCart() {
   );
 }
 
-export default ProductCart;
+export default ProductCartSideBar;

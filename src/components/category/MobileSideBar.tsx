@@ -1,5 +1,5 @@
 "use client";
-import { useProduct } from "@/context/productContext";
+import { useProduct } from "@/context/ProductContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";

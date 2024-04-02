@@ -1,13 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
-import { SideBar } from "@/components/homapage/SideBar";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
+import { SideBar } from "@/components/admin/SideBar";
 import { useMediaQuery } from "react-responsive";
 import { useRouter } from "next/navigation";
 import { Toaster, toast } from "react-hot-toast";
 import AddIcon from "@mui/icons-material/Add";
 import axios from "axios";
 import { z, object, string } from "zod";
+import { useAuth } from "@/context/AuthContext";
 
 const productSchema = object({
   name: string()
@@ -32,6 +33,7 @@ interface Category {
 }
 
 function CreateCategory() {
+  const { token } = useAuth();
   const router = useRouter();
 
   const isTabletOrMobile = useMediaQuery({ query: "(max-width: 768px)" });
@@ -47,8 +49,6 @@ function CreateCategory() {
     try {
       const validationResult = productSchema.parse({ name, description });
       console.log(validationResult);
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5MzAxMywiZXhwIjoxNzEwNzk2NjEzfQ.QVcL6jgCHCoKKFSHfiT9TWuIjJ7Vyp6fpB-KPIDO4qA";
       const response = await axios.post(
         "http://localhost:4000/api/category",
         {

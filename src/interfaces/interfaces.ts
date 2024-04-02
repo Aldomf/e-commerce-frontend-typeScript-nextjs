@@ -3,12 +3,49 @@ import { ReactNode } from "react";
 export interface LayoutProps {
   children: ReactNode;
 }
+export interface ProductData {
+  name: string;
+  description: string;
+  price: string;
+  category: string;
+  discountPercentage?: string;
+  discountActive: boolean;
+  imageFile: File | null;
+  imageUrl: string | null;
+  inStock: boolean;
+  hot: boolean;
+  sale: boolean;
+  new: boolean;
+}
+
+export interface CartItem {
+  id: number;
+  name: string;
+  description: string;
+  price: string;
+  inStock: boolean;
+  hot: boolean;
+  sale: boolean;
+  new: boolean;
+  imageUrl: string;
+  discountPercentage: number;
+  priceWithDiscount: string;
+  discountActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  category: {
+    id: number;
+    name: string;
+    description?: string; // Optional field
+  };
+}
 
 export interface User {
   id: number;
   username: string;
   email: string;
   role: string;
+  cartList: CartItem[]
 }
 
 export interface HamburguerMenuProps {
@@ -36,6 +73,10 @@ export interface Product {
   sale: boolean;
 }
 
+export interface ProductQuantities {
+  [productId: number]: number;
+}
+
 export interface ProductWithoutCategory {
   id: number;
   imageUrl: string;
@@ -49,6 +90,11 @@ export interface ProductWithoutCategory {
   inStock: boolean;
   new: boolean;
   sale: boolean;
+}
+
+export interface UserLogin {
+  email: string;
+  password: string;
 }
 
 export interface Categories {

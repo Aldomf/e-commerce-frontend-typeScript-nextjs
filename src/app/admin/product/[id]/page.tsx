@@ -1,14 +1,15 @@
 "use client";
 import { useEffect, useState, ChangeEvent, FormEvent } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { SideBar } from "@/components/homapage/SideBar";
+import { SideBar } from "@/components/admin/SideBar";
 import { useMediaQuery } from "react-responsive";
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
 import axios from "axios";
 import { Toaster, toast } from "react-hot-toast";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { z, object, string, number, boolean, union } from "zod";
+import { useAuth } from "@/context/AuthContext";
 
 // Custom refinement to check if the value is a valid number
 const isNumberString = (val: string) => !isNaN(Number(val));
@@ -68,6 +69,7 @@ interface ProductData {
 }
 
 const UpdateProductForm = () => {
+  const { token } = useAuth();
   const params = useParams<{ id: string }>();
   const productId = params.id;
   const router = useRouter();
@@ -174,9 +176,6 @@ const UpdateProductForm = () => {
 
     if (confirmDelete) {
       try {
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5NjY5MSwiZXhwIjoxNzEwODAwMjkxfQ.Y5r47wfqIZRN_ytucTNODiKGrjms8uOCHeZnT8vxQ4U";
-
         const response = await axios.delete(
           `http://localhost:4000/api/product/${productId}`,
           {
@@ -277,9 +276,6 @@ const UpdateProductForm = () => {
       });
 
       console.log("Form data:", formData);
-
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMTYwMDYwNiwiZXhwIjoxNzExNjA0MjA2fQ.2DtWMDqjJ7oDJFjQpI60vfJVidhEcQVNr5A_icNQUQQ";
 
       const response = await axios.patch(
         `http://localhost:4000/api/product/${productId}`,

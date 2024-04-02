@@ -1,7 +1,7 @@
 import React from "react";
 import ProductCard from "./ProductCard";
 import Link from "next/link";
-import { useProduct } from "@/context/productContext";
+import { useProduct } from "@/context/ProductContext";
 
 function StartYourCart() {
   const { products } = useProduct();

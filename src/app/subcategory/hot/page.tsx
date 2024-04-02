@@ -3,13 +3,16 @@ import LaptopSidebar from "@/components/category/LaptopSideBar";
 import MobileSidebar from "@/components/category/MobileSideBar";
 import ProductCard from "@/components/homapage/ProductCard";
 import React from "react";
-import { useProduct } from "@/context/productContext"; 
+import { useProduct } from "@/context/ProductContext"; 
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import Footer from "@/components/layouts/Footer";
+import { useAddProduct } from "@/context/AddProductContext";
+import CartListSideBar from "@/components/homapage/CartListSideBar";
 
 function Hot() {
+  const { toggleSidebar, isSidebarOpen } = useAddProduct();
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1023 });
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
@@ -43,6 +46,8 @@ function Hot() {
         </div>
       </div>
       <Footer />
+      <CartListSideBar isOpen={isSidebarOpen}
+        toggleSidebar={toggleSidebar}/>
     </>
   );
 }
