@@ -21,6 +21,8 @@ interface User {
 interface AuthContextType {
   user: User | null;
   token: string | null;
+  signup: (email: string, password: string, username: string) => Promise<void>;
+  signupError: string | string[];
   loginError: string;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
@@ -44,6 +46,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const [user, setUser] = useState<User | null>(null);
   const [loginError, setLoginError] = useState<string>("");
+  const [signupError, setSignupError] = useState<string | string[]>([]);
   const [token, setToken] = useState<string | null>(() => {
     // Initialize token from localStorage if it exists
     if (typeof window !== "undefined") {
@@ -59,6 +62,37 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       setUser(JSON.parse(storedUser));
     }
   }, []);
+
+  // Function to handle signup
+  const signup = async (username: string, email: string, password: string) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/api/auth/signup",
+        {
+          username,
+          email,
+          password,
+        }
+      );
+      toast.success("Signed up successfully!", {
+        duration: 3000,
+      });
+      setSignupError([]); // Clear any previous signup errors
+      router.push("/login");
+      router.refresh();
+    } catch (error: any) {
+      console.error("Signup error:", error);
+      if (Array.isArray(error.response?.data.message)) {
+        setSignupError(error.response?.data.message);
+      } else if (typeof error.response?.data.message === 'string') {
+        setSignupError([error.response?.data.message]);
+      } else {
+        setSignupError(["An unknown error occurred"]);
+      }
+    }
+  };
+  
+
 
   // Function to handle login
   const login = async (email: string, password: string) => {
@@ -103,6 +137,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     user,
     token,
     loginError,
+    signup,
+    signupError,
     login,
     logout, // Include logout function in the context
   };

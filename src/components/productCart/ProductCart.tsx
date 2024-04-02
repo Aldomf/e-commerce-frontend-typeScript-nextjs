@@ -36,7 +36,7 @@ function ProductCart() {
                   <div className="flex items-center">
                     {product.discountActive ? (
                       <>
-                        <p className="line-through text-sm text-[#ADB5BD] pr-3">{`$${product.price}`}</p>
+                        <p className="line-through text-sm text-[#ADB5BD] pr-1 mm:pr-2">{`$${product.price}`}</p>
                         <p>{`$${product.priceWithDiscount}`}</p>
                       </>
                     ) : (
