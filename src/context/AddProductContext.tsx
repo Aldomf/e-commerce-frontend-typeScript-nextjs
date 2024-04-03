@@ -44,7 +44,7 @@ export const useAddProduct = () => {
 export const AddProductProvider = ({ children }: { children: ReactNode }) => {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, token } = useAuth();
 
   const { getUserCartlist, userCartList, deleteFromCart, setUserCartList  } = useUser();
 
@@ -82,6 +82,12 @@ export const AddProductProvider = ({ children }: { children: ReactNode }) => {
 
   const handleAddToCart = async (productId: number) => {
     try {
+      if (!token) {
+        // Redirect to login page if token doesn't exist
+        router.push("/login");
+        return; // Exit the function
+    }
+    
       if (isTabletOrLarger) {
         // Execute addToCart logic only if screen width > 768px
         await addToCart(productId);

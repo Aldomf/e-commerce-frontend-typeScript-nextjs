@@ -5,15 +5,19 @@ import { LiaTagSolid } from "react-icons/lia";
 import { PiNotepadLight } from "react-icons/pi";
 import { IoLockClosed } from "react-icons/io5";
 import { LiaShippingFastSolid } from "react-icons/lia";
+import { BsCartX } from "react-icons/bs";
 import React, { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import Footer from "@/components/layouts/Footer";
 import { useAddProduct } from "@/context/AddProductContext";
+import { useAuth } from "@/context/AuthContext";
+import Link from "next/link";
 
 function CartList() {
   const { sumOfPrices } = useAddProduct();
+  const { token } = useAuth();
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -40,12 +44,43 @@ function CartList() {
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
       <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[244px] py-4 flex flex-col px-4 md:flex-row md:justify-center lg:px-20 xl:px-64">
         <div className="md:mr-12 md:w-[70%]">
-          <h2 className="font-bold text-2xl border-b border-black py-4">
+          <h2 className="font-bold text-2xl text-center border-b border-black py-4">
             My cart
           </h2>
-          <div>
-            <ProductCart />
-          </div>
+          {token ? (
+            // Render product cart if token exists
+            <div className="px-6">
+              <ProductCart />
+            </div>
+          ) : (
+            // Render message and login/signup button if token doesn't exist
+            <div className="px-6 flex flex-col items-center">
+              <div>
+                <BsCartX className="text-9xl" />
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-2xl font-bold">Your cart is empty</p>
+                <p className=" font-semibold mb-4 text-center">
+                  Sign in to view your cart and start shopping
+                </p>
+              </div>
+              <div className="w-48 space-y-2 flex flex-col">
+                <Link
+                  href="/login"
+                  className="bg-[#6CA08E] text-white text-center font-semibold py-2 w-full text-base transition duration-500 ease-in-out hover:bg-[#A3C9BC]"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  href="/signup"
+                  className="bg-[#363F46] text-white text-center font-semibold py-2 text-base transition duration-500 ease-in-out hover:bg-[#53606A] hover:border-[#A3C9BC]"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            </div>
+          )}
           <div className="flex flex-col text-[#EC1C1C] font-light border-b border-black py-4 md:border-none">
             <div className="flex items-center">
               <LiaTagSolid className="mr-2 text-2xl" />

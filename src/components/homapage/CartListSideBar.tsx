@@ -4,7 +4,9 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import Link from "next/link";
 import { useAddProduct } from "@/context/AddProductContext";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { BsCartX } from "react-icons/bs";
 import ProductCartSideBar from "../cartlist/ProductCartSideBar";
+import { useAuth } from "@/context/AuthContext";
 
 interface CartListSideBarProps {
   isOpen: boolean;
@@ -14,6 +16,7 @@ interface CartListSideBarProps {
 const CartListSideBar = forwardRef<HTMLDivElement, CartListSideBarProps>(
   function CartListSideBar({ isOpen, toggleSidebar }, ref) {
     const { updatedCartList, setIsSidebarOpen, sumOfPrices } = useAddProduct();
+    const { token } = useAuth();
 
     const handleCloseSidebar = () => {
       toggleSidebar(); // Close sidebar when arrow right icon is clicked
@@ -44,9 +47,40 @@ const CartListSideBar = forwardRef<HTMLDivElement, CartListSideBarProps>(
             </div>
             <div className="h-6 bg-white"></div>
           </div>
-          <div className="px-6">
-            <ProductCartSideBar />
-          </div>
+          {token ? (
+            // Render product cart if token exists
+            <div className="px-6">
+              <ProductCartSideBar />
+            </div>
+          ) : (
+            // Render message and login/signup button if token doesn't exist
+            <div className="px-6 flex flex-col items-center justify-center h-full">
+              <div>
+                <BsCartX className="text-9xl"/>
+              </div>
+              <div className="flex flex-col justify-center items-center">
+                <p className="text-2xl font-bold">Your cart is empty</p>
+                <p className=" font-semibold mb-4 text-center">
+                  Sign in to view your cart and start shopping
+                </p>
+              </div>
+              <div className="w-48 space-y-2 flex flex-col">
+                <Link
+                  href="/login"
+                  className="bg-[#6CA08E] text-white text-center font-semibold py-2 w-full text-base transition duration-500 ease-in-out hover:bg-[#A3C9BC]"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  href="/signup"
+                  className="bg-[#363F46] text-white text-center font-semibold py-2 text-base transition duration-500 ease-in-out hover:bg-[#53606A] hover:border-[#A3C9BC]"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            </div>
+          )}
           {updatedCartList.length > 0 ? (
             <div className="w-full pt-4 flex flex-col px-6 pb-6 bottom-0 sticky bg-white">
               <div className="text-2xl">

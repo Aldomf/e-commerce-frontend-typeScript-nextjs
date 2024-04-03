@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import { VscLayoutPanelCenter } from "react-icons/vsc";
+import { VscHeart } from "react-icons/vsc";
+import { PiShoppingCartSimpleLight } from "react-icons/pi";
+import { LiaShippingFastSolid } from "react-icons/lia";
+import { PiAddressBook } from "react-icons/pi";
+import { BiSupport } from "react-icons/bi";
 import { Toaster, toast } from "react-hot-toast";
 import Link from "next/link";
 
@@ -68,11 +73,55 @@ export default function UserAccount() {
                     Account
                   </a>
                 </li>
+                <li className="font-medium">
+                  <Link
+                    href="/wishlist"
+                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
+                  >
+                    <div className="mr-3">
+                    <VscHeart className="w-6 h-6"/>
+                    </div>
+                    Whishlist
+                  </Link>
+                </li>
+                <li className="font-medium">
+                  <Link
+                    href="/cartlist"
+                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
+                  >
+                    <div className="mr-3">
+                    <PiShoppingCartSimpleLight className="w-6 h-6"/>
+                    </div>
+                    Cartlist
+                  </Link>
+                </li>
+                <li className="font-medium">
+                  <Link
+                    href="/orders"
+                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
+                  >
+                    <div className="mr-3">
+                    <LiaShippingFastSolid className="w-6 h-6"/>
+                    </div>
+                    Orders
+                  </Link>
+                </li>
+                <li className="font-medium">
+                  <Link
+                    href="/orders"
+                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
+                  >
+                    <div className="mr-3">
+                    <PiAddressBook  className="w-6 h-6"/>
+                    </div>
+                    Shipping Address
+                  </Link>
+                </li>
                 {user?.role === "admin" ? (
                   <li className="font-medium">
                     <Link
                       href="/admin/users"
-                      className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
+                      className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                     >
                       <div className="mr-3">
                         <VscLayoutPanelCenter className="w-6 h-6" />
@@ -86,31 +135,12 @@ export default function UserAccount() {
                 <li className="font-medium">
                   <a
                     href="#"
-                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
+                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                   >
                     <div className="mr-3">
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-                        />
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                        />
-                      </svg>
+                    <BiSupport className="w-6 h-6"/>
                     </div>
-                    Setting
+                    Customer Support
                   </a>
                 </li>
                 <hr className="dark:border-gray-700" />

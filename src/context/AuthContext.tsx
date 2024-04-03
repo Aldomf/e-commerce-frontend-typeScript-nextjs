@@ -129,7 +129,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     router.push("/");
-    router.refresh();
+    setTimeout(() => {
+        window.location.reload();
+    }, 1000);
   };
 
   // Value to be provided by the context

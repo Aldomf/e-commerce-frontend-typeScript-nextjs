@@ -5,6 +5,7 @@ import { Roboto } from "next/font/google";
 import { ProductProvider } from "@/context/ProductContext";
 import { AuthProvider } from "@/context/AuthContext";
 import { AddProductProvider } from "@/context/AddProductContext";
+import { WishlistProvider } from "@/context/WishlistContext";
 import { UserProvider } from "@/context/UserContext";
 import "./globals.css";
 
@@ -32,7 +33,9 @@ export default function RootLayout({
         <AuthProvider>
           <UserProvider>
             <AddProductProvider>
-              <ProductProvider>{children}</ProductProvider>
+              <WishlistProvider>
+                <ProductProvider>{children}</ProductProvider>
+              </WishlistProvider>
             </AddProductProvider>
           </UserProvider>
         </AuthProvider>

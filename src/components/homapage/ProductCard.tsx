@@ -5,7 +5,7 @@ import { Product } from '@/interfaces/interfaces';
 import { useAddProduct } from "@/context/AddProductContext";
 
 interface ProductCardProps {
-  products: Product[]; // Specify that the products prop is an array of Product
+  products: Product[] | null; // Specify that the products prop is an array of Product
   label?: string;
 }
 
@@ -13,7 +13,7 @@ function ProductCard({ products, label }: ProductCardProps) {
   const { handleAddToCart } = useAddProduct();
   // Check if products are available
   if (!products || products.length === 0) {
-    return <div>No products available</div>;
+    return <div className="text-2xl flex justify-center">Wishlist empty</div>;
   }
 
   return (
