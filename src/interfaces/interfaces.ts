@@ -97,6 +97,16 @@ export interface UserLogin {
   password: string;
 }
 
+export interface ShippingAddress {
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+  postalCode: string;
+  mobile: string;
+}
+
+
 export interface Categories {
   id: number;
   name: string;

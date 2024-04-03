@@ -42,14 +42,14 @@ function CartList() {
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
-      <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[244px] py-4 flex flex-col px-4 md:flex-row md:justify-center lg:px-20 xl:px-64">
+      <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[244px] py-4 flex flex-col px-2 mm:px-4 md:flex-row md:justify-center lg:px-20 xl:px-64">
         <div className="md:mr-12 md:w-[70%]">
           <h2 className="font-bold text-2xl text-center border-b border-black py-4">
             My cart
           </h2>
           {token ? (
             // Render product cart if token exists
-            <div className="px-6">
+            <div className="px-2 mm:px-6">
               <ProductCart />
             </div>
           ) : (

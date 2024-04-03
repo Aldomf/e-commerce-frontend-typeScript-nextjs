@@ -52,7 +52,7 @@ export default function UserAccount() {
                 <li className="font-medium">
                   <a
                     href="#"
-                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-indigo-700"
+                    className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                   >
                     <div className="mr-3">
                       <svg
@@ -108,7 +108,7 @@ export default function UserAccount() {
                 </li>
                 <li className="font-medium">
                   <Link
-                    href="/orders"
+                    href="/shipping-address"
                     className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                   >
                     <div className="mr-3">
