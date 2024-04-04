@@ -6,7 +6,7 @@ import { PiNotepadLight } from "react-icons/pi";
 import { IoLockClosed } from "react-icons/io5";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { BsCartX } from "react-icons/bs";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
@@ -14,15 +14,29 @@ import Footer from "@/components/layouts/Footer";
 import { useAddProduct } from "@/context/AddProductContext";
 import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
+import { useCheckoutAndOrder } from "@/context/CheckoutAndOrderContext";
+import { useShippingAddress } from "@/context/ShippingAddresContext";
 
 function CartList() {
   const { sumOfPrices } = useAddProduct();
   const { token } = useAuth();
+  const {
+    addShippingAddress,
+    getShippingAddress,
+    updateShippingAddress,
+    shippingAddress,
+    setShippingAddress,
+    shippingAddressError,
+  } = useShippingAddress();
+  const { createCheckoutSession } = useCheckoutAndOrder();
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
+
+  const shippingAddressFormRef = useRef<HTMLDivElement>(null);
+  const [addressRequired, setAddressRequired] = useState(false);
 
   const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation(); // Stop event propagation
@@ -38,6 +52,28 @@ function CartList() {
     e.stopPropagation(); // Stop event propagation
     setIsDropdownOpen3(!isDropdownOpen3);
   };
+
+  const handleCheckout = () => {
+    if (!shippingAddress) {
+      setAddressRequired(true);
+      scrollToShippingAddressForm();
+
+      setTimeout(() => {
+        setIsDropdownOpen3(true);
+      }, 1000);
+    } else {
+      createCheckoutSession(); // Proceed with the checkout
+    }
+  };
+
+  const scrollToShippingAddressForm = () => {
+    // Scroll to the shipping address form section
+    const shippingAddressForm = document.getElementById("shipping-address-form");
+    shippingAddressForm?.scrollIntoView({ behavior: "smooth" });
+  };
+  
+
+  console.log("hola", shippingAddress);
 
   return (
     <>
@@ -126,7 +162,7 @@ function CartList() {
           <div className="flex flex-col border-b border-black py-4 md:border-none">
             <div className="flex items-center text-[#EC1C1C] font-light">
               <LiaShippingFastSolid className="mr-2 text-2xl" />
-              <p className="text-xl cursor-pointer" onClick={toggleDropdown3}>
+              <p className="text-xl cursor-pointer" onClick={toggleDropdown3} id="shipping-address-form">
                 Shipping Address
               </p>
             </div>
@@ -157,7 +193,15 @@ function CartList() {
               <p>${sumOfPrices}</p>
             </div>
             <div className="flex flex-col items-center">
-              <button className="text-white font-semibold text-lg flex items-center justify-center bg-[#a3c9bc] w-full py-2 rounded-full">
+              {addressRequired && (
+                <div className="text-red-500 font-semibold mb-4 text-center">
+                  Please provide a shipping address to proceed with the payment.
+                </div>
+              )}
+              <button
+                className="text-white font-semibold text-lg flex items-center justify-center bg-[#6CA08E] w-full py-2 rounded-full transition duration-500 ease-in-out hover:bg-[#A3C9BC]"
+                onClick={handleCheckout}
+              >
                 Checkout
               </button>
               <div className="flex items-center justify-center mt-4 mb-6">

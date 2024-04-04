@@ -8,6 +8,7 @@ import { AddProductProvider } from "@/context/AddProductContext";
 import { WishlistProvider } from "@/context/WishlistContext";
 import { UserProvider } from "@/context/UserContext";
 import { ShippingAddressProvider } from "@/context/ShippingAddresContext";
+import { CheckoutAndOrderProvider } from "@/context/CheckoutAndOrderContext";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -36,7 +37,9 @@ export default function RootLayout({
             <AddProductProvider>
               <WishlistProvider>
                 <ShippingAddressProvider>
-                  <ProductProvider>{children}</ProductProvider>
+                  <CheckoutAndOrderProvider>
+                    <ProductProvider>{children}</ProductProvider>
+                  </CheckoutAndOrderProvider>
                 </ShippingAddressProvider>
               </WishlistProvider>
             </AddProductProvider>

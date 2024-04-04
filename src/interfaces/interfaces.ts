@@ -46,6 +46,7 @@ export interface User {
   email: string;
   role: string;
   cartList: CartItem[]
+  shippingAddress: ShippingAddress
 }
 
 export interface HamburguerMenuProps {
@@ -132,6 +133,7 @@ export interface Order {
   createdAt: Date;
   updatedAt: Date;
   products: Product[];
+  user: User
 }
 
 export enum Status {

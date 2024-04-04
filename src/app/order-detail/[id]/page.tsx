@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
@@ -7,9 +7,25 @@ import Footer from "@/components/layouts/Footer";
 import OrderDetailCard from "@/components/orders/OrderDetailCard";
 import { IoPerson } from "react-icons/io5";
 import { IoLocationSharp } from "react-icons/io5";
+import { useAuth } from "@/context/AuthContext";
+import { useCheckoutAndOrder } from "@/context/CheckoutAndOrderContext";
+import { useParams } from "next/navigation";
 
 function Orders() {
+  const params = useParams<{ id: string }>();
+  const orderId = params.id;
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
+  const { user, token } = useAuth();
+  const { getOrderById, orderById, setIsLoading, isLoading } = useCheckoutAndOrder();
+
+  console.log("ee", orderById)
+
+  useEffect(() => {
+    if (token && user?.id) {
+      getOrderById(orderId);
+    }
+  }, [token, user]);
+  
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
@@ -24,41 +40,38 @@ function Orders() {
           </div>
           <div className="flex flex-col font-semibold">
             <p className="text-sm">Status :</p>
-            <p className="text-[#7C7C7C] text-sm font-medium">Pending</p>
+            <p className="text-[#7C7C7C] text-sm font-medium">{orderById?.orderStatus}</p>
           </div>
         </div>
-        <div className="px-2 mm:px-4 ml:px-8 md:px-0">
-          <OrderDetailCard />
-          <OrderDetailCard />
-          <OrderDetailCard />
+        <div className="px-2 md:px-0">
+        <OrderDetailCard products={orderById?.products}/>
         </div>
         <div className="flex flex-col py-2 px-2 mm:px-4 ml:px-8 border-y-8 md:px-0">
           <div className="flex items-center mb-2">
             <IoPerson className="mr-4" />
-            <p className="mr-4">Aldo Miralles</p>
-            <p>0613890804</p>
+            <p className="mr-4">{orderById?.user.username}</p>
+            <p>{orderById?.user.shippingAddress.mobile}</p>
           </div>
-          <div className="flex justify-start">
-            <IoLocationSharp className="mr-4 text-2xl ml:text-xl" />
+          <div className="flex justify-start items-center">
+            <IoLocationSharp className="mr-4 w-8 ssm2:w-auto" />
             <div className="flex flex-col">
-              <p>19 Place du Beguinage</p>
-              <p>Chanteloup les Vignes Ile-deFrance France 78570</p>
+              <div>{orderById?.shippingAddress}</div>
             </div>
           </div>
         </div>
         <div className="flex justify-between py-2 px-2 mm:px-4 ml:px-8 border-b-8 md:px-0">
           <div className="flex items-center font-semibold">
-            <p className="mr-4">Total: $40.17</p>
+            <p className="mr-4"><span className="md:text-xl">Total:</span> ${orderById?.totalPrice}</p>
           </div>
-          <div className="flex justify-start">
-            <p>Payment Method: Card</p>
+          <div className="flex justify-start font-semibold">
+            <p><span className="md:text-lg font-normal">Payment method: </span>{orderById?.paymentInformation}</p>
           </div>
         </div>
         <div className="flex flex-col py-2 px-2 mm:px-4 ml:px-8 md:px-0">
           <div className="font-semibold mb-2">Order information</div>
           <div className="flex flex-col mb-2">
             <p className="text-[#7C7C7C] text-sm font-medium">Order number</p>
-            <p>HFGJDJD56SDD5</p>
+            <p>{orderById?.id}</p>
           </div>
           <div className="flex flex-col mb-2">
             <p className="text-[#7C7C7C] text-sm font-medium">Order lead time</p>
