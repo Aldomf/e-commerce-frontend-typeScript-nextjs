@@ -16,6 +16,9 @@ interface WishlistContextType {
   deleteProductFromWishlist: (productId: number) => Promise<void>;
   getUserWishlist: () => Promise<void>;
   userWishlist: Product[] | null;
+  checkIsInWishlist: (productId: number) => boolean;
+  isInWishlist: boolean;
+  setIsInWishlist: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const WishlistContext = createContext<WishlistContextType | null>(null);
@@ -35,24 +38,30 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
 
   const [userWishlist, setUserWishlist] = useState<Product[] | null>(null);
 
+  const [isInWishlist, setIsInWishlist] = useState(false);
+
   const addProductToWishlist = async (productId: number) => {
     try {
       if (!token) {
         // Redirect to login page if token doesn't exist
         router.push("/login");
         return; // Exit the function
-    }
+      }
 
       const response = await axios.post(
         `http://localhost:4000/api/wishlist/${user?.id}/add-product-to-wishlist/${productId}`,
+        {},
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
+
       // Handle response if needed
       console.log("Product added to wishlist:", response.data);
+      setIsInWishlist(true);
+      setUserWishlist([...userWishlist!, response.data]);
     } catch (error) {
       // Handle error
       console.error("Error adding product to wishlist:", error);
@@ -71,6 +80,9 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
       );
       // Handle response if needed
       console.log("Product deleted from wishlist:", response.data);
+      setIsInWishlist(false);
+      setUserWishlist(userWishlist!.filter(product => product.id !== productId));
+      
     } catch (error) {
       // Handle error
       console.error("Error deleting product from wishlist:", error);
@@ -89,21 +101,34 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
       );
       // Handle response if needed
       console.log("User wishlist:", response.data.wishlist);
-      setUserWishlist(response.data.wishlist)
+      setUserWishlist(response.data.wishlist);
     } catch (error) {
       // Handle error
       console.error("Error fetching user wishlist:", error);
     }
   };
 
-  useEffect(() => {
-    // Fetch user's wishlist only if the user object is available
-    if (user?.id) {
-      getUserWishlist();
-    }
-  }, [user]);
+  // Function to check if a product is in the wishlist
+  const checkIsInWishlist = (productId: number): boolean => {
+    if (!userWishlist) return false;
+    return userWishlist.some(product => product.id === productId);
+  };
+
+  
 
   return (
-    <WishlistContext.Provider value={{ addProductToWishlist, deleteProductFromWishlist, getUserWishlist, userWishlist }}>{children}</WishlistContext.Provider>
+    <WishlistContext.Provider
+      value={{
+        addProductToWishlist,
+        deleteProductFromWishlist,
+        getUserWishlist,
+        userWishlist,
+        checkIsInWishlist,
+        isInWishlist,
+        setIsInWishlist,
+      }}
+    >
+      {children}
+    </WishlistContext.Provider>
   );
 };

@@ -7,7 +7,9 @@ import { Categories } from '@/interfaces/interfaces';
 interface ProductContextType {
   products: Product[]; // Define the type of products
   categories: Categories[];
+  productById: Product | undefined;
   fetchCategories: () => Promise<void>;
+  fetchProductById: (id: number) => Promise<void>
   //fetchProducts: () => Promise<void>; // Update the return type of fetchProducts to Promise<void>
 }
 
@@ -25,12 +27,23 @@ export const useProduct = () => {
 export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const [products, setProducts] = useState<Product[]>([]); // Initialize products state with an empty array
   const [categories, setCategories] = useState<Categories[]>([]);
+  const [productById, setProductById] = useState<Product | undefined>();
 
   // Function to fetch products
   const fetchProducts = async () => {
     try {
       const response = await axios.get('http://localhost:4000/api/product');
       setProducts(response.data); // Update products state with fetched data
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  };
+
+  // Function to fetch products
+  const fetchProductById = async (id: number) => {
+    try {
+      const response = await axios.get(`http://localhost:4000/api/product/${id}`);
+      setProductById(response.data); // Update products state with fetched data
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -53,7 +66,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <ProductContext.Provider value={{ products, categories, fetchCategories }}>
+    <ProductContext.Provider value={{ products, categories, fetchCategories, productById, fetchProductById }}>
       {children}
     </ProductContext.Provider>
   );

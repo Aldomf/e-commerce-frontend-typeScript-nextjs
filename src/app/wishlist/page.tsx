@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
@@ -13,11 +13,18 @@ import { useAuth } from "@/context/AuthContext";
 import Link from "next/link";
 
 function Wishlist() {
-  const { userWishlist } = useWishlist();
-  const { token } = useAuth();
+  const { userWishlist, getUserWishlist } = useWishlist();
+  const { token, user } = useAuth();
 
   const { toggleSidebar, isSidebarOpen } = useAddProduct();
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
+
+  useEffect(() => {
+    // Fetch user's wishlist only if the user object is available
+    if (user?.id) {
+      getUserWishlist();
+    }
+  }, [user]);
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
