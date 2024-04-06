@@ -136,6 +136,17 @@ export interface Order {
   user: User
 }
 
+export interface Comment {
+  id: number;
+  userId: number;
+  productId: number;
+  rating: number;
+  comment: string;
+  createdAt: string;
+  updatedAt: string;
+  user: User
+}
+
 export enum Status {
   Pending = 'pending',
   Processing = 'processing',

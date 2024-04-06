@@ -23,9 +23,9 @@ function ProductCard({ products, label }: ProductCardProps) {
         <Link
           href={`/product/${product.id}`}
           key={product.id}
-          className="border-2"
+          className="ssm:border-2 w-86"
         >
-          <div className="">
+          <div className="mb-8 border-2 ssm:border-0 ssm:mb-0">
             <div className="relative h-52">
               {label && (
                 <p className="bg-red-600 px-4 h-8 rounded-full text-white w-fit flex justify-center items-center absolute top-2 left-2">
