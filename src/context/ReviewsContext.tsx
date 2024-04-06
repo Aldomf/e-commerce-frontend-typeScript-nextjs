@@ -7,6 +7,8 @@ interface ReviewsContextType {
     fetchProductComments: (productId: number) => Promise<Comment[]>;
     comments: Comment[]
     setComments: React.Dispatch<React.SetStateAction<Comment[]>>;
+    averageRating: number | null;
+    setAverageRating: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export const ReviewsContext = createContext<ReviewsContextType | null>(null);
@@ -22,6 +24,7 @@ export const useReviews = () => {
 // Step 2: Create a provider component to wrap your components
 export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
     const [comments, setComments] = useState<Comment[]>([]);
+    const [averageRating, setAverageRating] = useState<number | null>(null);
   
 
   // Function to fetch comments for a product by id
@@ -39,7 +42,7 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
   
 
   return (
-    <ReviewsContext.Provider value={{ fetchProductComments, comments, setComments }}>
+    <ReviewsContext.Provider value={{ fetchProductComments, comments, setComments, averageRating, setAverageRating }}>
       {children}
     </ReviewsContext.Provider>
   );
