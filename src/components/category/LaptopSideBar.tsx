@@ -1,7 +1,16 @@
+import { useProduct } from "@/context/ProductContext";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 
 const LaptopSidebar = () => {
+  const pathname = usePathname();
+  const { categories, products } = useProduct();
+
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
@@ -25,7 +34,7 @@ const LaptopSidebar = () => {
       </div>
       <div className="flex flex-col border-b-2 p-4">
         <div
-          className="text-xl flex justify-between items-center"
+          className="text-xl flex justify-between items-center cursor-pointer"
           onClick={toggleDropdown3}
         >
           <h3 className="font-light">Category</h3>
@@ -53,66 +62,32 @@ const LaptopSidebar = () => {
             isDropdownOpen3 ? "max-h-96 mt-4" : "max-h-0 overflow-hidden"
           }`}
         >
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Electronics
+          <Link
+            href="/category/all"
+            className={`mb-2 block transition duration-300 ease-in-out hover:text-[#a3c9bc] ${
+              pathname === "/category/all" ? "text-[#a3c9bc]" : ""
+            }`}
+            onClick={handleLinkClick}
+          >
+            All products
+          </Link>
+          {categories.map((category) => (
+            <Link
+              key={category.id} // Ensure each Link has a unique key
+              href={`/category/${category.id}`} // Correct href to navigate to each category
+              className={`mb-2 block transition duration-300 ease-in-out hover:text-[#a3c9bc] ${
+                pathname === `/category/${category.id}` ? "text-[#a3c9bc]" : ""
+              }`} // Add active class if the pathname matches the link
+              onClick={handleLinkClick}
+            >
+              {category.name} {/* Display the category name as Link text */}
             </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Games
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Health
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Fashion
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Beauty
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Accessories
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Toys
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Office
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Pets
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Books
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Sport
-            </Link>
-          </li>
+          ))}
         </ul>
       </div>
       <div className="flex flex-col border-b-2 p-4">
         <div
-          className="text-xl flex justify-between items-center"
+          className="text-xl flex justify-between items-center cursor-pointer"
           onClick={toggleDropdown}
         >
           <h3 className="font-light">Subcategory</h3>
@@ -141,25 +116,43 @@ const LaptopSidebar = () => {
           }`}
         >
           <li className="mb-2">
-            <a href="#" className="block hover:text-indigo-400">
+            <Link
+              href="/subcategory/hot"
+              className={`mb-2 block transition duration-300 ease-in-out hover:text-[#a3c9bc] ${
+                pathname === "/subcategory/hot" ? "text-[#a3c9bc]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
               Popular products
-            </a>
+            </Link>
           </li>
           <li className="mb-2">
-            <a href="#" className="block hover:text-indigo-400">
+            <Link
+              href="/subcategory/new"
+              className={`mb-2 block transition duration-300 ease-in-out hover:text-[#a3c9bc] ${
+                pathname === "/subcategory/new" ? "text-[#a3c9bc]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
               New arrivals
-            </a>
+            </Link>
           </li>
           <li className="mb-2">
-            <a href="#" className="block hover:text-indigo-400">
+            <Link
+              href="/subcategory/sale"
+              className={`mb-2 block transition duration-300 ease-in-out hover:text-[#a3c9bc] ${
+                pathname === "/subcategory/sale" ? "text-[#a3c9bc]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
               On sale
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
       <div className="flex flex-col border-b-2 p-4">
         <div
-          className="text-xl flex justify-between items-center"
+          className="text-xl flex justify-between items-center cursor-pointer"
           onClick={toggleDropdown2}
         >
           <h3 className="font-light">Price</h3>

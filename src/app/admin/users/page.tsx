@@ -1,12 +1,14 @@
 "use client";
-import { SideBar } from "@/components/homapage/SideBar";
+import { SideBar } from "@/components/admin/SideBar";
 import DataTable, { createTheme } from "react-data-table-component";
 import React, { useEffect, useState } from "react";
 import { User } from "@/interfaces/interfaces";
 import { useMediaQuery } from 'react-responsive';
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
+import { useAuth } from "@/context/AuthContext";
 
 function AdminUser() {
+  const { token } = useAuth();
   // createTheme creates a new theme named solarized that overrides the build in dark theme
   createTheme(
     "solarized",
@@ -69,8 +71,6 @@ function AdminUser() {
 
   const fetchData = async () => {
     try {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5MzAxMywiZXhwIjoxNzEwNzk2NjEzfQ.QVcL6jgCHCoKKFSHfiT9TWuIjJ7Vyp6fpB-KPIDO4qA";
       const response = await fetch("http://localhost:4000/api/user", {
         headers: {
           Authorization: `Bearer ${token}`,

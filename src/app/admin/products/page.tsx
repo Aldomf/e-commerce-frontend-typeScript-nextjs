@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
-import { SideBar } from "@/components/homapage/SideBar";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
+import { SideBar } from "@/components/admin/SideBar";
 import { useMediaQuery } from "react-responsive";
 import { Product } from "@/interfaces/interfaces";
 import Pagination from "@/components/homapage/Pagination";
@@ -43,13 +43,7 @@ function AdminProduct() {
 
   const fetchData = async (): Promise<Product[]> => {
     try {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc4NDkwMCwiZXhwIjoxNzEwNzg4NTAwfQ.ohIACQE8TJXbSsxAVWZEkCUTpV-q5gORBDmz08lt3qo";
-      const response = await fetch("http://localhost:4000/api/product", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await fetch("http://localhost:4000/api/product");
       const productData: Product[] = await response.json();
       console.log(productData);
       setProduct(productData);

@@ -2,11 +2,12 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { SideBar } from "@/components/homapage/SideBar";
+import { SideBar } from "@/components/admin/SideBar";
 import { useMediaQuery } from "react-responsive";
-import HamburguerMenuAdmin from "@/components/homapage/HamburguerMenuAdmin";
+import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
 import { Toaster, toast } from "react-hot-toast";
 import { z, object, string, number, boolean } from "zod";
+import { useAuth } from "@/context/AuthContext";
 
 // Define the schema for the form data using Zod
 const productSchema = object({
@@ -56,6 +57,7 @@ interface ProductData {
 }
 
 const CreateProduct: React.FC = () => {
+  const { token } = useAuth();
   const [productData, setProductData] = useState<ProductData>({
     name: "",
     description: "",
@@ -200,9 +202,6 @@ const CreateProduct: React.FC = () => {
       formData.append("image", productData.imageFile as Blob);
 
       console.log("Form data:", formData);
-
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJ1c2VybmFtZSI6IkFsZG8iLCJzdWIiOjEsInJvbGUiOiJhZG1pbiIsImlhdCI6MTcxMDc5NjY5MSwiZXhwIjoxNzEwODAwMjkxfQ.Y5r47wfqIZRN_ytucTNODiKGrjms8uOCHeZnT8vxQ4U";
 
       const response = await axios.post(
         "http://localhost:4000/api/product/create",

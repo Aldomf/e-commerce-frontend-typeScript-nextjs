@@ -4,6 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CategoryIcon from "@mui/icons-material/Category";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import { BiSolidExit } from "react-icons/bi";
 
 export function SideBar() {
   const pathname = usePathname()
@@ -14,7 +15,7 @@ export function SideBar() {
       <ul className="py-4 flex-1">
         <Link href="/admin/users">
           <li
-            className={`px-6 py-3 flex cursor-pointer ${
+            className={`px-6 py-3 flex items-center cursor-pointer ${
               pathname === "/admin/users"
                 ? "bg-gray-700 text-blue-400"
                 : "hover:bg-gray-700 hover:text-blue-400"
@@ -26,7 +27,7 @@ export function SideBar() {
         </Link>
         <Link href="/admin/products">
           <li
-            className={`px-6 py-3 flex cursor-pointer ${
+            className={`px-6 py-3 flex items-center cursor-pointer ${
               pathname === "/admin/products"
                 ? "bg-gray-700 text-blue-400"
                 : "hover:bg-gray-700 hover:text-blue-400"
@@ -39,7 +40,7 @@ export function SideBar() {
 
         <Link href="/admin/categories">
           <li
-            className={`px-6 py-3 flex cursor-pointer ${
+            className={`px-6 py-3 flex items-center cursor-pointer ${
               pathname === "/admin/categories"
                 ? "bg-gray-700 text-blue-400"
                 : "hover:bg-gray-700 hover:text-blue-400"
@@ -52,7 +53,7 @@ export function SideBar() {
 
         <Link href="/admin/orders">
           <li
-            className={`px-6 py-3 flex cursor-pointer ${
+            className={`px-6 py-3 flex items-center cursor-pointer ${
               pathname === "/admin/orders"
                 ? "bg-gray-700 text-blue-400"
                 : "hover:bg-gray-700 hover:text-blue-400"
@@ -60,6 +61,15 @@ export function SideBar() {
           >
             <LocalShippingIcon className="mr-2" />
             <p>Orders</p>
+          </li>
+        </Link>
+
+        <Link href="/">
+          <li
+            className={`px-6 py-3 flex items-center cursor-pointer hover:bg-gray-700 hover:text-red-400`}
+          >
+            <BiSolidExit className="mr-2 w-6 h-6" />
+            <p>Exit</p>
           </li>
         </Link>
       </ul>

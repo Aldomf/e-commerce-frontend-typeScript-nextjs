@@ -4,12 +4,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import UserAccount from "../login-signup-forms/UserAccount";
 import { FaLocationDot } from "react-icons/fa6";
+import { useProduct } from "@/context/ProductContext";
+import { useAuth } from "@/context/AuthContext";
 
 export default function HambuergerIcon() {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
+  const { token } = useAuth();
+
   const pathname = usePathname();
+
+  const { categories } = useProduct();
 
   useEffect(() => {
     return () => {
@@ -44,9 +51,17 @@ export default function HambuergerIcon() {
           <div className={isNavOpen ? "showMenuNav" : "hideMenuNav"}>
             <div className="absolute top-0 flex justify-between w-full px-4 md:px-10 pt-16">
               <div className="flex justify-between items-center w-full">
-                <Link href="/login" className="text-white flex justify-center items-center">
-                  Log In <AccountCircleIcon className="ml-2 w-10 h-10" />
-                </Link>
+              {token ? (
+                  <UserAccount />
+                ) : (
+                  <Link
+                    href="/login"
+                    className="text-white flex justify-center items-center"
+                  >
+                    Log In{" "}
+                    <AccountCircleIcon className="ml-2 w-10 h-10" />
+                  </Link>
+                )}
                 <div className="flex">
                   <Link href="">
                     <FaLocationDot className="text-white mr-4 w-7 h-7" />
@@ -86,133 +101,32 @@ export default function HambuergerIcon() {
               <Link href="">Customer Support</Link>
             </div>
             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between font-bold mt-6 text-xl text-white min-h-[250px]">
-              <Link href="/admin/users">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/users"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Electronics</p>
-                </li>
+              <Link
+                href="/category/all"
+                className={`my-4 flex justify-center items-center cursor-pointer ${
+                  pathname === "/category/all" ? "text-[#363F46]" : ""
+                }`}
+                //onClick={handleLinkClick}
+              >
+                All products
               </Link>
-              <Link href="/admin/products">
-                <li
+              {categories.map((category) => (
+                <Link
+                  key={category.id} // Ensure each Link has a unique key
+                  href={`/category/${category.id}`} // Correct href to navigate to each category
                   className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/products"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
+                    pathname === `/category/${category.id}`
+                      ? "text-[#363F46]"
+                      : ""
+                  }`} // Add active class if the pathname matches the link
                 >
-                  <p>Games</p>
-                </li>
-              </Link>
-              <Link href="/admin/categories">
+                  {category.name} {/* Display the category name as Link text */}
+                </Link>
+              ))}
+              <Link href="/subcategory/hot">
                 <li
                   className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/categories"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Health</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Fashion</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Beauty</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Accessories</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Toys</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Office</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Pets</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Books</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
-                  }`}
-                >
-                  <p>Sport</p>
-                </li>
-              </Link>
-              <Link href="/admin/orders">
-                <li
-                  className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
+                    pathname === "/subcategory/hot" ? "text-[#363F46]" : ""
                   }`}
                 >
                   <p>Most Popular</p>
@@ -221,9 +135,7 @@ export default function HambuergerIcon() {
               <Link href="/admin/orders">
                 <li
                   className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === "/admin/orders"
-                      ? "text-blue-400"
-                      : "hover:text-blue-400"
+                    pathname === `/category/orders` ? "text-[#363F46]" : ""
                   }`}
                 >
                   <p>My orders</p>

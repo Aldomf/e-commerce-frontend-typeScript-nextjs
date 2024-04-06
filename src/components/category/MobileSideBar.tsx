@@ -1,8 +1,17 @@
 "use client";
+import { useProduct } from "@/context/ProductContext";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState, useEffect } from "react";
 
 const MobileSidebar = () => {
+  const pathname = usePathname();
+  const { categories, products } = useProduct();
+
+  const handleLinkClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const [isOpen, setIsOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
@@ -118,61 +127,27 @@ const MobileSidebar = () => {
             isDropdownOpen3 ? "max-h-96 mt-4" : "max-h-0 overflow-hidden"
           }`}
         >
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Electronics
+          <Link
+            href="/category/all"
+            className={`mb-2 block ${
+              pathname === "/category/all" ? "text-[#a3c9bc]" : ""
+            }`}
+            onClick={handleLinkClick}
+          >
+            All products
+          </Link>
+          {categories.map((category) => (
+            <Link
+              key={category.id} // Ensure each Link has a unique key
+              href={`/category/${category.id}`} // Correct href to navigate to each category
+              className={`mb-2 block ${
+                pathname === `/category/${category.id}` ? "text-[#a3c9bc]" : ""
+              }`} // Add active class if the pathname matches the link
+              onClick={handleLinkClick}
+            >
+              {category.name} {/* Display the category name as Link text */}
             </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Games
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Health
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Fashion
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Beauty
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Accessories
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Toys
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Office
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Pets
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Books
-            </Link>
-          </li>
-          <li className="mb-2">
-            <Link href="#" className="block hover:text-indigo-400">
-              Sport
-            </Link>
-          </li>
+          ))}
         </ul>
       </div>
             <div className="flex flex-col border-b-2 p-4">
@@ -206,20 +181,38 @@ const MobileSidebar = () => {
                 }`}
               >
                 <li className="mb-2">
-                  <a href="#" className="block hover:text-indigo-400">
-                    Popular products
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="block hover:text-indigo-400">
-                    New arrivals
-                  </a>
-                </li>
-                <li className="mb-2">
-                  <a href="#" className="block hover:text-indigo-400">
-                    On sale
-                  </a>
-                </li>
+            <Link
+              href="/subcategory/hot"
+              className={`mb-2 block ${
+                pathname === "/subcategory/hot" ? "text-[#a3c9bc]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
+              Popular products
+            </Link>
+          </li>
+          <li className="mb-2">
+            <Link
+              href="/subcategory/new"
+              className={`mb-2 block ${
+                pathname === "/subcategory/new" ? "text-[#a3c9bc]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
+              New arrivals
+            </Link>
+          </li>
+          <li className="mb-2">
+            <Link
+              href="/subcategory/sale"
+              className={`mb-2 block ${
+                pathname === "/subcategory/sale" ? "text-[#a3c9bc]" : ""
+              }`}
+              onClick={handleLinkClick}
+            >
+              On sale
+            </Link>
+          </li>
               </ul>
             </div>
             <div className="flex flex-col border-b-2 p-4">
@@ -259,7 +252,7 @@ const MobileSidebar = () => {
                 }`}
               />
             </div>
-            <div className="flex justify-between px-4 py-2">
+            {/* <div className="flex justify-between px-4 py-2">
               <button
                 className="text-blue-500 hover:text-blue-700"
                 onClick={applyFilters}
@@ -272,7 +265,7 @@ const MobileSidebar = () => {
               >
                 Clear Filters
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
