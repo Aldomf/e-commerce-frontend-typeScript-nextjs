@@ -22,7 +22,17 @@ const MobileHeader = dynamic(
 );
 
 function Product() {
-  const { handleAddToCart, toggleSidebar, isSidebarOpen } = useAddProduct();
+  const {
+    handleAddToCart,
+    toggleSidebar,
+    isSidebarOpen,
+    updatedCartList,
+    handleDeleteFromCart,
+    handleDecreaseQuantity,
+    handleIncreaseQuantity,
+    productQuantities,
+    updateQuantity,
+  } = useAddProduct();
   const {
     addProductToWishlist,
     deleteProductFromWishlist,
@@ -31,6 +41,7 @@ function Product() {
   } = useWishlist();
   const { token, user } = useAuth();
   const { productById, fetchProductById } = useProduct();
+
   const params = useParams<{ id: string }>();
   const productId = params.id;
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
@@ -115,17 +126,17 @@ function Product() {
               <div className="flex items-center  border w-fit p-1">
                 <button
                   className="mr-2"
-                  //   onClick={() => {
-                  //     if ((productQuantities[product.id] || 0) > 1) {
-                  //       // Check if counter is greater than 1
-                  //       handleDecreaseQuantity(product.id);
-                  //       updateQuantity(
-                  //         product.id,
-                  //         (productQuantities[product.id] || 0) - 1
-                  //       );
-                  //     }
-                  //   }}
-                  //   disabled={(productQuantities[product.id] || 0) <= 1} // Disable the button if counter is 1 or less
+                  // onClick={() => {
+                  //   if ((productQuantities[parseInt(productId)] || 0) > 1) {
+                  //     // Check if counter is greater than 1
+                  //     handleDecreaseQuantity(parseInt(productId));
+                  //     updateQuantity(
+                  //       parseInt(productId),
+                  //       (productQuantities[parseInt(productId)] || 0) - 1
+                  //     );
+                  //   }
+                  // }}
+                  // disabled={(productQuantities[parseInt(productId)] || 0) <= 1} // Disable the button if counter is 1 or less
                 >
                   <svg
                     className="w-4 h-4 flex justify-center items-center"
@@ -135,16 +146,17 @@ function Product() {
                     <path d="M20 11H4v2h16z" />
                   </svg>
                 </button>
+                {/* <p>{productQuantities[parseInt(productId)] || 0}</p> */}
                 <p>1</p>
                 <button
                   className="ml-2"
-                  //   onClick={() => {
-                  //     handleIncreaseQuantity(product.id);
-                  //     updateQuantity(
-                  //       product.id,
-                  //       (productQuantities[product.id] || 0) + 1
-                  //     );
-                  //   }}
+                  // onClick={() => {
+                  //   handleIncreaseQuantity(parseInt(productId));
+                  //   updateQuantity(
+                  //     parseInt(productId),
+                  //     (productQuantities[parseInt(productId)] || 0) + 1
+                  //   );
+                  // }}
                 >
                   <svg
                     className="w-4 h-4 flex justify-center items-center"

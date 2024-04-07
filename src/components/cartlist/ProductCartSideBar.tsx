@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useAddProduct } from "@/context/AddProductContext";
+import Link from "next/link";
 
 function ProductCartSideBar() {
   const {
@@ -22,7 +23,10 @@ function ProductCartSideBar() {
           >
             <div className="flex h-full justify-between">
               <div className="flex">
-                <div className="h-full w-28 border mr-4">
+                <Link
+                  href={`/product/${product.id}`}
+                  className="h-full w-28 border mr-4"
+                >
                   <Image
                     src={product.imageUrl} // Use product image URL
                     width={1000}
@@ -30,7 +34,7 @@ function ProductCartSideBar() {
                     alt={product.name} // Use product name as alt text
                     className="h-full w-full object-cover"
                   />
-                </div>
+                </Link>
                 <div className="flex flex-col justify-between max-w-28">
                   <h3 className="">
                     {product.name.length > 13
