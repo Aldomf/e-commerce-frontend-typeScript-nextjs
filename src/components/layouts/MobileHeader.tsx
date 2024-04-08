@@ -21,7 +21,7 @@ function MobileHeader() {
             <Image
               src="/extra-logo.svg"
               alt="Logo"
-              className="dark:invert"
+              className=""
               width={50}
               height={50}
               priority

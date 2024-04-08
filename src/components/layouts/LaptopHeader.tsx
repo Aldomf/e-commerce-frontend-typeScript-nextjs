@@ -75,7 +75,7 @@ function LaptopHeader() {
             <Image
               src="/extra-logo.svg"
               alt="Logo"
-              className="dark:invert lg:w-16 lg:h-16 xl:w-20 xl:h-20"
+              className="lg:w-16 lg:h-16 xl:w-20 xl:h-20"
               width={50}
               height={50}
               priority

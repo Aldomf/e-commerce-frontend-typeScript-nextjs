@@ -18,13 +18,14 @@ import { useMediaQuery } from 'react-responsive';
 // import LaptopHeader from '@/components/layouts/LaptopHeader';
 import Footer from '@/components/layouts/Footer';
 import { Toaster } from "react-hot-toast";
-import CartListSideBar from '@/components/homapage/CartListSideBar';
+//import CartListSideBar from '@/components/homapage/CartListSideBar';
 import { useAddProduct } from '@/context/AddProductContext';
 
 const LaptopHeader = dynamic(() => import('../components/layouts/LaptopHeader'))
 const MobileHeader = dynamic(() => import('../components/layouts/MobileHeader'))
 const HeroLaptop = dynamic(() => import('../components/homapage/HeroLaptop'))
 const HeroMobile = dynamic(() => import('../components/homapage/HeroMobile'))
+const CartListSideBar = dynamic(() => import('../components/homapage/CartListSideBar'))
 
 function HomePage() {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
