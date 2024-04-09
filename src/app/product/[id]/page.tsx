@@ -9,7 +9,7 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useAddProduct } from "@/context/AddProductContext";
 import { useParams } from "next/navigation";
 import { useProduct } from "@/context/ProductContext";
-import CartListSideBar from "@/components/homapage/CartListSideBar";
+//import CartListSideBar from "@/components/homapage/CartListSideBar";
 import { useWishlist } from "@/context/WishlistContext";
 import { useAuth } from "@/context/AuthContext";
 import Reviews from "@/components/reviews/Reviews";
@@ -20,6 +20,7 @@ const LaptopHeader = dynamic(
 const MobileHeader = dynamic(
   () => import("../../../components/layouts/MobileHeader")
 );
+const CartListSideBar = dynamic(() => import('../../../components/homapage/CartListSideBar'))
 
 function Product() {
   const { handleAddToCart, toggleSidebar, isSidebarOpen } = useAddProduct();

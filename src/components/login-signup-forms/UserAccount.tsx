@@ -8,6 +8,7 @@ import { PiAddressBook } from "react-icons/pi";
 import { BiSupport } from "react-icons/bi";
 import { Toaster, toast } from "react-hot-toast";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function UserAccount() {
   const [open, setOpen] = useState(false);
@@ -35,10 +36,12 @@ export default function UserAccount() {
           }`}
         >
           <div className="flex justify-center items-center space-x-1 cursor-pointer">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-900">
-              <img
-                src="https://images.unsplash.com/photo-1610397095767-84a5b4736cbd?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+            <div className="w-10 h-10 rounded-full overflow-hidden">
+              <Image
+                src="/user.svg"
                 alt=""
+                width={500}
+                height={500}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -50,7 +53,7 @@ export default function UserAccount() {
             <div className="absolute w-40 px-5 py-3 text-[#363F46] dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent mt-5">
               <ul className="space-y-3">
                 <li className="font-medium">
-                  <a
+                  <Link
                     href="#"
                     className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                   >
@@ -71,7 +74,7 @@ export default function UserAccount() {
                       </svg>
                     </div>
                     Account
-                  </a>
+                  </Link>
                 </li>
                 <li className="font-medium">
                   <Link
@@ -133,7 +136,7 @@ export default function UserAccount() {
                   ""
                 )}
                 <li className="font-medium">
-                  <a
+                  <Link
                     href="#"
                     className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                   >
@@ -141,7 +144,7 @@ export default function UserAccount() {
                     <BiSupport className="w-6 h-6"/>
                     </div>
                     Customer Support
-                  </a>
+                  </Link>
                 </li>
                 <hr className="dark:border-gray-700" />
                 <li className="font-medium">

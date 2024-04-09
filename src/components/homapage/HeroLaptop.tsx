@@ -108,9 +108,9 @@ function HeroLaptop() {
               className="w-full h-full object-cover"
             />
             <div className="absolute top-20 left-20 lg:left-32 xl:top-28 xl:left-64 text-white flex flex-col items-start">
-              <p className="text-xs mb-2 text-center md:mb-6 md:text-xl">
+              <div className="mb-2 text-center md:mb-6">
                 {slides[currentIndex].description}
-              </p>
+              </div>
               <button className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 border-white hover:bg-white">
                 {slides[currentIndex].button}
               </button>
