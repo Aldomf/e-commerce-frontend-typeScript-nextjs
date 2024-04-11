@@ -442,6 +442,7 @@ const CreateProduct: React.FC = () => {
               onChange={(e) => {
                 handleChange(e);
                 handleImageChange(e);
+                console.log('error');
               }}
               required
               className="rounded-md p-2 w-full"
