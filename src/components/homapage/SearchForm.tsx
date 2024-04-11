@@ -22,9 +22,8 @@ function SearchForm() {
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
-    // Check if the related target is contained within the search input or the expanded element
     if (
-      searchRef.current && // Check if searchRef.current is not null
+      searchRef.current &&
       !searchRef.current.contains(event.relatedTarget as Node) &&
       !event.currentTarget.contains(event.relatedTarget as Node)
     ) {
@@ -38,16 +37,15 @@ function SearchForm() {
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
-      // Navigate to the first product link
-      const firstProductLink = document.querySelector(".product-link") as HTMLAnchorElement | null;
+      const firstProductLink = document.querySelector(
+        ".product-link"
+      ) as HTMLAnchorElement | null;
       if (firstProductLink) {
-        event.preventDefault(); // Prevent the default link behavior
+        event.preventDefault();
         firstProductLink.click();
       }
     }
   };
-  
-  
 
   return (
     <form className="max-w-lg mx-auto">
@@ -90,12 +88,41 @@ function SearchForm() {
         {isExpanded && (
           <div className="absolute top-full left-0 w-full bg-[#a3c9bc] text-white border border-gray-200 rounded-b-lg shadow-lg z-10">
             <h3 className="px-4 py-4 flex items-center">
-              {" "}
               {searchQuery === "" ? "Trending Products" : "Products"}
               {searchQuery === "" ? <VscFlame className="ml-2" /> : ""}
             </h3>
             <div className="px-6">
-              {filteredProducts.length === 0 ? (
+              {searchQuery === "" ? (
+                hotProducts.slice(0, 4).map((product, index) => (
+                  <Link
+                    href={`/product/${product.id}`}
+                    key={product.id}
+                    className={`flex mb-4 ${index === 0 ? 'product-link' : ''}`}
+                  >
+                    <div className="w-20 h-20 mr-4">
+                      <Image
+                        src={product.imageUrl}
+                        width={1000}
+                        height={500}
+                        alt={product.name}
+                        className="h-full"
+                      />
+                    </div>
+                    <div>
+                      <p>
+                        {product.name.length > 30
+                          ? `${product.name.substring(0, 30)}...`
+                          : product.name}
+                      </p>
+                      <p className="font-light text-sm">
+                        {product.description.length > 30
+                          ? `${product.description.substring(0, 30)}...`
+                          : product.description}
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              ) : filteredProducts.length === 0 ? (
                 <p className="text-center text-gray-500 py-4">
                   No products match your search.
                 </p>
@@ -139,4 +166,5 @@ function SearchForm() {
 }
 
 export default SearchForm;
+
 
