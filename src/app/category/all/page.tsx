@@ -17,7 +17,7 @@ function All() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1023 });
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
-  const { products } = useProduct();
+  const { products, filteredProducts } = useProduct();
 
   return (
     <>
@@ -38,7 +38,7 @@ function All() {
             )}
             <div className="lg:w-[80%]">
               <div className="px-6 ssm:grid ssm:grid-cols-2 ssm:gap-4 md:grid-cols-3 md:gap-5 lg:gap-3 xl:gap-10 lg:grid-cols-4 xl:grid-cols-5">
-                <ProductCard products={products}/>
+                <ProductCard products={filteredProducts}/>
               </div>
             </div>
           </div>

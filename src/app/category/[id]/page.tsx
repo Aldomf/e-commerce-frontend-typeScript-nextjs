@@ -22,13 +22,13 @@ function Category() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1023 });
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
-  const { products, categories } = useProduct();
+  const { products, categories, filteredProducts } = useProduct();
 
   const category = categories.find(cat => cat.id === categoryIdNumber);
 
   const categoryName = category ? category.name : 'Category';
 
-  const productsCategory = products.filter((product) => product.category.id === categoryIdNumber);
+  const productsCategory = filteredProducts.filter((product) => product.category.id === categoryIdNumber);
 
   return (
     <>

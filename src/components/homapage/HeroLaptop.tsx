@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React, { useState } from "react";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
@@ -6,13 +7,13 @@ import "react-image-gallery/styles/css/image-gallery.css";
 interface CustomImageGalleryItem {
   original: string;
   description: JSX.Element;
-  button: string;
+  //button: string;
 }
 
 interface ReactImageGalleryItem {
   original: string;
   description: string;
-  button: string;
+  //button: string;
 }
 
 function HeroLaptop() {
@@ -30,7 +31,7 @@ function HeroLaptop() {
           <span className="text-4xl">Favorite Brands</span>
         </div>
       ),
-      button: "Shop Now",
+      //button: "Shop Now",
     },
     {
       original: "/back-5.jpg",
@@ -45,7 +46,7 @@ function HeroLaptop() {
           <span className="text-4xl">Favorite Brands</span>
         </div>
       ),
-      button: "Shop Now",
+      //button: "Shop Now",
     },
     {
       original: "/back-1.jpg",
@@ -60,7 +61,7 @@ function HeroLaptop() {
           <span className="text-4xl">Favorite Brands</span>
         </div>
       ),
-      button: "Shop Now",
+      //button: "Shop Now",
     },
     {
       original: "/back-55.jpg",
@@ -75,14 +76,14 @@ function HeroLaptop() {
           <span className="text-4xl">Favorite Brands</span>
         </div>
       ),
-      button: "Shop Now",
+      //button: "Shop Now",
     },
   ];
 
   const convertedSlides: ReactImageGalleryItem[] = slides.map((slide) => ({
     original: slide.original,
     description: slide.description.toString(), // Convert JSX element to string
-    button: slide.button,
+    //button: slide.button,
   }));
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -111,9 +112,12 @@ function HeroLaptop() {
               <div className="mb-2 text-center md:mb-6">
                 {slides[currentIndex].description}
               </div>
-              <button className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 border-white hover:bg-white">
+              {/* <button className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 border-white hover:bg-white">
                 {slides[currentIndex].button}
-              </button>
+              </button> */}
+              <Link href="/category/all" className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 border-white hover:bg-white">
+                Shop Now
+              </Link>
             </div>
           </div>
         )}

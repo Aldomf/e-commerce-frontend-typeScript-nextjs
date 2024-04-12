@@ -1,11 +1,12 @@
 import { useProduct } from "@/context/ProductContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const LaptopSidebar = () => {
   const pathname = usePathname();
-  const { categories, products } = useProduct();
+  const { categories, maxPrice, inputMaxPrice, setInputMaxPrice, minPrice, setMaxPrice, products } =
+    useProduct();
 
   const handleLinkClick = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -14,6 +15,22 @@ const LaptopSidebar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
   const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
+
+  useEffect(() => {
+    // Find the highest price among all products
+    const highestPrice = Math.max(
+      ...products.map((product) =>
+        parseFloat(product.priceWithDiscount ?? product.price)
+      )
+    );
+    setMaxPrice(highestPrice);
+    setInputMaxPrice(highestPrice); // Set inputMaxPrice to the initial maxPrice
+  }, [products, maxPrice]);
+
+  // useEffect(() => {
+  //   // Reset inputMaxPrice when changing the page
+  //   setInputMaxPrice(maxPrice);
+  // }, [pathname, maxPrice, setInputMaxPrice]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -174,18 +191,28 @@ const LaptopSidebar = () => {
             </svg>
           )}
         </div>
-
-        <input
-          type="range"
-          min="0"
-          max="100"
-          // value={minPrice}
-          // onChange={(e) => setMinPrice(parseFloat(e.target.value))}
-          // onMouseUp={() => setMinPrice(parseFloat(minPrice))}
+        <div
           className={`transition-all duration-300 ease-linear ${
             isDropdownOpen2 ? "max-h-96 mt-4" : "max-h-0 overflow-hidden"
           }`}
-        />
+        >
+          <div>
+            {/* Your other JSX elements */}
+            <input
+              type="range"
+              min={0}
+              max={maxPrice} // Set max to maxPrice
+              value={inputMaxPrice} // Use inputMaxPrice for the value
+              onChange={(e) => setInputMaxPrice(parseFloat(e.target.value))}
+              className="w-full"
+            />
+            {/* Show the current price range */}
+            <div className="flex items-center justify-between">
+              <span className="mr-2">${minPrice}</span>
+              <span>${inputMaxPrice}</span> {/* Display inputMaxPrice */}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

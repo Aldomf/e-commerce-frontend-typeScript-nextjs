@@ -16,9 +16,9 @@ function Hot() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1023 });
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
-  const { products } = useProduct();
+  const { filteredProducts } = useProduct();
 
-  const hotProducts = products.filter((product) => product.hot);
+  const hotProducts = filteredProducts.filter((product) => product.hot);
 
   return (
     <>

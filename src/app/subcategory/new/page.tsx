@@ -16,9 +16,9 @@ function New() {
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1023 });
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
-  const { products } = useProduct();
+  const { filteredProducts } = useProduct();
 
-  const newProducts = products.filter((product) => product.new);
+  const newProducts = filteredProducts.filter((product) => product.new);
 
   return (
     <>
