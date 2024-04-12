@@ -82,9 +82,9 @@ const UpdateProductForm = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+  {/*const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null
-  );
+  );*/}
   const [currentCategoryName, setCurrentCategoryName] = useState<string>("");
 
   const [validationErrors, setValidationErrors] = useState<{
@@ -159,14 +159,14 @@ const UpdateProductForm = () => {
     fetchCategories();
   }, []);
 
-  useEffect(() => {
+  {/*useEffect(() => {
     if (
       typeof productData.category === "object" &&
       productData.category !== null
     ) {
       setSelectedCategoryId(productData.category.id);
     }
-  }, [productData.category]);
+  }, [productData.category]);*/}
 
   const handleDelete = async () => {
     // Display a confirmation dialog before deleting the product
