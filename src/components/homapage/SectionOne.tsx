@@ -26,7 +26,7 @@ function SectionOne() {
           <p className="font-light">
             Ckeck Out{" "}
             <Link
-              href=""
+              href="/customer-support#locations"
               className="border-b border-black border-solid border-b-0.5"
             >
               Locations
@@ -43,7 +43,7 @@ function SectionOne() {
           <p className="font-light">
             {" "}
             <Link
-              href=""
+              href="/customer-support"
               className="border-b border-black border-solid border-b-0.5"
             >
               Online Support

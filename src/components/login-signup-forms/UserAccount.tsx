@@ -137,7 +137,7 @@ export default function UserAccount() {
                 )}
                 <li className="font-medium">
                   <Link
-                    href="#"
+                    href="/customer-support"
                     className="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-[#A3C9BC]"
                   >
                     <div className="mr-3">

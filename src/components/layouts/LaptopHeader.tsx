@@ -87,7 +87,7 @@ function LaptopHeader() {
             </div>
           </div>
           <div className="flex justify-center items-center">
-            <Link href="" className="mr-4 lg:mr-6 xl:mr-8">
+            <Link href="/customer-support#locations" className="mr-4 lg:mr-6 xl:mr-8">
               <FaLocationDot className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
             </Link>
             <Link href="/wishlist" className=" mr-4 lg:mr-6 xl:mr-8">

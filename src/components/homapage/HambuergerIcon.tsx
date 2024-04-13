@@ -63,7 +63,7 @@ export default function HambuergerIcon() {
                   </Link>
                 )}
                 <div className="flex">
-                  <Link href="">
+                  <Link href="/customer-support#locations">
                     <FaLocationDot className="text-white mr-4 w-7 h-7" />
                   </Link>
                   <Link href="/wishlist">
@@ -98,7 +98,7 @@ export default function HambuergerIcon() {
             </div>
             <div className="flex flex-col items-center text-white mt-36">
               <Link href="">About Us</Link>
-              <Link href="">Customer Support</Link>
+              <Link href="/customer-support">Customer Support</Link>
             </div>
             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between font-bold mt-6 text-xl text-white min-h-[250px]">
               <Link
@@ -132,10 +132,10 @@ export default function HambuergerIcon() {
                   <p>Most Popular</p>
                 </li>
               </Link>
-              <Link href="/admin/orders">
+              <Link href={token ? '/orders' : '/login'}>
                 <li
                   className={`my-4 flex justify-center items-center cursor-pointer ${
-                    pathname === `/category/orders` ? "text-[#363F46]" : ""
+                    pathname === `/orders` ? "text-[#363F46]" : ""
                   }`}
                 >
                   <p>My orders</p>

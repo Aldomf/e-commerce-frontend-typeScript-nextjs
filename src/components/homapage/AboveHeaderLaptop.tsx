@@ -33,7 +33,7 @@ function AboveHeaderLaptop() {
           About Us
         </Link>
         <Link
-          href=""
+          href="/customer-support"
           className="hover:text-[#363F46] transition duration-500 ease-in-out"
         >
           Customer Support
