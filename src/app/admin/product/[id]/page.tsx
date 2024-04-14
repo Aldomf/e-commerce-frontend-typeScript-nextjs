@@ -27,9 +27,9 @@ const productSchema = object({
       message: "Product description must be at most 1000 characters long",
     }),
   price: string().min(1, { message: "Price must be at least 1" }),
-  category: string()
-    .min(1, { message: "Category a category" })
-    .max(255, { message: "Category must be at most 255 characters long" }),
+  // category: string()
+  //   .min(1, { message: "Category a category" })
+  //   .max(255, { message: "Category must be at most 255 characters long" }),
   discountPercentage: union([
     number().max(99), // If discountPercentage is a number <= 99
     string()
@@ -255,6 +255,8 @@ const UpdateProductForm = () => {
         priceWithDiscount,
         createdAt,
         updatedAt,
+        // imageURL added to fix update products bug
+        imageUrl,
         ...relevantData
       } = productData;
 
@@ -313,9 +315,8 @@ const UpdateProductForm = () => {
 
   return (
     <div
-      className={`bg-[#111827] ${
-        isTabletOrMobile ? "flex-col" : "flex h-screen"
-      }`}
+      className={`bg-[#111827] ${isTabletOrMobile ? "flex-col" : "flex h-screen"
+        }`}
     >
       <div
         className="hidden lg:block"
