@@ -32,7 +32,7 @@ function CustomerSupportForm() {
   };
 
   return (
-    <div className="mb-8 lg:border lg:border-black lg:flex lg:mx-20 xl:mx-36 lg:mb-40">
+    <div className="mb-8 lg:border lg:border-black lg:flex lg:mx-20 xl:mx-36 lg:mb-28">
       <div
         className="bg-cover bg-center w-full h-60 md:h-96 mb-6 lg:mb-0 lg:h-[760px] lg:w-[50%] xl:h-[735px]"
         style={{ backgroundImage: 'url("customerSupport.jpg")' }}

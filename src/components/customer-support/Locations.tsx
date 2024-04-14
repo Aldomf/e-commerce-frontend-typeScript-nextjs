@@ -3,7 +3,7 @@ import { IoLocationOutline } from "react-icons/io5";
 
 function Locations() {
   return (
-    <div className="mb-6 lg:mx-20 xl:mx-36 lg:mb-40">
+    <div className="mb-6 lg:mx-20 xl:mx-36 lg:mb-28">
       <div className="mb-8 mx-6">
         <h2 className="text-2xl font-bold mb-3 lg:text-4xl">
           You Can Find Us in Any of These Locations

@@ -27,7 +27,7 @@ function AboveHeaderLaptop() {
     <div className="py-3 px-4 lg:px-10 xl:px-16 bg-[#6ca08e] text-white flex justify-between font-light">
       <div className="flex items-center">
         <Link
-          href=""
+          href="/aboutUs"
           className="mr-10 hover:text-[#363F46] transition duration-500 ease-in-out"
         >
           About Us

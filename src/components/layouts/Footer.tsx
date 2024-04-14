@@ -99,8 +99,10 @@ function Footer() {
               FAQ
             </Link>
             <Link
-              href=""
-              className="mb-4 hover:text-[#363F46] transition duration-500 ease-in-out"
+              href="/aboutUs"
+              className={`mb-4 hover:text-[#363F46] transition duration-500 ease-in-out ${
+                pathname === "/aboutUs" ? "text-[#363F46]" : ""
+              }`}
             >
               About Us
             </Link>

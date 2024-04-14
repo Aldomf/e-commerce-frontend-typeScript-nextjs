@@ -97,7 +97,7 @@ export default function HambuergerIcon() {
               </div>
             </div>
             <div className="flex flex-col items-center text-white mt-36">
-              <Link href="">About Us</Link>
+              <Link href="/aboutUs">About Us</Link>
               <Link href="/customer-support">Customer Support</Link>
             </div>
             <ul className="MENU-LINK-MOBILE-OPEN flex flex-col items-center justify-between font-bold mt-6 text-xl text-white min-h-[250px]">

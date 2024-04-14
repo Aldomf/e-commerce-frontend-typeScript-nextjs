@@ -17,7 +17,7 @@ function FAQ() {
     setIsDropdownOpen3(!isDropdownOpen3);
   };
   return (
-    <div className="mb-6 lg:mx-20 xl:mx-36 lg:mb-40">
+    <div className="mb-6 lg:mx-20 xl:mx-36 lg:mb-28">
       <div className="border-b border-black">
         <h2 className="text-2xl mx-6 font-bold mb-3 lg:text-4xl text-center py-4">
           Frequently Asked Questions
