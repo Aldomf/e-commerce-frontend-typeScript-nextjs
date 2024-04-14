@@ -86,6 +86,7 @@ const UpdateProductForm = () => {
     null
   );*/}
   const [currentCategoryName, setCurrentCategoryName] = useState<string>("");
+  console.log(currentCategoryName);
 
   const [validationErrors, setValidationErrors] = useState<{
     [key: string]: string;
@@ -97,6 +98,7 @@ const UpdateProductForm = () => {
   const validateProduct = (data: ProductData) => {
     try {
       productSchema.parse(data);
+      console.log(data);
       return { isValid: true, errors: {} };
     } catch (error: any) {
       const errors: { [key: string]: string } = {};
@@ -113,7 +115,7 @@ const UpdateProductForm = () => {
     name: "",
     description: "",
     price: "",
-    category: {} as Category,
+    category: {id : 0, name: ""},
     discountPercentage: "",
     discountActive: false,
     imageFile: null,
@@ -134,6 +136,7 @@ const UpdateProductForm = () => {
         setProductData(product);
         setCurrentCategoryName(product.category.name);
         console.log(product);
+        console.log(product.category.name);
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
@@ -202,6 +205,9 @@ const UpdateProductForm = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
+    console.log(name);
+    console.log(value);
+    console.log(type);
 
     let newValue: string | boolean | File | null = value;
 
@@ -237,13 +243,16 @@ const UpdateProductForm = () => {
     e.preventDefault();
     console.log("Submitting form:", productData);
     console.log(productData.category.name);
+    console.log(productData);
+    console.log(productData.category);
 
-    const validationResult = validateProduct(productData);
+    {/* const validationResult = validateProduct(productData);
+    console.log(validationResult);
     if (!validationResult.isValid) {
       console.error("Validation errors:", validationResult.errors);
       setValidationErrors(validationResult.errors); // Set validation errors state
       return;
-    }
+    }*/}
 
     try {
       const formData = new FormData();
@@ -255,6 +264,7 @@ const UpdateProductForm = () => {
         priceWithDiscount,
         createdAt,
         updatedAt,
+        imageUrl,
         ...relevantData
       } = productData;
 
@@ -301,6 +311,7 @@ const UpdateProductForm = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.files);
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setProductData((prevProductData) => ({
