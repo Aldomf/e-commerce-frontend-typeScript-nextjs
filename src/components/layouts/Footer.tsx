@@ -146,19 +146,19 @@ function Footer() {
         <div className="w-full flex flex-col items-center">
           <div className="flex flex-col items-center mb-14 md:flex-row md:justify-center md:items-center">
             <Link
-              href=""
+              href="/shipping-returns"
               className="underline mb-4 md:mb-0 md:mr-16 hover:text-[#363F46] transition duration-500 ease-in-out"
             >
               Shipping & Returns
             </Link>
             <Link
-              href=""
+              href="/terms-conditions"
               className="underline mb-4 md:mb-0 md:mr-16 hover:text-[#363F46] transition duration-500 ease-in-out"
             >
               Terms & Conditions
             </Link>
             <Link
-              href=""
+              href="/terms-conditions#payments"
               className="underline hover:text-[#363F46] transition duration-500 ease-in-out"
             >
               Payment Methods

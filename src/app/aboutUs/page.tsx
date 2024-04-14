@@ -15,7 +15,7 @@ const MobileHeader = dynamic(
   () => import("../../components/layouts/MobileHeader")
 );
 
-function CustomerSupport() {
+function AboutUs() {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
   return (
     <>
@@ -36,4 +36,4 @@ function CustomerSupport() {
   );
 }
 
-export default CustomerSupport;
+export default AboutUs;

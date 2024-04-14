@@ -61,7 +61,7 @@ function SectionOne() {
           <p className="font-light">
             Download Our{" "}
             <Link
-              href=""
+              href="/#app"
               className="border-b border-black border-solid border-b-0.5"
             >
               App
