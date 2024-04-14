@@ -255,6 +255,7 @@ const UpdateProductForm = () => {
         priceWithDiscount,
         createdAt,
         updatedAt,
+        // imageURL added to fix update products bug
         imageUrl,
         ...relevantData
       } = productData;
