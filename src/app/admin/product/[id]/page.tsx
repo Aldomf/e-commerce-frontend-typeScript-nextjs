@@ -27,9 +27,9 @@ const productSchema = object({
       message: "Product description must be at most 1000 characters long",
     }),
   price: string().min(1, { message: "Price must be at least 1" }),
-  category: string()
-    .min(1, { message: "Category a category" })
-    .max(255, { message: "Category must be at most 255 characters long" }),
+  // category: string()
+  //   .min(1, { message: "Category a category" })
+  //   .max(255, { message: "Category must be at most 255 characters long" }),
   discountPercentage: union([
     number().max(99), // If discountPercentage is a number <= 99
     string()
@@ -82,11 +82,10 @@ const UpdateProductForm = () => {
 
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  {/*const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(
     null
-  );*/}
+  );
   const [currentCategoryName, setCurrentCategoryName] = useState<string>("");
-  console.log(currentCategoryName);
 
   const [validationErrors, setValidationErrors] = useState<{
     [key: string]: string;
@@ -98,7 +97,6 @@ const UpdateProductForm = () => {
   const validateProduct = (data: ProductData) => {
     try {
       productSchema.parse(data);
-      console.log(data);
       return { isValid: true, errors: {} };
     } catch (error: any) {
       const errors: { [key: string]: string } = {};
@@ -115,7 +113,7 @@ const UpdateProductForm = () => {
     name: "",
     description: "",
     price: "",
-    category: {id : 0, name: ""},
+    category: {} as Category,
     discountPercentage: "",
     discountActive: false,
     imageFile: null,
@@ -136,7 +134,6 @@ const UpdateProductForm = () => {
         setProductData(product);
         setCurrentCategoryName(product.category.name);
         console.log(product);
-        console.log(product.category.name);
       } catch (error) {
         console.error("Error fetching product details:", error);
       }
@@ -162,14 +159,14 @@ const UpdateProductForm = () => {
     fetchCategories();
   }, []);
 
-  {/*useEffect(() => {
+  useEffect(() => {
     if (
       typeof productData.category === "object" &&
       productData.category !== null
     ) {
       setSelectedCategoryId(productData.category.id);
     }
-  }, [productData.category]);*/}
+  }, [productData.category]);
 
   const handleDelete = async () => {
     // Display a confirmation dialog before deleting the product
@@ -205,9 +202,6 @@ const UpdateProductForm = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type } = e.target;
-    console.log(name);
-    console.log(value);
-    console.log(type);
 
     let newValue: string | boolean | File | null = value;
 
@@ -243,16 +237,13 @@ const UpdateProductForm = () => {
     e.preventDefault();
     console.log("Submitting form:", productData);
     console.log(productData.category.name);
-    console.log(productData);
-    console.log(productData.category);
 
-    {/* const validationResult = validateProduct(productData);
-    console.log(validationResult);
+    const validationResult = validateProduct(productData);
     if (!validationResult.isValid) {
       console.error("Validation errors:", validationResult.errors);
       setValidationErrors(validationResult.errors); // Set validation errors state
       return;
-    }*/}
+    }
 
     try {
       const formData = new FormData();
@@ -311,7 +302,6 @@ const UpdateProductForm = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.files);
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
       setProductData((prevProductData) => ({
@@ -324,9 +314,8 @@ const UpdateProductForm = () => {
 
   return (
     <div
-      className={`bg-[#111827] ${
-        isTabletOrMobile ? "flex-col" : "flex h-screen"
-      }`}
+      className={`bg-[#111827] ${isTabletOrMobile ? "flex-col" : "flex h-screen"
+        }`}
     >
       <div
         className="hidden lg:block"
