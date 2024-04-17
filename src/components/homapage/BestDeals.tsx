@@ -5,12 +5,15 @@ import { useProduct } from "@/context/ProductContext";
 
 function BestDeals() {
   const { products } = useProduct();
+  console.log(products);
 
   // Filter out products with hot property set to true
   const onSaleProducts = products.filter((product) => product.sale);
+  console.log(onSaleProducts);
 
   // Slice the hotProducts array to render only the first 5 products
   const limitedonSaleProducts = onSaleProducts.slice(0, 5);
+  console.log(limitedonSaleProducts);
 
   return (
     <div className="flex flex-col items-center my-6 mb-12 px-8 sm:px-16 lg:mb-16">
