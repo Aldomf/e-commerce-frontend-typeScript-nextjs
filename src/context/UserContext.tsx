@@ -31,7 +31,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     try {
       if (user && user.id) { // Check if user object and user id are available
         // Make a GET request to the endpoint
-        console.log(user?.id)
         const response = await axios.get<User>(
           `http://localhost:4000/api/user/${user.id}`, {
             headers: {
@@ -40,7 +39,6 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           }
         );
         setUserCartList(response.data.cartList); // Set user info in state
-        console.log(response.data.cartList)
       }
     } catch (error) {
       console.error("Error fetching user info:", error);

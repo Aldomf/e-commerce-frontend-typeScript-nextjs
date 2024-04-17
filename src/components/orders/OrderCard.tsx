@@ -1,13 +1,36 @@
 import { useAuth } from "@/context/AuthContext";
 import { useCheckoutAndOrder } from "@/context/CheckoutAndOrderContext";
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { FaRegCircleCheck } from "react-icons/fa6";
 
 function OrderCard() {
   const { user, token } = useAuth();
   const { getUserOrders, orders, setIsLoading, isLoading } =
     useCheckoutAndOrder();
+
+    // New method to update order status
+  const updateOrderStatus = async (orderId: string) => {
+    try {
+      await axios.patch(
+        `http://localhost:4000/api/orders/${user?.id}/${orderId}/status`,
+        { }, // Body containing the status
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // If successful, update the order status locally or fetch updated orders
+      // depending on your application logic
+    } catch (error) {
+      // Handle error
+      console.error("Error updating order status:", error);
+      throw error; // Rethrow the error to handle it at a higher level if needed
+    }
+  };
 
   useEffect(() => {
     if (token && user?.id) {
@@ -28,9 +51,10 @@ function OrderCard() {
             className="bg-[#F8F8F8] p-4 w-full flex flex-col rounded-md mb-8 sm:mb-0 border"
           >
             <div className="flex flex-col">
-              <p className="mb-2">
+              <p className="mb-2 flex items-center">
                 Status:{" "}
-                <span className="font-semibold">{order.orderStatus}</span>
+                <span className={order.orderStatus === 'shipped' ? 'font-semibold mx-1 text-green-500' : 'font-semibold mx-1'}>{order.orderStatus}</span>
+                {order.orderStatus === 'shipped' && <FaRegCircleCheck className="text-green-500"/>}
               </p>
               <p className="mb-2">
                 Order Number: <span>{order.id}</span>
@@ -69,7 +93,7 @@ function OrderCard() {
               >
                 Order Details
               </Link>
-              <button className="w-1/2 py-4 font-bold bg-[#363F46] hover:bg-[#4B565E] text-white flex justify-center items-center rounded-md">
+              <button className="w-1/2 py-4 font-bold bg-[#363F46] hover:bg-[#4B565E] text-white flex justify-center items-center rounded-md" onClick={() => updateOrderStatus(order.id.toString())}>
                 Received
               </button>
             </div>

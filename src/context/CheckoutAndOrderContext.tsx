@@ -18,6 +18,7 @@ interface CheckoutAndOrderContextType {
   orderById: Order | null;
   isLoading: boolean
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  updateOrderStatus: (orderId: string) => Promise<void>;
 }
 
 export const CheckoutAndOrderContext =
@@ -103,9 +104,30 @@ export const CheckoutAndOrderProvider = ({
     }
   };
 
+  // New method to update order status
+  const updateOrderStatus = async (orderId: string) => {
+    try {
+      await axios.patch(
+        `http://localhost:4000/api/orders/${user?.id}/${orderId}/status`,
+        { }, // Body containing the status
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      // If successful, update the order status locally or fetch updated orders
+      // depending on your application logic
+    } catch (error) {
+      // Handle error
+      console.error("Error updating order status:", error);
+      throw error; // Rethrow the error to handle it at a higher level if needed
+    }
+  };
+
   return (
     <CheckoutAndOrderContext.Provider
-      value={{ createCheckoutSession, getUserOrders, getOrderById, orders, isLoading, setIsLoading, orderById }}
+      value={{ createCheckoutSession, getUserOrders, getOrderById, orders, isLoading, setIsLoading, orderById, updateOrderStatus }}
     >
       {children}
     </CheckoutAndOrderContext.Provider>

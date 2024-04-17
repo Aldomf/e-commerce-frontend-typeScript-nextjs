@@ -108,7 +108,6 @@ export const AddProductProvider = ({ children }: { children: ReactNode }) => {
     if (userCartList) {
       // Set the updated cart list to the state
       setUpdatedCartList(userCartList);
-      console.log(updatedCartList);
     }
   }, [userCartList]);
   

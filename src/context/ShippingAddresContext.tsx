@@ -89,7 +89,6 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
         }
       );
       // Handle response if needed
-      console.log("Shipping address fetched:", response.data);
       return response.data;
     } catch (error) {
       // Handle error

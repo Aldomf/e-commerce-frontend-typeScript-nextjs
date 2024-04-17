@@ -57,9 +57,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
           },
         }
       );
-
-      // Handle response if needed
-      console.log("Product added to wishlist:", response.data);
       setIsInWishlist(true);
       setUserWishlist([...userWishlist!, response.data]);
     } catch (error) {
@@ -99,8 +96,6 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
           },
         }
       );
-      // Handle response if needed
-      console.log("User wishlist:", response.data.wishlist);
       setUserWishlist(response.data.wishlist);
     } catch (error) {
       // Handle error
