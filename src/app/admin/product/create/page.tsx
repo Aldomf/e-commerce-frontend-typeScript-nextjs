@@ -8,6 +8,7 @@ import HamburguerMenuAdmin from "@/components/admin/HamburguerMenuAdmin";
 import { Toaster, toast } from "react-hot-toast";
 import { z, object, string, number, boolean } from "zod";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 // Define the schema for the form data using Zod
 const productSchema = object({
@@ -442,13 +443,15 @@ const CreateProduct: React.FC = () => {
               onChange={(e) => {
                 handleChange(e);
                 handleImageChange(e);
-                console.log('error');
+                console.log("error");
               }}
               required
               className="rounded-md p-2 w-full"
             />
             {productData.imageUrl && (
-              <img
+              <Image
+                width={500}
+                height={500}
                 src={productData.imageUrl} // Set the src to the current image URL
                 alt="Current Image"
                 className="mt-2"

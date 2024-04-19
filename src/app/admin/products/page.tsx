@@ -8,6 +8,7 @@ import Pagination from "@/components/homapage/Pagination";
 import { useRouter } from "next/navigation";
 import { Toaster } from "react-hot-toast";
 import AddIcon from "@mui/icons-material/Add";
+import Image from "next/image";
 
 function AdminProduct() {
   const router = useRouter();
@@ -43,7 +44,9 @@ function AdminProduct() {
 
   const fetchData = async (): Promise<Product[]> => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product`);
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product`
+      );
       const productData: Product[] = await response.json();
       console.log(productData);
       setProduct(productData);
@@ -139,9 +142,11 @@ function AdminProduct() {
               }`}
               onClick={() => router.push(`/admin/product/${product.id}`)}
             >
-              <img
+              <Image
                 src={product.imageUrl}
                 alt={product.name}
+                width={500}
+                height={500}
                 className="w-40 h-auto mb-2 rounded-lg border-2"
               />
               <h2 className="text-xl text-[#60A5FA] font-bold">

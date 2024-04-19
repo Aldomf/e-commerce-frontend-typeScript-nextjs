@@ -10,6 +10,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { z, object, string, number, boolean, union } from "zod";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 // Custom refinement to check if the value is a valid number
 const isNumberString = (val: string) => !isNaN(Number(val));
@@ -315,8 +316,9 @@ const UpdateProductForm = () => {
 
   return (
     <div
-      className={`bg-[#111827] ${isTabletOrMobile ? "flex-col" : "flex h-screen"
-        }`}
+      className={`bg-[#111827] ${
+        isTabletOrMobile ? "flex-col" : "flex h-screen"
+      }`}
     >
       <div
         className="hidden lg:block"
@@ -493,10 +495,12 @@ const UpdateProductForm = () => {
               className="rounded-md p-2 w-full"
             />
             {productData.imageUrl && (
-              <img
+              <Image
                 src={productData.imageUrl} // Set the src to the current image URL
                 alt="Current Image"
                 className="mt-2"
+                width={500}
+                height={500}
                 style={{ maxWidth: "200px" }} // Adjust the width as needed
               />
             )}
