@@ -12,6 +12,7 @@ import Footer from "@/components/layouts/Footer";
 import { useAddProduct } from "@/context/AddProductContext";
 import CartListSideBar from "@/components/homapage/CartListSideBar";
 
+
 function Category() {
   const { toggleSidebar, isSidebarOpen } = useAddProduct();
   const params = useParams<{ id: string }>();
