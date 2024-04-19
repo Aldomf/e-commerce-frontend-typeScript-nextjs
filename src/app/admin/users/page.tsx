@@ -71,7 +71,7 @@ function AdminUser() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/user", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -45,7 +45,7 @@ function Categories() {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          "http://localhost:4000/api/category"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`
         );
         setCategories(response.data);
         console.log(response.data);

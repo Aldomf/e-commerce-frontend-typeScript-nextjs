@@ -35,7 +35,7 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
   const addShippingAddress = async (addressData: ShippingAddress) => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/shipping-address/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shipping-address/${user?.id}`,
         addressData,
         {
           headers: {
@@ -59,7 +59,7 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
     try {
         const { id, ...dataWithoutId } = addressData as { id?: any };
       const response = await axios.patch(
-        `http://localhost:4000/api/shipping-address/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shipping-address/${user?.id}`,
         dataWithoutId,
         {
           headers: {
@@ -81,7 +81,7 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
   const getShippingAddress = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/shipping-address/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/shipping-address/${user?.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

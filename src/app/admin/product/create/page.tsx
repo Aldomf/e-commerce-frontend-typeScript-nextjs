@@ -111,7 +111,7 @@ const CreateProduct: React.FC = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          "http://localhost:4000/api/category"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`
         );
         setCategories(response.data);
         console.log(response.data);
@@ -204,7 +204,7 @@ const CreateProduct: React.FC = () => {
       console.log("Form data:", formData);
 
       const response = await axios.post(
-        "http://localhost:4000/api/product/create",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/create`,
         formData,
         {
           headers: {

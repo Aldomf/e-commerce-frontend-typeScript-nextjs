@@ -32,7 +32,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       if (user && user.id) { // Check if user object and user id are available
         // Make a GET request to the endpoint
         const response = await axios.get<User>(
-          `http://localhost:4000/api/user/${user.id}`, {
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/user/${user.id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -50,7 +50,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     try {
       // Make a DELETE request to remove product from cart
       const response = await axios.delete(
-        `http://localhost:4000/api/cart/${user?.id}/delete-product-from-cartList/${productId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/cart/${user?.id}/delete-product-from-cartList/${productId}`,
         {
           headers: {
             "x-user-id": user?.id // Replace with actual user ID

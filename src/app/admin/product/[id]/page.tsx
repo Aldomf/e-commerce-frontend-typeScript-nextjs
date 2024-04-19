@@ -128,7 +128,7 @@ const UpdateProductForm = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await axios.get<ProductData>(
-          `http://localhost:4000/api/product/${productId}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`
         );
         const product = response.data;
         setProductData(product);
@@ -146,7 +146,7 @@ const UpdateProductForm = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          "http://localhost:4000/api/category"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`
         );
         setCategories(response.data);
         console.log(response.data);
@@ -177,7 +177,7 @@ const UpdateProductForm = () => {
     if (confirmDelete) {
       try {
         const response = await axios.delete(
-          `http://localhost:4000/api/product/${productId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -280,7 +280,7 @@ const UpdateProductForm = () => {
       console.log("Form data:", formData);
 
       const response = await axios.patch(
-        `http://localhost:4000/api/product/${productId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`,
         formData,
         {
           headers: {

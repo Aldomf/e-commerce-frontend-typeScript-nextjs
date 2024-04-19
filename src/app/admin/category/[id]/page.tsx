@@ -47,7 +47,7 @@ function UpdateCategory() {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/api/category/${categoryId}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category/${categoryId}`
         );
         const { name, description } = response.data;
         setName(name);
@@ -67,7 +67,7 @@ function UpdateCategory() {
 
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:4000/api/category/${categoryId}`, {
+        await axios.delete(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category/${categoryId}`, {
           headers: {
             Authorization: `Bearer ${token}`, // Set the Authorization header
           },
@@ -89,7 +89,7 @@ function UpdateCategory() {
     try {
       const validationResult = productSchema.parse({ name, description });
       const response = await axios.patch(
-        `http://localhost:4000/api/category/${categoryId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category/${categoryId}`,
         {
           name: validationResult.name,
           description: validationResult.description,
