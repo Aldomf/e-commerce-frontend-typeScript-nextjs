@@ -11,12 +11,12 @@ function OrderCard() {
   const { getUserOrders, orders, setIsLoading, isLoading } =
     useCheckoutAndOrder();
 
-    // New method to update order status
+  // New method to update order status
   const updateOrderStatus = async (orderId: string) => {
     try {
       await axios.patch(
         `http://localhost:4000/api/orders/${user?.id}/${orderId}/status`,
-        { }, // Body containing the status
+        {}, // Body containing the status
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ function OrderCard() {
       getUserOrders();
       setIsLoading(false);
     }
-  }, [token, user]);
+  }, [token, user, orders]);
   return (
     <>
       {isLoading ? (
@@ -54,7 +54,7 @@ function OrderCard() {
               <p className="mb-2 flex items-center">
                 Status:{" "}
                 <span className={order.orderStatus === 'shipped' ? 'font-semibold mx-1 text-green-500' : 'font-semibold mx-1'}>{order.orderStatus}</span>
-                {order.orderStatus === 'shipped' && <FaRegCircleCheck className="text-green-500"/>}
+                {order.orderStatus === 'shipped' && <FaRegCircleCheck className="text-green-500" />}
               </p>
               <p className="mb-2">
                 Order Number: <span>{order.id}</span>
