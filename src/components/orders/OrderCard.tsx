@@ -1,6 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
 import { useCheckoutAndOrder } from "@/context/CheckoutAndOrderContext";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,36 +7,15 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 
 function OrderCard() {
   const { user, token } = useAuth();
-  const { getUserOrders, orders, setIsLoading, isLoading } =
+  const { getUserOrders, orders, setIsLoading, isLoading, updateOrderStatus } =
     useCheckoutAndOrder();
-
-  // New method to update order status
-  const updateOrderStatus = async (orderId: string) => {
-    try {
-      await axios.patch(
-        `http://localhost:4000/api/orders/${user?.id}/${orderId}/status`,
-        {}, // Body containing the status
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // If successful, update the order status locally or fetch updated orders
-      // depending on your application logic
-    } catch (error) {
-      // Handle error
-      console.error("Error updating order status:", error);
-      throw error; // Rethrow the error to handle it at a higher level if needed
-    }
-  };
 
   useEffect(() => {
     if (token && user?.id) {
       getUserOrders();
       setIsLoading(false);
     }
-  }, [token, user, orders]);
+  }, [token, user]);
   return (
     <>
       {isLoading ? (
