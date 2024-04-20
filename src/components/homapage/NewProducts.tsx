@@ -15,7 +15,7 @@ function NewProducts() {
   return (
     <div className="flex flex-col items-center my-6 mb-12 px-8 ml:px-12 ssm:px-28 ssl:px-0 md:px-4 sm:px-16 lg:mb-16">
       <h2 className="font-bold text-3xl mb-6 lg:text-5xl">New Products</h2>
-      <div className="ssl:grid ssl:grid-cols-2 ssll:gap-4 md:grid-cols-3 md:gap-2 lg:gap-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-6">
+      <div className="ssl:grid ssl:grid-cols-2 ssll:gap-4 md:grid-cols-3 md:gap-2 lg:gap-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-6 w-[90%] ssl:w-auto">
         <ProductCard products={limitedNewProducts} label="New" />
       </div>
       <Link
