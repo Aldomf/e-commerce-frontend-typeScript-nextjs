@@ -95,7 +95,7 @@ function AdminProduct() {
 
   return (
     <div
-      className={`bg-[#111827] h-auto md:h-[800px] lg:h-[700px] xl:h-screen ${
+      className={`bg-[#111827] h-auto md:h-[800px] lg:h-[700px] xl:h-auto ${
         isTabletOrMobile ? "flex-col" : "flex"
       }`}
     >
@@ -147,7 +147,7 @@ function AdminProduct() {
                 alt={product.name}
                 width={500}
                 height={500}
-                className="w-40 h-auto mb-2 rounded-lg border-2"
+                className="w-40 h-60 mb-2 rounded-lg border-2"
               />
               <h2 className="text-xl text-[#60A5FA] font-bold">
                 {product.name}

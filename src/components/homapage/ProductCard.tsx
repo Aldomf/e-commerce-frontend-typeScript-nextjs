@@ -23,10 +23,10 @@ function ProductCard({ products, label }: ProductCardProps) {
         <Link
           href={`/product/${product.id}`}
           key={product.id}
-          className="ssm:border-2 w-86"
+          className="ssm:border-2 w-60"
         >
           <div className="mb-8 border-2 ssm:border-0 ssm:mb-0">
-            <div className="relative h-52">
+            <div className="relative h-72">
               {label && (
                 <p className="bg-red-600 px-4 h-8 rounded-full text-white w-fit flex justify-center items-center absolute top-2 left-2">
                   {label}
@@ -40,48 +40,54 @@ function ProductCard({ products, label }: ProductCardProps) {
                 className="h-full"
               />
             </div>
-            <div className="px-2 pb-2 h-40">
+            <div className="px-2 h-fit">
               <div>
                 <h3 className="text-[#a3c9bc] font-semibold text-xl my-2">
-                  {product.name} {/* Render product name */}
+                  {product && product.name && (
+                  <p className="leading-none mb-2">
+                    {product.name.length > 23
+                      ? product.name.substring(0, 23) + "..."
+                      : product.name}
+                  </p>
+                )}
                 </h3>
-                {product && product.description && (
+                {/* {product && product.description && (
                   <p className="leading-none mb-2">
                     {product.description.length > 80
                       ? product.description.substring(0, 80) + "..."
                       : product.description}
                   </p>
-                )}
+                )} */}
 
                 {/* Render product description */}
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center mb-2">
                 <div className="flex items-center">
-                  <div>
-                    {product.discountActive && (
-                      <p className="line-through">${product.price}</p>
-                    )}
-                    {/* Render product price */}
-                    <p className="text-xl font-semibold text-green-500">
+                    
+                    <p className="text-lg mr-1 font-semibold text-green-500">
                       ${product.priceWithDiscount}
                     </p>{" "}
-                    {/* Render product discounted price */}
-                  </div>
+
+                    {product.discountActive && (
+                      <p className="line-through text-sm text-[#ADB5BD]">${product.price}</p>
+                    )}
+                    
+                  
                   {product.discountActive && (
-                    <div className="ml-2 text-green-500 border border-green-500 px-1">
-                      {product.discountPercentage}%{" "}
+                    <div className="ml-2 text-sm text-green-500 border border-green-500 px-1">
+                      -{product.discountPercentage}%{" "}
                       {/* Render product discount percentage */}
                     </div>
                   )}
                 </div>
                 <button
-                  className="w-10 h-10 rounded-full border-2 border-black flex justify-center items-center hover:bg-[#a3c9bc] transition duration-300 ease-in-out"
+                  className="px-2 py-1 rounded-full border-2 border-black flex justify-center items-center hover:bg-[#a3c9bc] transition duration-300 ease-in-out"
                   onClick={(event) => {
                     event.preventDefault(); // Stop propagation of the click event
                     handleAddToCart(product.id);
                   }}
                 >
-                  <AddShoppingCartIcon />
+                  <AddShoppingCartIcon className="w-5 h-5"/>
                 </button>
               </div>
             </div>

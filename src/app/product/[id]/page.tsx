@@ -110,7 +110,7 @@ function Product() {
               </p>
               {productById?.discountActive && (
                 <div className="ml-2 text-green-500 border border-green-500 px-1">
-                  {productById?.discountPercentage}%{" "}
+                  -{productById?.discountPercentage}%{" "}
                   {/* Render product discount percentage */}
                 </div>
               )}

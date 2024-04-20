@@ -303,7 +303,7 @@ const MobileSidebar = () => {
 
       <div className="flex-1 flex flex-col overflow-hidden">
         <div className="bg-white shadow">
-          <div className="container px-6">
+          <div className="container">
             <div className="flex justify-between items-center py-4">
               <button
                 className="text-gray-500 hover:text-gray-600 border-2 w-full py-2"

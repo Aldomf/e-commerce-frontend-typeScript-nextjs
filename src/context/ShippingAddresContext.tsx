@@ -10,9 +10,11 @@ interface ShippingAddressContextType {
     addShippingAddress: (addressData: ShippingAddress) => Promise<void>;
     updateShippingAddress: (addressData: Partial<ShippingAddress>) => Promise<void>;
     getShippingAddress: () => Promise<ShippingAddress | null>;
-    shippingAddress: ShippingAddress | null
+    shippingAddress: ShippingAddress | null;
     setShippingAddress: React.Dispatch<React.SetStateAction<ShippingAddress | null>>;
-    shippingAddressError: string
+    shippingAddressError: string;
+    isDropdownOpen3: boolean;
+    setIsDropdownOpen3: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const ShippingAddressContext = createContext<ShippingAddressContextType | null>(null);
@@ -32,6 +34,8 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
   const [shippingAddress, setShippingAddress] = useState<ShippingAddress | null>(null);
   const [shippingAddressError, setShippingAddressError] = useState<string>("");
 
+  const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
+
   const addShippingAddress = async (addressData: ShippingAddress) => {
     try {
       const response = await axios.post(
@@ -44,8 +48,8 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
         }
       );
       // Handle response if needed
-      console.log("Shipping address added:", response.data);
-      window.location.reload();
+      //console.log("Shipping address added:", response.data);
+      setIsDropdownOpen3(false)
       toast.success("The shipping address has been registered successfully!", {
         duration: 3000,
       });
@@ -68,7 +72,8 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
         }
       );
       // Handle response if needed
-      console.log("Shipping address updated:", response.data);
+      //console.log("Shipping address updated:", response.data);
+      setIsDropdownOpen3(false)
       toast.success("The shipping address has been updated successfully!", {
         duration: 3000,
       });
@@ -100,7 +105,7 @@ export const ShippingAddressProvider = ({ children }: { children: ReactNode }) =
   
 
   return (
-    <ShippingAddressContext.Provider value={{ addShippingAddress, updateShippingAddress, getShippingAddress, shippingAddress, setShippingAddress, shippingAddressError }}>
+    <ShippingAddressContext.Provider value={{ addShippingAddress, updateShippingAddress, getShippingAddress, shippingAddress, setShippingAddress, shippingAddressError, isDropdownOpen3, setIsDropdownOpen3 }}>
       {children}
     </ShippingAddressContext.Provider>
   );
