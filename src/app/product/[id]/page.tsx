@@ -87,7 +87,7 @@ function Product() {
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
       <div className="md:mt-[230px] lg:mt-[240px] xl:mt-[260px] md:px-10 lg:px-20 xl:px-48 flex flex-col items-center md:items-start">
         <div className="flex flex-col items-center pb-6 ssm:px-10 md:flex-row md:items-start  md:space-x-4  lg:space-x-6 xl:space-x-8">
-          <div className="border w-[80%] h-60 mt-4 ssm2:h-96 md:mt-0 xl:h-[500px]">
+          <div className="border w-[80%] h-80 ml:h-96 mt-4 ssm2:h-[500px] md:mt-0 xl:h-[500px] xl:w-[60%]">
             {productById && (
               <Image
                 src={productById.imageUrl} // Ensure productById is not undefined before accessing imageUrl

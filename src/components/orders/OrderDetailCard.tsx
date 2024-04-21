@@ -17,7 +17,7 @@ function OrderDetailCard({ products = [] }: { products?: Product[] }) {
         <div key={product.id} className="w-full my-6">
           <div className="flex justify-between h-32">
             <div className="flex w-[80%]">
-              <div className="w-[50%] md:w-[30%] xl:w-[20%] h-full mr-2">
+              <div className="w-[50%] ml:w-[45%] md:w-[25%] lg:w-[20%] xl:w-[15%] h-full mr-2">
                 <Image
                   src={product.imageUrl}
                   alt={product.name}
@@ -26,7 +26,7 @@ function OrderDetailCard({ products = [] }: { products?: Product[] }) {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="flex flex-col justify-between w-[50%] md:w-[70%] xl:w-[80%]">
+              <div className="flex flex-col justify-between w-[50%] ml:w-[55%] md:w-[75%] lg:w-[80%] xl:w-[85%]">
                 <div className="mb-2 w-full">
                   <p className="mb-2">{product.name}</p>
                   <p className="text-sm w-full">

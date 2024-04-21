@@ -26,7 +26,7 @@ function SectionTwo() {
           </span>
 
           <Link
-            href="category/27"
+            href="category/3"
             className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white"
           >
             Shop Now
@@ -49,7 +49,7 @@ function SectionTwo() {
           <br />
           <span className="text-lg mb-4 md:mb-8 md:text-2xl">Lorem ipsum dolor sit amet</span>
           <Link
-            href="category/30"
+            href="category/8"
             className="bg-[#A3C9BC] text-white px-10 py-2 rounded-full text-base transition duration-500 ease-in-out hover:text-[#A3C9BC] hover:border-[#A3C9BC] border-2 hover:bg-white"
           >
             Shop Now
