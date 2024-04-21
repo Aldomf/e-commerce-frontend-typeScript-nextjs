@@ -23,12 +23,12 @@ function OrderCard() {
           },
         }
       );
-      // If successful, update the order status locally or fetch updated orders
-      // depending on your application logic
+      // update the order status locally
+      await getUserOrders();
     } catch (error) {
       // Handle error
       console.error("Error updating order status:", error);
-      throw error; // Rethrow the error to handle it at a higher level if needed
+      throw error; // Rethrow the error to handle it at a higher level if nezeded
     }
   };
 
@@ -37,7 +37,8 @@ function OrderCard() {
       getUserOrders();
       setIsLoading(false);
     }
-  }, [token, user, orders]);
+  }, [token, user]);
+
   return (
     <>
       {isLoading ? (
