@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signup = async (username: string, email: string, password: string) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/signup",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/signup`,
         {
           username,
           email,
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post(
-        "http://localhost:4000/api/auth/login",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/login`,
         { email, password }
       );
       const { token, user } = response.data;

@@ -10,7 +10,7 @@ function PopularCategories() {
       </h2>
       <div className="flex flex-col items-center md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         <Link
-          href="/category/26"
+          href="/category/2"
           className="border-y border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">
@@ -22,10 +22,10 @@ function PopularCategories() {
               className="w-52 h-52 rounded-full border-4 border-[#a3c9bc]"
             />
           </div>
-          <p className="font-bold mt-8 text-3xl text-[#363F46]">Games</p>
+          <p className="font-bold mt-8 text-3xl text-[#363F46]">Gaming</p>
         </Link>
         <Link
-          href="/category/27"
+          href="/category/3"
           className="border-b border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">
@@ -40,7 +40,7 @@ function PopularCategories() {
           <p className="font-bold mt-8 text-3xl text-[#363F46]">Beauty</p>
         </Link>
         <Link
-          href="/category/24"
+          href="/category/10"
           className="border-b border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">
@@ -55,7 +55,7 @@ function PopularCategories() {
           <p className="font-bold mt-8 text-3xl text-[#363F46]">Toys</p>
         </Link>
         <Link
-          href="/category/25"
+          href="/category/9"
           className="border-b border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">
@@ -70,7 +70,7 @@ function PopularCategories() {
           <p className="font-bold  mt-8 text-3xl text-[#363F46]">Books</p>
         </Link>
         <Link
-          href="/category/30"
+          href="/category/8"
           className="border-b border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">
@@ -100,7 +100,7 @@ function PopularCategories() {
           <p className="font-bold mt-8 text-3xl text-[#363F46]">Electronics</p>
         </Link>
         <Link
-          href="/category/21"
+          href="/category/4"
           className="border-b border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">
@@ -115,7 +115,7 @@ function PopularCategories() {
           <p className="font-bold mt-8 text-3xl text-[#363F46]">Fashion</p>
         </Link>
         <Link
-          href="/category/29"
+          href="/category/6"
           className="border-b border-2 w-full flex flex-col items-center py-10 md:border-2"
         >
           <div className="w-52 h-52 rounded-full flex justify-center items-center transition-transform duration-300 ease-in-out transform md:hover:scale-110">

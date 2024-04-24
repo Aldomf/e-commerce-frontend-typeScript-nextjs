@@ -52,13 +52,13 @@ const LaptopSidebar = () => {
         >
           <li className="mb-2">
             <p className="block text-sm font-extralight">
-              I'm a product detail. I'm a great place to add more information
-              about your product such as sizing, material, care and cleaning
-              instructions. This is also a great space to write what makes this
-              product special and how your customers can benefit from this item.
-              Buyers like to know what they’re getting before they purchase, so
-              give them as much information as possible so they can buy with
-              confidence and certainty.
+              I&apos;m a product detail. I&apos;mm a great place to add more
+              information about your product such as sizing, material, care and
+              cleaning instructions. This is also a great space to write what
+              makes this product special and how your customers can benefit from
+              this item. Buyers like to know what they’re getting before they
+              purchase, so give them as much information as possible so they can
+              buy with confidence and certainty.
             </p>
           </li>
         </ul>
@@ -136,7 +136,7 @@ const LaptopSidebar = () => {
         >
           <li className="mb-2">
             <p className="block text-sm font-extralight">
-              I'm a shipping policy. I'm a great place to add more information
+              I&apos;mm a shipping policy. I&apos;mm a great place to add more information
               about your shipping methods, packaging and cost. Providing
               straightforward information about your shipping policy is a great
               way to build trust and reassure your customers that they can buy

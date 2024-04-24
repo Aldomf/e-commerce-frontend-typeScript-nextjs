@@ -49,7 +49,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
       }
 
       const response = await axios.post(
-        `http://localhost:4000/api/wishlist/${user?.id}/add-product-to-wishlist/${productId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wishlist/${user?.id}/add-product-to-wishlist/${productId}`,
         {},
         {
           headers: {
@@ -68,7 +68,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const deleteProductFromWishlist = async (productId: number) => {
     try {
       const response = await axios.delete(
-        `http://localhost:4000/api/wishlist/${user?.id}/delete-product-from-wishlist/${productId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wishlist/${user?.id}/delete-product-from-wishlist/${productId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -89,7 +89,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const getUserWishlist = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/wishlist/user/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/wishlist/user/${user?.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

@@ -49,7 +49,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   // Function to fetch products
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/product");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product`);
       setProducts(response.data); // Update products state with fetched data
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -60,7 +60,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   const fetchProductById = async (id: number) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/product/${id}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${id}`
       );
       setProductById(response.data); // Update products state with fetched data
     } catch (error) {
@@ -71,7 +71,7 @@ export const ProductProvider = ({ children }: { children: ReactNode }) => {
   // Function to fetch products
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/category");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`);
       setCategories(response.data);
     } catch (error) {
       console.error("Error fetching category:", error);

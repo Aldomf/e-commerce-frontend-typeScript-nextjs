@@ -49,7 +49,7 @@ export const CheckoutAndOrderProvider = ({
   const createCheckoutSession = async () => {
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/checkout/session/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/checkout/session/${user?.id}`,
         {},
         {
           headers: {
@@ -68,7 +68,7 @@ export const CheckoutAndOrderProvider = ({
   const getUserOrders = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/orders/${user?.id}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/${user?.id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -87,7 +87,7 @@ export const CheckoutAndOrderProvider = ({
   const getOrderById = async (orderId: string) => {
     try {
       const response = await axios.get(
-        `http://localhost:4000/api/orders/${user?.id}/${orderId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/${user?.id}/${orderId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -108,7 +108,7 @@ export const CheckoutAndOrderProvider = ({
   const updateOrderStatus = async (orderId: string) => {
     try {
       await axios.patch(
-        `http://localhost:4000/api/orders/${user?.id}/${orderId}/status`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/${user?.id}/${orderId}/status`,
         { }, // Body containing the status
         {
           headers: {

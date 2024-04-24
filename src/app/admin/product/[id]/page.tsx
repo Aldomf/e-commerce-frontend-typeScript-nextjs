@@ -10,6 +10,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
 import { z, object, string, number, boolean, union } from "zod";
 import { useAuth } from "@/context/AuthContext";
+import Image from "next/image";
 
 // Custom refinement to check if the value is a valid number
 const isNumberString = (val: string) => !isNaN(Number(val));
@@ -128,7 +129,7 @@ const UpdateProductForm = () => {
     const fetchProductDetails = async () => {
       try {
         const response = await axios.get<ProductData>(
-          `http://localhost:4000/api/product/${productId}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`
         );
         const product = response.data;
         setProductData(product);
@@ -146,7 +147,7 @@ const UpdateProductForm = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get<Category[]>(
-          "http://localhost:4000/api/category"
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`
         );
         setCategories(response.data);
         console.log(response.data);
@@ -177,7 +178,7 @@ const UpdateProductForm = () => {
     if (confirmDelete) {
       try {
         const response = await axios.delete(
-          `http://localhost:4000/api/product/${productId}`,
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -280,7 +281,7 @@ const UpdateProductForm = () => {
       console.log("Form data:", formData);
 
       const response = await axios.patch(
-        `http://localhost:4000/api/product/${productId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`,
         formData,
         {
           headers: {
@@ -315,8 +316,9 @@ const UpdateProductForm = () => {
 
   return (
     <div
-      className={`bg-[#111827] ${isTabletOrMobile ? "flex-col" : "flex h-screen"
-        }`}
+      className={`bg-[#111827] ${
+        isTabletOrMobile ? "flex-col" : "flex h-screen"
+      }`}
     >
       <div
         className="hidden lg:block"
@@ -493,10 +495,12 @@ const UpdateProductForm = () => {
               className="rounded-md p-2 w-full"
             />
             {productData.imageUrl && (
-              <img
+              <Image
                 src={productData.imageUrl} // Set the src to the current image URL
                 alt="Current Image"
                 className="mt-2"
+                width={500}
+                height={500}
                 style={{ maxWidth: "200px" }} // Adjust the width as needed
               />
             )}

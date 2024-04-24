@@ -27,13 +27,15 @@ function CartList() {
     shippingAddress,
     setShippingAddress,
     shippingAddressError,
+    isDropdownOpen3,
+    setIsDropdownOpen3
   } = useShippingAddress();
   const { createCheckoutSession } = useCheckoutAndOrder();
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
-  const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
+  //const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
 
   const shippingAddressFormRef = useRef<HTMLDivElement>(null);
   const [addressRequired, setAddressRequired] = useState(false);

@@ -50,7 +50,7 @@ function CreateCategory() {
       const validationResult = productSchema.parse({ name, description });
       console.log(validationResult);
       const response = await axios.post(
-        "http://localhost:4000/api/category",
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`,
         {
           name: validationResult.name,
           description: validationResult.description,

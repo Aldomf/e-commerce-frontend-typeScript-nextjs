@@ -62,7 +62,7 @@ export const AddProductProvider = ({ children }: { children: ReactNode }) => {
     try {
       // Make a POST request to the endpoint
       const response = await axios.post(
-        `http://localhost:4000/api/cart/${user?.id}/add-product-to-cartList/${productId}`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/cart/${user?.id}/add-product-to-cartList/${productId}`,
         {},
         {
           headers: {
@@ -132,7 +132,7 @@ const increaseQuantity = async (productId: number) => {
   try {
     // Make a PATCH request to the endpoint
     const response = await axios.patch(
-      `http://localhost:4000/api/cart/${user?.id}/${productId}/increase-quantity`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/cart/${user?.id}/${productId}/increase-quantity`,
       {},
       {
         headers: {
@@ -151,7 +151,7 @@ const decreaseQuantity = async (productId: number) => {
   try {
     // Make a PATCH request to the endpoint
     const response = await axios.patch(
-      `http://localhost:4000/api/cart/${user?.id}/${productId}/decrease-quantity`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/cart/${user?.id}/${productId}/decrease-quantity`,
       {},
       {
         headers: {

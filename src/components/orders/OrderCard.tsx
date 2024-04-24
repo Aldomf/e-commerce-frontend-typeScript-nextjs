@@ -1,6 +1,5 @@
 import { useAuth } from "@/context/AuthContext";
 import { useCheckoutAndOrder } from "@/context/CheckoutAndOrderContext";
-import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -8,7 +7,7 @@ import { FaRegCircleCheck } from "react-icons/fa6";
 
 function OrderCard() {
   const { user, token } = useAuth();
-  const { getUserOrders, orders, setIsLoading, isLoading } =
+  const { getUserOrders, orders, setIsLoading, isLoading, updateOrderStatus } =
     useCheckoutAndOrder();
 
   // New method to update order status

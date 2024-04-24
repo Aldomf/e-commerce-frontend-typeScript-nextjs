@@ -101,7 +101,7 @@ function AdminUser() {
 
   const fetchData = async () => {
     try {
-      const response = await fetch("http://localhost:4000/api/orders", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -146,7 +146,7 @@ function AdminUser() {
 
   const updateOrderStatus = async (id: number, status: OrderStatus) => {
     try {
-      const response = await fetch(`http://localhost:4000/api/orders/${id}/status`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/orders/${id}/status`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

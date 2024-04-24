@@ -30,7 +30,7 @@ export const ReviewsProvider = ({ children }: { children: ReactNode }) => {
   // Function to fetch comments for a product by id
   const fetchProductComments = async (productId: number) => {
     try {
-      const response = await axios.get(`http://localhost:4000/api/reviews/${productId}/comments`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/${productId}/comments`);
       return response.data;
     } catch (error) {
       console.error('Error fetching product comments:', error);
