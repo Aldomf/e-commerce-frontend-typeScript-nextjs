@@ -10,26 +10,6 @@ function OrderCard() {
   const { getUserOrders, orders, setIsLoading, isLoading, updateOrderStatus } =
     useCheckoutAndOrder();
 
-  // New method to update order status
-  const updateOrderStatus = async (orderId: string) => {
-    try {
-      await axios.patch(
-        `http://localhost:4000/api/orders/${user?.id}/${orderId}/status`,
-        {}, // Body containing the status
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      // update the order status locally
-      await getUserOrders();
-    } catch (error) {
-      // Handle error
-      console.error("Error updating order status:", error);
-      throw error; // Rethrow the error to handle it at a higher level if nezeded
-    }
-  };
 
   useEffect(() => {
     if (token && user?.id) {
