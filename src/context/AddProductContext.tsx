@@ -26,6 +26,7 @@ interface AddProductContextType {
   handleDecreaseQuantity: (productId: number) => Promise<void>;
   productQuantities: ProductQuantities;
   updateQuantity: (productId: number, quantity: number) => void;
+  getQuantity: (productId: number) => void;
 }
 
 export const AddProductContext = createContext<AddProductContextType | null>(
@@ -192,6 +193,21 @@ const updateQuantity = (productId: number, quantity: number) => {
   });
 };
 
+// Function to get product quantity
+const getQuantity = async (productId: number) => {
+  try {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/cart/${user?.id}/items/${productId}`, {
+      headers: {
+        "x-user-id": user?.id, // Replace with actual user ID
+      },
+    });
+    return response.data; // Return the cart items
+  } catch (error) {
+    console.error("Error fetching cart items:", error);
+    return []; // Return an empty array in case of error
+  }
+};
+
 // Initialize product quantities when updatedCartList changes
 useEffect(() => {
   // Initialize productQuantities object
@@ -232,6 +248,7 @@ useEffect(() => {
         handleDecreaseQuantity,
         productQuantities,
         updateQuantity,
+        getQuantity
       }}
     >
       {children}

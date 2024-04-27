@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "e-commerce-backend-nestjs-postgres.onrender.com",
       },
+      {
+        protocol: "https", // Cloudinary uses HTTPS protocol
+        hostname: "res.cloudinary.com", // Cloudinary hostname
+      },
     ],
   },
 };
