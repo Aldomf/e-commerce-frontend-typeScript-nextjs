@@ -222,22 +222,7 @@ function AdminUser() {
       return console.log(error);
     }
   };
-
-  //!!!!!
-  //   const handleRowClick = async (row: Order, _: MouseEvent<HTMLTableRowElement, MouseEvent>) => {
-  //     console.log('Row clicked:', row);
-  //     const newStatus: OrderStatus = { status: Status.Shipped }; // Update status as needed
-  //     console.log(newStatus)
-  //     try {
-  //       await updateOrderStatus(row.id, newStatus);
-  //       // Refresh data or update UI as necessary
-  //     } catch (error) {
-  //       console.error('Error updating order status:', error);
-  //     }
-  //   };
-
-
-
+  
   return (
     <div
       className={`bg-[#111827] h-screen ${isTabletOrMobile ? "flex-col" : "flex"
