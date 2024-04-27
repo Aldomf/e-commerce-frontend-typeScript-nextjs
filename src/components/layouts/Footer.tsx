@@ -26,7 +26,7 @@ function Footer() {
               <Image
                 src="/tertiary-logo.svg"
                 alt="Logo"
-                className="dark:invert lg:w-20 lg:h-20"
+                className="lg:w-20 lg:h-20"
                 width={50}
                 height={50}
                 priority

@@ -120,15 +120,15 @@ function Product() {
               <div className="flex items-center  border w-fit p-1">
                 <button
                   className="mr-2"
-                    onClick={() => {
-                      if ((productQuantities[parseInt(productId)] || 0) > 1) {
-                        // Check if counter is greater than 1
-                        updateQuantity(
-                          parseInt(productId),
-                          (productQuantities[parseInt(productId)] || 0) - 1
-                        );
-                      }
-                    }}
+                    // onClick={() => {
+                    //   if ((productQuantities[parseInt(productId)] || 0) > 1) {
+                    //     // Check if counter is greater than 1
+                    //     updateQuantity(
+                    //       parseInt(productId),
+                    //       (productQuantities[parseInt(productId)] || 0) - 1
+                    //     );
+                    //   }
+                    // }}
                     disabled={(productQuantities[parseInt(productId)] || 0) <= 1} // Disable the button if counter is 1 or less
                 >
                   <svg
@@ -142,12 +142,12 @@ function Product() {
                 <p>{productQuantities[parseInt(productId)] || 0}</p>
                 <button
                   className="ml-2"
-                    onClick={() => {
-                      updateQuantity(
-                        parseInt(productId),
-                        (productQuantities[parseInt(productId)] || 0) + 1
-                      );
-                    }}
+                    // onClick={() => {
+                    //   updateQuantity(
+                    //     parseInt(productId),
+                    //     (productQuantities[parseInt(productId)] || 0) + 1
+                    //   );
+                    // }}
                 >
                   <svg
                     className="w-4 h-4 flex justify-center items-center"

@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { FaRegCircleCheck } from "react-icons/fa6";
+import { TbTruckOff } from "react-icons/tb";
 
 function OrderCard() {
   const { user, token } = useAuth();
@@ -19,9 +20,12 @@ function OrderCard() {
   return (
     <>
       {isLoading ? (
-        <p>Loading...</p>
+        <p>Loading orders...</p>
       ) : orders && orders.length === 0 ? (
-        <p>No orders available.</p>
+        <div className="flex flex-col items-center lg:flex-row">
+          <p className="text-3xl lg:text-4xl lg:mr-6">There are no orders</p>
+          <TbTruckOff className="w-20 h-20"/>
+        </div>
       ) : (
         orders?.map((order, index) => (
           <div
@@ -31,8 +35,18 @@ function OrderCard() {
             <div className="flex flex-col">
               <p className="mb-2 flex items-center">
                 Status:{" "}
-                <span className={order.orderStatus === 'shipped' ? 'font-semibold mx-1 text-green-500' : 'font-semibold mx-1'}>{order.orderStatus}</span>
-                {order.orderStatus === 'shipped' && <FaRegCircleCheck className="text-green-500" />}
+                <span
+                  className={
+                    order.orderStatus === "delivered"
+                      ? "font-semibold mx-1 text-green-500"
+                      : "font-semibold mx-1"
+                  }
+                >
+                  {order.orderStatus}
+                </span>
+                {order.orderStatus === "delivered" && (
+                  <FaRegCircleCheck className="text-green-500" />
+                )}
               </p>
               <p className="mb-2">
                 Order Number: <span>{order.id}</span>
@@ -71,7 +85,10 @@ function OrderCard() {
               >
                 Order Details
               </Link>
-              <button className="w-1/2 py-4 font-bold bg-[#363F46] hover:bg-[#4B565E] text-white flex justify-center items-center rounded-md" onClick={() => updateOrderStatus(order.id.toString())}>
+              <button
+                className="w-1/2 py-4 font-bold bg-[#363F46] hover:bg-[#4B565E] text-white flex justify-center items-center rounded-md"
+                onClick={() => updateOrderStatus(order.id.toString())}
+              >
                 Received
               </button>
             </div>

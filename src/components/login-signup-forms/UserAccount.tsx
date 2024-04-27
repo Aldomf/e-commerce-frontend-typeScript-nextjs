@@ -50,7 +50,7 @@ export default function UserAccount() {
             </div>
           </div>
           {open && (
-            <div className="absolute w-40 px-5 py-3 text-[#363F46] dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent mt-5">
+            <div className="absolute w-40 px-5 py-3 text-[#363F46] bg-white rounded-lg shadow border dark:border-transparent mt-5">
               <ul className="space-y-3">
                 <li className="font-medium">
                   <Link

@@ -28,15 +28,24 @@ function Wishlist() {
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
-      <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[244px] flex flex-col items-center px-6 pb-6 ssm:px-10">
+      <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[244px] flex flex-col items-center px-6 pb-6 ssm:px-10 ssll:px-0">
         <h2 className="text-3xl font-bold my-6 lg:text-5xl">
-        My Wishlist {token ? `(${userWishlist?.length})` : ''}
+          My Wishlist {token ? `(${userWishlist?.length})` : ""}
         </h2>
 
         {token ? (
           // Render product cart if token exists
-          <div className="ssm:grid ssm:grid-cols-2 ssm:gap-4 md:grid-cols-3 md:gap-5 lg:gap-3 xl:gap-10 lg:grid-cols-4 xl:grid-cols-5">
-            <ProductCard products={userWishlist} />
+          <div className="pb-12 px-6 mm:px-12">
+            {userWishlist && userWishlist.length > 0 ? (
+              <div className="ssll:grid ssll:grid-cols-2 ssll:gap-8 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4">
+                <ProductCard products={userWishlist} />
+              </div>
+            ) : (
+              <div className="text-2xl flex flex-col justify-center items-center">
+                Wishlist empty
+                <PiHeartStraightBreakThin className="text-9xl" />
+              </div>
+            )}
           </div>
         ) : (
           // Render message and login/signup button if token doesn't exist
@@ -45,9 +54,12 @@ function Wishlist() {
               <PiHeartStraightBreakThin className="text-9xl" />
             </div>
             <div className="flex flex-col justify-center items-center">
-              <p className="text-2xl font-bold text-center">Your wishlist is empty</p>
+              <p className="text-2xl font-bold text-center">
+                Your wishlist is empty
+              </p>
               <p className=" font-semibold mb-4 text-center">
-                Sign in to personalize your shopping experience with your Wishlist.
+                Sign in to personalize your shopping experience with your
+                Wishlist.
               </p>
             </div>
             <div className="w-48 space-y-2 flex flex-col">

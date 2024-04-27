@@ -118,6 +118,7 @@ export const CheckoutAndOrderProvider = ({
       );
       // If successful, update the order status locally or fetch updated orders
       // depending on your application logic
+      await getUserOrders()
     } catch (error) {
       // Handle error
       console.error("Error updating order status:", error);
