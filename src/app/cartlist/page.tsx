@@ -28,7 +28,9 @@ function CartList() {
     setShippingAddress,
     shippingAddressError,
     isDropdownOpen3,
-    setIsDropdownOpen3
+    setIsDropdownOpen3,
+    addressRequired,
+    setAddressRequired,
   } = useShippingAddress();
   const { createCheckoutSession } = useCheckoutAndOrder();
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
@@ -38,7 +40,7 @@ function CartList() {
   //const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
 
   const shippingAddressFormRef = useRef<HTMLDivElement>(null);
-  const [addressRequired, setAddressRequired] = useState(false);
+  //const [addressRequired, setAddressRequired] = useState(false);
 
   const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation(); // Stop event propagation
@@ -70,10 +72,11 @@ function CartList() {
 
   const scrollToShippingAddressForm = () => {
     // Scroll to the shipping address form section
-    const shippingAddressForm = document.getElementById("shipping-address-form");
+    const shippingAddressForm = document.getElementById(
+      "shipping-address-form"
+    );
     shippingAddressForm?.scrollIntoView({ behavior: "smooth" });
   };
-  
 
   console.log("hola", shippingAddress);
 
@@ -164,7 +167,11 @@ function CartList() {
           <div className="flex flex-col border-b border-black py-4 md:border-none">
             <div className="flex items-center text-[#EC1C1C] font-light">
               <LiaShippingFastSolid className="mr-2 text-2xl" />
-              <p className="text-xl cursor-pointer" onClick={toggleDropdown3} id="shipping-address-form">
+              <p
+                className="text-xl cursor-pointer"
+                onClick={toggleDropdown3}
+                id="shipping-address-form"
+              >
                 Shipping Address
               </p>
             </div>

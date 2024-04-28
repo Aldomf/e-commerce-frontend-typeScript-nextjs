@@ -13,10 +13,10 @@ const shippingAddressSchema = z.object({
   state: z.string().min(1, "State is required"),
   postalCode: z.string().min(1, "Postal code is required"),
   street: z.string().min(1, "Street address is required"),
-  mobile: z
-    .string()
-    .min(1, "Mobile number is required")
-    .regex(/^\+[1-9]\d{1,14}$/, "Invalid mobile number format"),
+  // mobile: z
+  //   .string()
+  //   .min(1, "Mobile number is required")
+  //   .regex(/^\+[1-9]\d{1,14}$/, "Invalid mobile number format"),
 });
 
 function ShippingAddressForm() {
@@ -89,9 +89,6 @@ function ShippingAddressForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {shippingAddressError && (
-        <div className="error-message text-red-500">{shippingAddressError}</div>
-      )}
       <div className="mb-4">
         <label
           htmlFor="country"
@@ -196,18 +193,23 @@ function ShippingAddressForm() {
           className="mt-1 p-2 border border-gray-300 rounded-md w-full"
           {...register("mobile")}
         />
-        {errors.mobile && (
+        {/* {errors.mobile && (
           <span className="text-red-500">{errors.mobile.message}</span>
+        )} */}
+        {shippingAddressError && (
+          <div className="error-message text-red-500">
+            {shippingAddressError}
+          </div>
         )}
       </div>
-      
-        <input
-          type="submit"
-          className="cursor-pointer py-2 px-4 text-[#EC1C1C] border border-[#EC1C1C] w-fit"
-          value={!shippingAddress ? "Save" : "Update"}
-          disabled={submitting}
-        />
-      
+
+      <input
+        type="submit"
+        className="cursor-pointer py-2 px-4 text-[#EC1C1C] border border-[#EC1C1C] w-fit"
+        value={!shippingAddress ? "Save" : "Update"}
+        disabled={submitting}
+      />
+
       <Toaster />
     </form>
   );
