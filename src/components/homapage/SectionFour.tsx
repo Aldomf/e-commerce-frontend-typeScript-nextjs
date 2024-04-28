@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
@@ -5,9 +6,9 @@ function SectionFour() {
     return (
         <div className="flex flex-col lg:flex-row sm:px-16 lg:mt-16 lg:mb-16">
           <div
-            className="relative flex flex-col bg-cover bg-center h-[400px] md:mb-8 lg:mb-0 lg:w-[50%] lg:mr-2 lg:h-[530px] xl:mr-6"
-            style={{ backgroundImage: 'url("v.jpg")' }}
+            className="relative flex flex-col h-[400px] md:mb-8 lg:mb-0 lg:w-[50%] lg:mr-2 lg:h-[530px] xl:mr-6"
           >
+            <Image src="/v.jpg" alt="Background Image 1" layout="fill" objectFit="cover" />
             {/* <div className="absolute inset-0 bg-[#B1EFEC] opacity-60"></div> */}
             <div className="flex flex-col justify-start items-start text-black p-8 pt-16 relative md:pl-24 md:pt-20 lg:pt-28 xl:pt-28 xl:pl-24">
               <span className="font-bold mb-4 text-lg md:text-2xl">
@@ -29,9 +30,9 @@ function SectionFour() {
             </div>
           </div>
           <div
-            className="relative flex flex-col bg-cover bg-center h-[400px] lg:w-[50%] lg:ml-2 lg:h-[530px]"
-            style={{ backgroundImage: 'url("a.jpg")' }}
+            className="relative flex flex-col h-[400px] lg:w-[50%] lg:ml-2 lg:h-[530px]"
           >
+            <Image src="/a.jpg" alt="Background Image 1" layout="fill" objectFit="cover" />
             {/* <div className="absolute inset-0 bg-[#B1EFEC] opacity-60"></div> */}
             <div className="flex flex-col justify-start items-start text-black p-8 pt-20 relative md:pl-24 md:pt-20 lg:pt-28 lg:pl-24 xl:pt-28 xl:pl-16">
               <span className="font-bold text-lg md:text-2xl mb-6 xl:mb-0 xl:text-2xl">

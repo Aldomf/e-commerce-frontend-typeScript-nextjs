@@ -1,17 +1,14 @@
 import React from "react";
 import { IoLogoGooglePlaystore } from "react-icons/io5";
 import { FaApple } from "react-icons/fa";
+import Image from "next/image";
 
 function SectionThree2() {
   return (
     <div
       className="h-fit relative pb-16 lg:mt-16 lg:mb-16"
-      style={{
-        backgroundImage: 'url("back-download.jpg")',
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
     >
+      <Image src="/back-download.jpg" alt="Background Image 1" layout="fill" objectFit="cover" />
       <div className="absolute inset-0 bg-black opacity-50"></div>
       <div className="flex justify-center items-center text-white relative">
         <div className="flex flex-col justify-center items-start p-8 lg:p-0 lg:w-[750px] pt-16 lg:pl-0 lg:pt-20">
