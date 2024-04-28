@@ -110,6 +110,7 @@ export const ShippingAddressProvider = ({
       toast.success("The shipping address has been updated successfully!", {
         duration: 3000,
       });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error: any) {
       setShippingAddressError(error.response.data.message);
       console.error("Error updating shipping address:", error);
