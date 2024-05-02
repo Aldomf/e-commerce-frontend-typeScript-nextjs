@@ -4,7 +4,7 @@ import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
 import LaptopHeader from "@/components/layouts/LaptopHeader";
 import Footer from "@/components/layouts/Footer";
-import ResetPasword from "@/components/reset-password/resetPasword";
+import ResetPasword from "@/components/reset-password/ResetPassword";
 
 const ResetPasswordPage = () => {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
