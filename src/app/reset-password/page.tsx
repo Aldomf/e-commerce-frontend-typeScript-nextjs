@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useState } from "react";
+import { FormEvent, Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { useMediaQuery } from "react-responsive";
 import MobileHeader from "@/components/layouts/MobileHeader";
@@ -39,10 +39,13 @@ const ResetPasswordPage = () => {
       }
 
       // Send a POST request to your backend API endpoint for resetting the password
-      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/reset-password`, {
-        newPassword: password,
-        token,
-      });
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/reset-password`,
+        {
+          newPassword: password,
+          token,
+        }
+      );
 
       setPassword("");
       setConfirmPassword("");
@@ -59,75 +62,77 @@ const ResetPasswordPage = () => {
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
-      <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[250px] flex flex-col items-center px-6 pb-6 ssm:px-10">
-        <h1 className="text-2xl my-6 md:text-3xl lg:text-4xl">
-          Reset Your Password
-        </h1>
-        {error && <p className="text-red-500">{error}</p>}{" "}
-        {/* Display error message */}
-        {success && <p className="text-green-500">{success}</p>}{" "}
-        {/* Display success message */}
-        <form onSubmit={handleSubmit}>
-          <div>
-            <div className="relative">
-              <input
-                type={showPassword ? "text" : "password"}
-                id="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter new password"
-                required
-                className="block border border-grey-light w-full p-3 rounded mb-4 pr-10"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                {showPassword ? (
-                  <FaEyeSlash
-                    className="h-6 w-6 text-gray-400 cursor-pointer"
-                    onClick={togglePasswordVisibility}
-                  />
-                ) : (
-                  <FaEye
-                    className="h-6 w-6 text-gray-400 cursor-pointer"
-                    onClick={togglePasswordVisibility}
-                  />
-                )}
+      <Suspense>
+        <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[250px] flex flex-col items-center px-6 pb-6 ssm:px-10">
+          <h1 className="text-2xl my-6 md:text-3xl lg:text-4xl">
+            Reset Your Password
+          </h1>
+          {error && <p className="text-red-500">{error}</p>}{" "}
+          {/* Display error message */}
+          {success && <p className="text-green-500">{success}</p>}{" "}
+          {/* Display success message */}
+          <form onSubmit={handleSubmit}>
+            <div>
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Enter new password"
+                  required
+                  className="block border border-grey-light w-full p-3 rounded mb-4 pr-10"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+                  {showPassword ? (
+                    <FaEyeSlash
+                      className="h-6 w-6 text-gray-400 cursor-pointer"
+                      onClick={togglePasswordVisibility}
+                    />
+                  ) : (
+                    <FaEye
+                      className="h-6 w-6 text-gray-400 cursor-pointer"
+                      onClick={togglePasswordVisibility}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          <div>
-            <div className="relative">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="Confirm new password"
-                required
-                className="block border border-grey-light w-full p-3 rounded mb-4 pr-10"
-              />
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2">
-                {showConfirmPassword ? (
-                  <FaEyeSlash
-                    className="h-6 w-6 text-gray-400 cursor-pointer"
-                    onClick={toggleConfirmPasswordVisibility}
-                  />
-                ) : (
-                  <FaEye
-                    className="h-6 w-6 text-gray-400 cursor-pointer"
-                    onClick={toggleConfirmPasswordVisibility}
-                  />
-                )}
+            <div>
+              <div className="relative">
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  placeholder="Confirm new password"
+                  required
+                  className="block border border-grey-light w-full p-3 rounded mb-4 pr-10"
+                />
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2">
+                  {showConfirmPassword ? (
+                    <FaEyeSlash
+                      className="h-6 w-6 text-gray-400 cursor-pointer"
+                      onClick={toggleConfirmPasswordVisibility}
+                    />
+                  ) : (
+                    <FaEye
+                      className="h-6 w-6 text-gray-400 cursor-pointer"
+                      onClick={toggleConfirmPasswordVisibility}
+                    />
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-          <button
-            type="submit"
-            className="flex w-full justify-center rounded-md bg-[#6CA08E] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#A3C9BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6CA08E] mt-4"
-          >
-            Reset Password
-          </button>
-        </form>
-      </div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md bg-[#6CA08E] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-[#A3C9BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#6CA08E] mt-4"
+            >
+              Reset Password
+            </button>
+          </form>
+        </div>
+      </Suspense>
       <Footer />
     </>
   );
