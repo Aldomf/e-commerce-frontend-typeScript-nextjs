@@ -24,7 +24,10 @@ const ResetPasswordRequestPage = () => {
       const email = emailInput.value;
 
       // Send a POST request to the backend to request password reset
-      await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/forgot-password`, { email });
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/auth/forgot-password`,
+        { email }
+      );
 
       // Reset the form and display success message
       (e.target as HTMLFormElement).reset();
@@ -43,13 +46,26 @@ const ResetPasswordRequestPage = () => {
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
       <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[250px] flex flex-col items-center px-6 pb-6 ssm:px-10">
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 lg:px-8">
+          <div
+            className="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative mt-4"
+            role="alert"
+          >
+            <span className="block sm:inline">
+              Please note that the feature of sending messages by email is
+              currently restricted to sending testing emails only to the
+              creator&apos;s email address. This
+              restriction is in place to ensure the secure and responsible use
+              of our email sending service during the testing phase.
+            </span>
+          </div>
+
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <h2 className="mt-2 md:mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            <h2 className="mt-8 md:mt-4 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
               Enter Your Email
             </h2>
           </div>
 
-          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+          <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
             <form onSubmit={handleSubmit} className="">
               {error && <p className="text-red-500">{error}</p>}{" "}
               {/* Display error message */}
