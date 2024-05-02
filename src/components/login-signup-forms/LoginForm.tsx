@@ -64,12 +64,15 @@ export default function LoginForm() {
             </div>
 
             <div>
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
-                Password
-              </label>
+              <div className="flex justify-between">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Password
+                </label>
+                <Link href="/forgot-password" className="text-[#6CA08E]">Forgot Password?</Link>
+              </div>
               <div className="relative">
                 <input
                   id="password"
