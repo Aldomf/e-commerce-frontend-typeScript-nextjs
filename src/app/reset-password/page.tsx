@@ -60,9 +60,9 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <>
-      {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
-      <Suspense>
+    <Suspense fallback={<div>Loading...</div>}>
+      <>
+        {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
         <div className="md:mt-[214px] lg:mt-[228px] xl:mt-[250px] flex flex-col items-center px-6 pb-6 ssm:px-10">
           <h1 className="text-2xl my-6 md:text-3xl lg:text-4xl">
             Reset Your Password
@@ -132,9 +132,9 @@ const ResetPasswordPage = () => {
             </button>
           </form>
         </div>
-      </Suspense>
-      <Footer />
-    </>
+        <Footer />
+      </>
+    </Suspense>
   );
 };
 
