@@ -27,7 +27,7 @@ export interface CartItem {
   hot: boolean;
   sale: boolean;
   new: boolean;
-  imageUrl: string;
+  imageUrls: string[];
   discountPercentage: number;
   priceWithDiscount: string;
   discountActive: boolean;
