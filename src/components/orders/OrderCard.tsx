@@ -24,7 +24,7 @@ function OrderCard() {
       ) : orders && orders.length === 0 ? (
         <div className="flex flex-col items-center lg:flex-row">
           <p className="text-3xl lg:text-4xl lg:mr-6">There are no orders</p>
-          <TbTruckOff className="w-20 h-20"/>
+          <TbTruckOff className="w-20 h-20" />
         </div>
       ) : (
         orders?.map((order, index) => (
@@ -68,13 +68,20 @@ function OrderCard() {
               {/* Render images of products */}
               {order.products.map((product, index) => (
                 <div key={index} className="w-20 h-20 mb-2 mr-2">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.name}
-                    width={500}
-                    height={500}
-                    className="w-full h-full object-cover"
-                  />
+                  {product.imageUrls.length > 0 ? (
+                    product.imageUrls.map((url, index) => (
+                      <div key={index} className="w-20 h-20 mb-2 mr-2">
+                        <Image
+                          src={url} // Use each image URL from the array
+                          alt={`Image ${index + 1} of ${product.name}`} // Provide a descriptive alt text
+                          width={500}
+                          height={500}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <div>No images available</div> // Display a fallback message or component
+                  )}
                 </div>
               ))}
             </div>

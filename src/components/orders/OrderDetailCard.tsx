@@ -19,7 +19,11 @@ function OrderDetailCard({ products = [] }: { products?: Product[] }) {
             <div className="flex w-[80%]">
               <div className="w-[50%] ml:w-[45%] md:w-[25%] lg:w-[20%] xl:w-[15%] h-full mr-2">
                 <Image
-                  src={product.imageUrl}
+                  src={
+                    product.imageUrls.length > 0
+                      ? product.imageUrls[0]
+                      : "/path/to/default-image.jpg"
+                  } // Use the first image or a default image
                   alt={product.name}
                   width={500}
                   height={500}
@@ -63,8 +67,7 @@ function OrderDetailCard({ products = [] }: { products?: Product[] }) {
           </div>
         </div>
       ))}
-      <CartListSideBar isOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}/>
+      <CartListSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
     </div>
   );
 }
