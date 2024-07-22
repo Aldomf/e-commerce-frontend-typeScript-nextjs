@@ -27,13 +27,14 @@ function ProductCartSideBar() {
                   href={`/product/${product.id}`}
                   className="h-full w-28 border mr-4"
                 >
-                  <Image
-                    src={product.imageUrl} // Use product image URL
-                    width={1000}
-                    height={500}
-                    alt={product.name} // Use product name as alt text
-                    className="h-full w-full object-cover"
-                  />
+                  {product.imageUrls && product.imageUrls.length > 0 && (
+                    <Image
+                      src={product.imageUrls[0]} // Use the first image URL from the array
+                      width={1000}
+                      height={500}
+                      alt={product.name} // Use product name as alt text
+                    />
+                  )}
                 </Link>
                 <div className="flex flex-col justify-between max-w-28">
                   <h3 className="">
