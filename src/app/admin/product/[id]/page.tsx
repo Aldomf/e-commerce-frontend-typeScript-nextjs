@@ -11,6 +11,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { z, object, string, number, boolean, union } from "zod";
 import { useAuth } from "@/context/AuthContext";
 import Image from "next/image";
+import { RxCross2 } from "react-icons/rx";
 
 // Custom refinement to check if the value is a valid number
 const isNumberString = (val: string) => !isNaN(Number(val));
@@ -58,8 +59,9 @@ interface ProductData {
   category: Category;
   discountPercentage: string;
   discountActive: boolean;
-  imageFile: File | null;
-  imageUrl: string | null;
+  imageFiles: File[]; // Update to array of files
+  imageUrls: string[];
+  images: FileList | null;
   inStock: boolean;
   hot: boolean;
   sale: boolean;
@@ -94,8 +96,12 @@ const UpdateProductForm = () => {
 
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // Define a function to validate the form data against the schema
-  const validateProduct = (data: ProductData) => {
+  const [imageIndicesToDelete, setImageIndicesToDelete] = useState<number[]>(
+    []
+  );
+
+   // Define a function to validate the form data against the schema
+   const validateProduct = (data: ProductData) => {
     try {
       productSchema.parse(data);
       return { isValid: true, errors: {} };
@@ -117,13 +123,21 @@ const UpdateProductForm = () => {
     category: {} as Category,
     discountPercentage: "",
     discountActive: false,
-    imageFile: null,
-    imageUrl: "",
+    imageFiles: [], // Initialize as an empty array
+    imageUrls: [], // Initialize as an empty array
+    images: null,
     inStock: true,
     hot: false,
     sale: false,
     new: false,
   });
+
+  const handleRemoveImage = (index: number) => {
+    const updatedImageUrls = [...productData.imageUrls];
+    updatedImageUrls.splice(index, 1); // Remove image from state
+    setProductData({ ...productData, imageUrls: updatedImageUrls });
+    setImageIndicesToDelete((prevIndices) => [...prevIndices, index]); // Track the index of the image to delete
+  };
 
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -132,7 +146,10 @@ const UpdateProductForm = () => {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`
         );
         const product = response.data;
-        setProductData(product);
+        setProductData({
+          ...product,
+          imageFiles: [] // Ensure imageFiles is initialized as an empty array
+        });
         setCurrentCategoryName(product.category.name);
         console.log(product);
       } catch (error) {
@@ -202,36 +219,51 @@ const UpdateProductForm = () => {
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    const { name, value, type } = e.target;
+    const { name, value, type, files } = e.target as HTMLInputElement;
 
-    let newValue: string | boolean | File | null = value;
+    setProductData((prevData) => {
+      if (type === "file") {
+        if (files && files.length > 0) {
+          const newFilesArray = Array.from(files);
+          const newUrlsArray = newFilesArray.map((file) => URL.createObjectURL(file));
 
-    if (type === "checkbox") {
-      newValue = (e.target as HTMLInputElement).checked;
-    } else if (type === "file") {
-      newValue = (e.target as HTMLInputElement).files?.[0] ?? null;
-    }
+          // Ensure prevData.imageFiles and prevData.imageUrls are arrays
+          const existingFileNames = new Set((prevData.imageFiles || []).map((file) => file.name));
+          const existingUrls = new Set(prevData.imageUrls || []);
 
-    // Remove imageFile from state if file input was cleared
-    if (type === "file" && newValue === null) {
-      setProductData((prevData) => ({
-        ...prevData,
-        imageFile: null,
-      }));
-    } else {
-      // If the input is the category select element and its value is not changed, retain the current category name
-      if (name === "category" && newValue === currentCategoryName) {
-        setProductData((prevData) => ({
-          ...prevData,
-          [name]: prevData.category, // Retain current category
-        }));
-      } else {
-        setProductData((prevData) => ({
-          ...prevData,
-          [name]: newValue,
-        }));
+          // Filter out already existing files and URLs
+          const uniqueFiles = newFilesArray.filter((file) => !existingFileNames.has(file.name));
+          const uniqueUrls = newUrlsArray.filter((url) => !existingUrls.has(url));
+
+          // Clear the file input after processing
+          e.target.value = "";
+
+          return {
+            ...prevData,
+            imageFiles: [...(prevData.imageFiles || []), ...uniqueFiles],
+            imageUrls: [...(prevData.imageUrls || []), ...uniqueUrls],
+          };
+        }
       }
-    }
+
+      let newValue: string | boolean = value;
+
+      if (type === "checkbox") {
+        newValue = (e.target as HTMLInputElement).checked;
+      }
+
+      if (name === "category" && newValue === currentCategoryName) {
+        return {
+          ...prevData,
+          [name]: prevData.category,
+        };
+      }
+
+      return {
+        ...prevData,
+        [name]: newValue,
+      };
+    });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -239,47 +271,63 @@ const UpdateProductForm = () => {
     console.log("Submitting form:", productData);
     console.log(productData.category.name);
 
+    // Validate product data
     const validationResult = validateProduct(productData);
     if (!validationResult.isValid) {
       console.error("Validation errors:", validationResult.errors);
-      setValidationErrors(validationResult.errors); // Set validation errors state
+      setValidationErrors(validationResult.errors);
       return;
     }
 
     try {
       const formData = new FormData();
 
-      // Append only relevant properties to formData
+      // Destructure productData and exclude unnecessary fields
       const {
-        imageFile,
+        imageFiles, // Handle imageFiles separately
+        imageUrls, // Remove if not required
         id,
         priceWithDiscount,
         createdAt,
         updatedAt,
-        // imageURL added to fix update products bug
-        imageUrl,
-        ...relevantData
+        ...relevantData // Other relevant fields
       } = productData;
 
-      // Handle imageFile separately
-      if (imageFile) {
-        // Check if imageFile is truthy (not null or undefined)
-        formData.append("image", imageFile);
+      // Append imageFiles to formData
+      if (imageFiles && imageFiles.length > 0) {
+        imageFiles.forEach((file) => {
+          formData.append("images", file); // Append each file as 'images'
+        });
       }
 
-      // Append other relevant data
+      // Append other relevant data to formData
       Object.entries(relevantData).forEach(([key, value]) => {
-        // If the value is a boolean, convert it to string
-        const formattedValue =
-          typeof value === "boolean" ? value.toString() : value;
-        // Ensure value is not of type Category before appending
+        // Convert boolean to string and append
+        const formattedValue = typeof value === "boolean" ? value.toString() : value;
+        // Append only if the value is not an object (like category)
         if (typeof formattedValue !== "object") {
           formData.append(key, formattedValue);
         }
       });
 
+      // Append imageIndicesToDelete if needed
+      if (imageIndicesToDelete.length > 0) {
+        // Append each index as a separate form data entry
+        imageIndicesToDelete.forEach((index) => {
+          formData.append("imageIndicesToDelete[]", index.toString());
+        });
+      }
+
+      // Append imageUrls if needed
+      if (imageUrls && Array.isArray(imageUrls)) {
+        imageUrls.forEach((url, index) => {
+          formData.append(`imageUrls[${index}]`, url); // Adjust if necessary for your backend
+        });
+      }
+
       console.log("Form data:", formData);
 
+      // Make the PATCH request
       const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/product/${productId}`,
         formData,
@@ -290,6 +338,16 @@ const UpdateProductForm = () => {
           },
         }
       );
+
+      // Update imageUrls state to remove deleted images
+      const updatedImageUrls = productData.imageUrls.filter(
+        (_, index) => !imageIndicesToDelete.includes(index)
+      );
+      setProductData((prevState) => ({
+        ...prevState,
+        imageUrls: updatedImageUrls,
+      }));
+
       console.log("Product updated:", response.data);
       toast.success("Product updated successfully!", {
         duration: 3000,
@@ -305,14 +363,16 @@ const UpdateProductForm = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
+      const filesArray = Array.from(e.target.files);
+      const urlsArray = filesArray.map((file) => URL.createObjectURL(file));
       setProductData((prevProductData) => ({
         ...prevProductData,
-        imageFile: file,
-        imageUrl: URL.createObjectURL(file),
+        imageFiles: [...(prevProductData.imageFiles || []), ...filesArray],
+        imageUrls: [...(prevProductData.imageUrls || []), ...urlsArray],
       }));
     }
   };
+
 
   return (
     <div
@@ -486,24 +546,38 @@ const UpdateProductForm = () => {
             </div>
             <input
               type="file"
-              name="imageFile"
+              name="imageFiles"
               accept="image/*"
+              multiple
               onChange={(e) => {
                 handleChange(e);
                 handleImageChange(e);
               }}
               className="rounded-md p-2 w-full"
             />
-            {productData.imageUrl && (
-              <Image
-                src={productData.imageUrl} // Set the src to the current image URL
-                alt="Current Image"
-                className="mt-2"
-                width={500}
-                height={500}
-                style={{ maxWidth: "200px" }} // Adjust the width as needed
-              />
-            )}
+            <div className="flex flex-wrap">
+            {productData.imageUrls &&
+              productData.imageUrls.map((url, index) => (
+                <div key={index} className="relative w-24 h-24 m-1">
+                <Image
+                  key={index}
+                  src={url}
+                  alt={`Product Image ${index + 1}`}
+                  layout="fill"
+                  objectFit="cover"
+                  className="rounded"
+                  style={{ maxWidth: "200px" }}
+                />
+                <button
+                    type="button"
+                    onClick={() => handleRemoveImage(index)}
+                    className="absolute top-0 right-0 bg-red-500 text-white p-1 rounded"
+                  >
+                    <RxCross2 />
+                  </button>
+                </div>
+              ))}
+            </div>
 
             <div className="flex flex-col ssm:flex-row ssm:justify-between">
               <button

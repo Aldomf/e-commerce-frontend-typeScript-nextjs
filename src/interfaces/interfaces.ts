@@ -10,8 +10,8 @@ export interface ProductData {
   category: string;
   discountPercentage?: string;
   discountActive: boolean;
-  imageFile: File | null;
-  imageUrl: string | null;
+  imageFiles: File[];  // Update to array of files
+  imageUrls: string[];
   inStock: boolean;
   hot: boolean;
   sale: boolean;
@@ -56,7 +56,7 @@ export interface HamburguerMenuProps {
 
 export interface Product {
   id: number;
-  imageUrl: string;
+  imageUrls: string[];
   name: string;
   description: string;
   price: string;

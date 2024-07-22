@@ -49,8 +49,8 @@ interface ProductData {
   category: string;
   discountPercentage?: string;
   discountActive: boolean;
-  imageFile: File | null;
-  imageUrl: string | null;
+  imageFiles: File[];  // Update to array of files
+  imageUrls: string[];  // Update to array of strings
   inStock: boolean;
   hot: boolean;
   sale: boolean;
@@ -66,8 +66,8 @@ const CreateProduct: React.FC = () => {
     category: "",
     discountPercentage: "",
     discountActive: false,
-    imageFile: null,
-    imageUrl: "",
+    imageFiles: [],  // Initialize as an empty array
+    imageUrls: [],  // Initialize as an empty array
     inStock: true,
     hot: false,
     sale: false,
@@ -78,7 +78,6 @@ const CreateProduct: React.FC = () => {
     [key: string]: string;
   }>({});
 
-  // Define a function to validate the form data against the schema
   const validateProduct = (data: ProductData) => {
     try {
       productSchema.parse(data);
@@ -86,7 +85,6 @@ const CreateProduct: React.FC = () => {
     } catch (error: any) {
       const errors: { [key: string]: string } = {};
       error.errors.forEach((err: any) => {
-        // Convert Zod error format to { fieldName: errorMessage } format
         const field = err.path.join(".");
         errors[field] = err.message;
       });
@@ -105,7 +103,6 @@ const CreateProduct: React.FC = () => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [loading, setLoading] = useState<boolean>(true);
-
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   useEffect(() => {
@@ -115,7 +112,6 @@ const CreateProduct: React.FC = () => {
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/category`
         );
         setCategories(response.data);
-        console.log(response.data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching categories:", error);
@@ -132,10 +128,9 @@ const CreateProduct: React.FC = () => {
     const newValue = name === "price" ? parseFloat(value) : value;
     setProductData((prevData) => ({
       ...prevData,
-      [name]: name === "imageFile" ? (files ? files[0] : null) : newValue,
+      [name]: name === "imageFiles" ? (files ? Array.from(files) : []) : newValue,
     }));
 
-    // If the name of the select element is 'category', set the selected category name
     if (name === "category") {
       setSelectedCategory(value);
     }
@@ -144,18 +139,16 @@ const CreateProduct: React.FC = () => {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submitting form:", productData);
-    // Log the value of productData.category
     console.log("Product category:", productData.category);
 
     const validationResult = validateProduct(productData);
     if (!validationResult.isValid) {
       console.error("Validation errors:", validationResult.errors);
-      setValidationErrors(validationResult.errors); // Set validation errors state
+      setValidationErrors(validationResult.errors);
       return;
     }
 
     try {
-      // Find the category name based on the selected category ID
       const selectedCategoryObject = categories.find(
         (category) => category.name === productData.category
       );
@@ -168,39 +161,37 @@ const CreateProduct: React.FC = () => {
       const formData = new FormData();
       formData.append("name", productData.name);
       formData.append("description", productData.description);
-      formData.append("price", parseFloat(productData.price).toString()); // Convert to number and then to string
+      formData.append("price", parseFloat(productData.price).toString());
       formData.append("category", productData.category);
       if (productData.discountPercentage) {
-        // Check if discountPercentage is defined
         formData.append(
           "discountPercentage",
           parseFloat(productData.discountPercentage).toString()
         );
       }
       if (typeof productData.discountActive === "boolean") {
-        // Check if discountActive is defined and a boolean
         formData.append(
           "discountActive",
           productData.discountActive.toString()
         );
       }
       if (typeof productData.inStock === "boolean") {
-        // Check if inStock is defined and a boolean
         formData.append("inStock", productData.inStock.toString());
       }
       if (typeof productData.hot === "boolean") {
-        // Check if hot is defined and a boolean
         formData.append("hot", productData.hot.toString());
       }
       if (typeof productData.sale === "boolean") {
-        // Check if sale is defined and a boolean
         formData.append("sale", productData.sale.toString());
       }
       if (typeof productData.new === "boolean") {
-        // Check if new is defined and a boolean
         formData.append("new", productData.new.toString());
       }
-      formData.append("image", productData.imageFile as Blob);
+
+      // Append multiple files
+      productData.imageFiles.forEach((file) => {
+        formData.append("images", file);
+      });
 
       console.log("Form data:", formData);
 
@@ -229,11 +220,12 @@ const CreateProduct: React.FC = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
+      const filesArray = Array.from(e.target.files);
+      const urlsArray = filesArray.map((file) => URL.createObjectURL(file));
       setProductData((prevProductData) => ({
         ...prevProductData,
-        imageFile: file,
-        imageUrl: URL.createObjectURL(file),
+        imageFiles: filesArray,  // Use all files for the imageFiles
+        imageUrls: urlsArray,  // Set all URLs
       }));
     }
   };
@@ -440,6 +432,7 @@ const CreateProduct: React.FC = () => {
               type="file"
               name="imageFile"
               accept="image/*"
+              multiple
               onChange={(e) => {
                 handleChange(e);
                 handleImageChange(e);
@@ -448,16 +441,20 @@ const CreateProduct: React.FC = () => {
               required
               className="rounded-md p-2 w-full"
             />
-            {productData.imageUrl && (
-              <Image
-                width={500}
-                height={500}
-                src={productData.imageUrl} // Set the src to the current image URL
-                alt="Current Image"
-                className="mt-2"
-                style={{ maxWidth: "200px" }} // Adjust the width as needed
-              />
-            )}
+            <div className="flex flex-wrap">
+            {productData.imageUrls &&
+              productData.imageUrls.map((url, index) => (
+                <Image
+                  key={index}
+                  width={90}
+                  height={90}
+                  src={url}
+                  alt={`Product Image ${index + 1}`}
+                  className="mt-2 mr-2"
+                  style={{ maxWidth: "200px" }}
+                />
+              ))}
+            </div>
             <button
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-200"

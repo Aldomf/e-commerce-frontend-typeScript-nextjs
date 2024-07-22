@@ -143,7 +143,7 @@ function AdminProduct() {
               onClick={() => router.push(`/admin/product/${product.id}`)}
             >
               <Image
-                src={product.imageUrl}
+                src={product.imageUrls[0]}
                 alt={product.name}
                 width={500}
                 height={500}
