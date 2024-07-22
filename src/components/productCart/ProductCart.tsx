@@ -28,7 +28,11 @@ function ProductCart() {
                   className="h-full w-28 border mr-4"
                 >
                   <Image
-                    src={product.imageUrl} // Use product image URL
+                    src={
+                      product.imageUrls.length > 0
+                        ? product.imageUrls[0]
+                        : "/path/to/default-image.jpg"
+                    } // Use the first image or a default image
                     width={1000}
                     height={500}
                     alt={product.name} // Use product name as alt text
