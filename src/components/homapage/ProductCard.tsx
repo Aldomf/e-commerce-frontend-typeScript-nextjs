@@ -64,13 +64,14 @@ function ProductCard({ products, label }: ProductCardProps) {
                   {label}
                 </p>
               )}
-              <Image
-                src={product.imageUrl} // Use product image URL
-                width={1000}
-                height={500}
-                alt={product.name}
-                className="h-full"
-              />
+              {product.imageUrls && product.imageUrls.length > 0 && (
+                <Image
+                  src={product.imageUrls[0]} // Use the first image URL from the imageUrls array
+                  width={1000}
+                  height={500}
+                  alt={product.name} // Use product name as alt text
+                />
+              )}
             </div>
             <div className="px-2 h-fit">
               <div>
