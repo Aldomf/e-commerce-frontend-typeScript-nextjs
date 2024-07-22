@@ -97,16 +97,24 @@ function SearchForm() {
                   <Link
                     href={`/product/${product.id}`}
                     key={product.id}
-                    className={`flex mb-4 ${index === 0 ? 'product-link' : ''}`}
+                    className={`flex mb-4 ${index === 0 ? "product-link" : ""}`}
                   >
                     <div className="w-20 h-20 mr-4">
-                      <Image
-                        src={product.imageUrl}
-                        width={1000}
-                        height={500}
-                        alt={product.name}
-                        className="h-full"
-                      />
+                      {product.imageUrls.length > 0 ? (
+                        <Image
+                          src={product.imageUrls[0]} // Display the first image URL
+                          width={1000}
+                          height={500}
+                          alt={product.name} // Use product name as alt text
+                        />
+                      ) : (
+                        <Image
+                          src="/default-image.jpg" // Provide a default image if no images are available
+                          width={1000}
+                          height={500}
+                          alt="Default image"
+                        />
+                      )}
                     </div>
                     <div>
                       <p>
@@ -131,16 +139,24 @@ function SearchForm() {
                   <Link
                     href={`/product/${product.id}`}
                     key={product.id}
-                    className={`flex mb-4 ${index === 0 ? 'product-link' : ''}`}
+                    className={`flex mb-4 ${index === 0 ? "product-link" : ""}`}
                   >
                     <div className="w-20 h-20 mr-4">
-                      <Image
-                        src={product.imageUrl}
-                        width={1000}
-                        height={500}
-                        alt={product.name}
-                        className="h-full"
-                      />
+                      {product.imageUrls.length > 0 ? (
+                        <Image
+                          src={product.imageUrls[0]} // Display the first image URL
+                          width={1000}
+                          height={500}
+                          alt={product.name} // Use product name as alt text
+                        />
+                      ) : (
+                        <Image
+                          src="/default-image.jpg" // Provide a default image if no images are available
+                          width={1000}
+                          height={500}
+                          alt="Default image"
+                        />
+                      )}
                     </div>
                     <div>
                       <p>
@@ -166,5 +182,3 @@ function SearchForm() {
 }
 
 export default SearchForm;
-
-
