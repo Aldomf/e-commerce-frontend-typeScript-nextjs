@@ -25,7 +25,15 @@ const CartListSideBar = dynamic(
 );
 
 function Product() {
-  const { handleAddToCart, toggleSidebar, isSidebarOpen, handleDecreaseQuantity, handleIncreaseQuantity, updateQuantity, productQuantities } = useAddProduct();
+  const {
+    handleAddToCart,
+    toggleSidebar,
+    isSidebarOpen,
+    handleDecreaseQuantity,
+    handleIncreaseQuantity,
+    updateQuantity,
+    productQuantities,
+  } = useAddProduct();
   const {
     addProductToWishlist,
     deleteProductFromWishlist,
@@ -88,16 +96,17 @@ function Product() {
       <div className="md:mt-[230px] lg:mt-[240px] xl:mt-[260px] md:px-10 lg:px-20 xl:px-48 flex flex-col items-center md:items-start">
         <div className="flex flex-col items-center pb-6 ssm:px-10 md:flex-row md:items-start  md:space-x-4  lg:space-x-6 xl:space-x-8">
           <div className="border w-[80%] h-80 ml:h-96 mt-4 ssm2:h-[500px] md:mt-0 xl:h-[500px] xl:w-[60%]">
-            {productById && (
-              <Image
-                src={productById.imageUrl} // Ensure productById is not undefined before accessing imageUrl
-                alt="Logo"
-                className="w-full h-full"
-                width={500}
-                height={500}
-                priority
-              />
-            )}
+            {productById &&
+              productById.imageUrls &&
+              productById.imageUrls.length > 0 && (
+                <Image
+                  src={productById.imageUrls[0]} // Access the first image in the array, or handle as needed
+                  alt="Product Image"
+                  className="w-full h-full"
+                  width={500}
+                  height={500} // Make sure to provide height to avoid layout shift
+                />
+              )}
           </div>
           <div className="w-[80%]">
             <h2 className="font-bold text-2xl">{productById?.name}</h2>
@@ -120,16 +129,16 @@ function Product() {
               <div className="flex items-center  border w-fit p-1">
                 <button
                   className="mr-2"
-                    // onClick={() => {
-                    //   if ((productQuantities[parseInt(productId)] || 0) > 1) {
-                    //     // Check if counter is greater than 1
-                    //     updateQuantity(
-                    //       parseInt(productId),
-                    //       (productQuantities[parseInt(productId)] || 0) - 1
-                    //     );
-                    //   }
-                    // }}
-                    disabled={(productQuantities[parseInt(productId)] || 0) <= 1} // Disable the button if counter is 1 or less
+                  // onClick={() => {
+                  //   if ((productQuantities[parseInt(productId)] || 0) > 1) {
+                  //     // Check if counter is greater than 1
+                  //     updateQuantity(
+                  //       parseInt(productId),
+                  //       (productQuantities[parseInt(productId)] || 0) - 1
+                  //     );
+                  //   }
+                  // }}
+                  disabled={(productQuantities[parseInt(productId)] || 0) <= 1} // Disable the button if counter is 1 or less
                 >
                   <svg
                     className="w-4 h-4 flex justify-center items-center"
@@ -142,12 +151,12 @@ function Product() {
                 <p>{productQuantities[parseInt(productId)] || 0}</p>
                 <button
                   className="ml-2"
-                    // onClick={() => {
-                    //   updateQuantity(
-                    //     parseInt(productId),
-                    //     (productQuantities[parseInt(productId)] || 0) + 1
-                    //   );
-                    // }}
+                  // onClick={() => {
+                  //   updateQuantity(
+                  //     parseInt(productId),
+                  //     (productQuantities[parseInt(productId)] || 0) + 1
+                  //   );
+                  // }}
                 >
                   <svg
                     className="w-4 h-4 flex justify-center items-center"
