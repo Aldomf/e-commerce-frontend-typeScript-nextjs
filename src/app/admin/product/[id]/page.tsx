@@ -220,24 +220,21 @@ const UpdateProductForm = () => {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value, type, files } = e.target as HTMLInputElement;
-
+  
     setProductData((prevData) => {
       if (type === "file") {
         if (files && files.length > 0) {
           const newFilesArray = Array.from(files);
           const newUrlsArray = newFilesArray.map((file) => URL.createObjectURL(file));
-
-          // Ensure prevData.imageFiles and prevData.imageUrls are arrays
+  
           const existingFileNames = new Set((prevData.imageFiles || []).map((file) => file.name));
           const existingUrls = new Set(prevData.imageUrls || []);
-
-          // Filter out already existing files and URLs
+  
           const uniqueFiles = newFilesArray.filter((file) => !existingFileNames.has(file.name));
           const uniqueUrls = newUrlsArray.filter((url) => !existingUrls.has(url));
-
-          // Clear the file input after processing
+  
           e.target.value = "";
-
+  
           return {
             ...prevData,
             imageFiles: [...(prevData.imageFiles || []), ...uniqueFiles],
@@ -245,26 +242,27 @@ const UpdateProductForm = () => {
           };
         }
       }
-
+  
       let newValue: string | boolean = value;
-
+  
       if (type === "checkbox") {
         newValue = (e.target as HTMLInputElement).checked;
       }
-
+  
       if (name === "category" && newValue === currentCategoryName) {
         return {
           ...prevData,
           [name]: prevData.category,
         };
       }
-
+  
       return {
         ...prevData,
         [name]: newValue,
       };
     });
   };
+  
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

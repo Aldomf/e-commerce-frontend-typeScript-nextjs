@@ -60,7 +60,7 @@ function LaptopHeader() {
   return (
     <>
       <div
-        className={`fixed top-0 left-0 right-0 z-10 transition-opacity duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-opacity duration-500 ${
           isScrolled
             ? "opacity-0 pointer-events-none"
             : "opacity-100 pointer-events-auto"

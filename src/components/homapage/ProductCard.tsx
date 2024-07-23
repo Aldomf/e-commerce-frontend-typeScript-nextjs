@@ -16,7 +16,9 @@ function ProductCard({ products, label }: ProductCardProps) {
   const [hoveredImageIndex, setHoveredImageIndex] = useState<number | null>(
     null
   );
-  const [hoveredProductIndex, setHoveredProductIndex] = useState<number | null>(null);
+  const [hoveredProductIndex, setHoveredProductIndex] = useState<number | null>(
+    null
+  );
 
   const handleMouseEnter = (roomIndex: number, imageIndex: number) => {
     setHoveredProductIndex(roomIndex);
@@ -75,12 +77,12 @@ function ProductCard({ products, label }: ProductCardProps) {
         >
           <div className="mb-8 border-2 ssm:border-0 ssm:mb-0">
             <div
-              className="relative h-fit"
+              className="relative h-80 border border-red-500"
               onMouseEnter={() => handleMouseEnter(product.id, 0)}
               onMouseLeave={handleMouseLeave}
             >
               {label && (
-                <p className="bg-red-600 px-4 h-8 rounded-full text-white w-fit flex justify-center items-center absolute top-2 left-2">
+                <p className="bg-red-600 px-4 h-8 rounded-full text-white w-fit flex justify-center items-center absolute top-2 left-2 z-10">
                   {label}
                 </p>
               )}
@@ -97,7 +99,7 @@ function ProductCard({ products, label }: ProductCardProps) {
                   width={1000}
                   height={500}
                   alt={product.name} // Use product name as alt text
-                  //className="h-40"
+                  className="h-full border-red-700 border"
                 />
               )}
             </div>
