@@ -1,28 +1,20 @@
 "use client";
 import Footer from "@/components/layouts/Footer";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import { useMediaQuery } from "react-responsive";
 import Image from "next/image";
-import Link from "next/link";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { useAddProduct } from "@/context/AddProductContext";
 import { useParams } from "next/navigation";
 import { useProduct } from "@/context/ProductContext";
-//import CartListSideBar from "@/components/homapage/CartListSideBar";
 import { useWishlist } from "@/context/WishlistContext";
 import { useAuth } from "@/context/AuthContext";
 import Reviews from "@/components/reviews/Reviews";
 
-const LaptopHeader = dynamic(
-  () => import("../../../components/layouts/LaptopHeader")
-);
-const MobileHeader = dynamic(
-  () => import("../../../components/layouts/MobileHeader")
-);
-const CartListSideBar = dynamic(
-  () => import("../../../components/homapage/CartListSideBar")
-);
+const LaptopHeader = dynamic(() => import("../../../components/layouts/LaptopHeader"));
+const MobileHeader = dynamic(() => import("../../../components/layouts/MobileHeader"));
+const CartListSideBar = dynamic(() => import("../../../components/homapage/CartListSideBar"));
 
 function Product() {
   const {
@@ -45,41 +37,28 @@ function Product() {
   const params = useParams<{ id: string }>();
   const productId = params.id;
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
-  const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isDropdownOpen2, setIsDropdownOpen2] = useState(false);
-
+  const [isDropdownOpen3, setIsDropdownOpen3] = useState(false);
   const [isInWishlist, setIsInWishlist] = useState(false);
+  const [mainImage, setMainImage] = useState("");
+  const [hoverImage, setHoverImage] = useState("");
 
-  const [mainImage, setMainImage] = useState(productById?.imageUrls[0] || "");
-
-  // Function to handle adding or deleting a product from the wishlist
-  const handleToggleWishlist = () => {
-    if (isInWishlist) {
-      // If already in wishlist, delete it
-      deleteProductFromWishlist(parseInt(productId));
-    } else {
-      // If not in wishlist, add it
-      addProductToWishlist(parseInt(productId));
-    }
-    // Toggle the state
-    setIsInWishlist(!isInWishlist);
-  };
-
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const toggleDropdown2 = () => {
-    setIsDropdownOpen2(!isDropdownOpen2);
-  };
-
-  const toggleDropdown3 = () => {
-    setIsDropdownOpen3(!isDropdownOpen3);
-  };
+  // Memoize the image URLs list to avoid unnecessary re-renders
+  const imageUrls = useMemo(() => productById?.imageUrls || [], [productById]);
 
   useEffect(() => {
-    // Fetch user's wishlist only if the user object is available
+    // Set the initial main image when product data is fetched
+    if (imageUrls.length > 0) {
+      setMainImage(imageUrls[0]);
+    }
+  }, [imageUrls]);
+
+  useEffect(() => {
+    fetchProductById(parseInt(productId));
+  }, [productId, fetchProductById]);
+
+  useEffect(() => {
     if (user?.id) {
       getUserWishlist();
     }
@@ -92,34 +71,54 @@ function Product() {
     }
   }, [productId, checkIsInWishlist]);
 
+  // Function to handle adding or deleting a product from the wishlist
+  const handleToggleWishlist = () => {
+    if (isInWishlist) {
+      deleteProductFromWishlist(parseInt(productId));
+    } else {
+      addProductToWishlist(parseInt(productId));
+    }
+    setIsInWishlist(!isInWishlist);
+  };
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+  const toggleDropdown2 = () => setIsDropdownOpen2(!isDropdownOpen2);
+  const toggleDropdown3 = () => setIsDropdownOpen3(!isDropdownOpen3);
+
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
       <div className="md:mt-[230px] lg:mt-[240px] xl:mt-[260px] md:px-10 lg:px-20 xl:px-48 flex flex-col items-center md:items-start">
-        <div className="flex flex-col items-center pb-6 ssm:px-10 md:flex-row md:items-start md:space-x-4 lg:space-x-6 xl:space-x-8">
+        <div className="flex flex-col items-center pb-6 ssm:px-10 md:flex-row md:items-start md:space-x-4 lg:space-x-6 xl:space-x-8 md:mb-32">
           <div className="flex flex-col mt-10 w-[90%] ml:w-[80%] md:mt-0 lg:flex-row-reverse">
             <div className="w-full h-80 md:h-96 ssm2:h-[500px] xl:h-[500px] lg:ml-4">
               <Image
-                src={mainImage}
+                src={hoverImage || mainImage} // Use hoverImage if it exists, otherwise use mainImage
                 alt="Product Image"
                 className="w-full h-full"
                 width={500}
                 height={500}
+                priority
+                layout="responsive"
               />
             </div>
-            <div className="flex lg:flex-col lg:space-y-4 space-x-4 lg:space-x-0 md:mb-0 mb-4 mt-4 lg:mt-0">
-              {productById?.imageUrls &&
-                productById.imageUrls.map((url, index) => (
-                  <div key={index} onMouseEnter={() => setMainImage(url)}>
-                    <Image
-                      src={url}
-                      alt={`Thumbnail ${index + 1}`}
-                      className="w-16 h-20 border rounded cursor-pointer transition-opacity duration-300 ease-in-out hover:opacity-75"
-                      width={64}
-                      height={64}
-                    />
-                  </div>
-                ))}
+            <div className="flex lg:flex-col lg:space-y-4 space-x-4 lg:space-x-0 md:mb-0 mb-4 mt-20 lg:mt-0">
+              {imageUrls.map((url, index) => (
+                <div
+                  key={index}
+                  onMouseEnter={() => setHoverImage(url)}
+                  onMouseLeave={() => setHoverImage("")} // Clear hoverImage when mouse leaves
+                >
+                  <Image
+                    src={url}
+                    alt={`Thumbnail ${index + 1}`}
+                    className="w-16 h-20 border rounded cursor-pointer transition-opacity duration-300 ease-in-out hover:opacity-75"
+                    width={64}
+                    height={64}
+                    layout="intrinsic"
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
