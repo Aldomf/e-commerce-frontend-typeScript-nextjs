@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Image from "next/image";
 import { Product } from "@/interfaces/interfaces";
@@ -12,6 +12,22 @@ interface ProductCardProps {
 
 function ProductCard({ products, label }: ProductCardProps) {
   const { handleAddToCart } = useAddProduct();
+
+  const [hoveredImageIndex, setHoveredImageIndex] = useState<number | null>(
+    null
+  );
+  const [hoveredProductIndex, setHoveredProductIndex] = useState<number | null>(null);
+
+  const handleMouseEnter = (roomIndex: number, imageIndex: number) => {
+    setHoveredProductIndex(roomIndex);
+    setHoveredImageIndex(imageIndex);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredProductIndex(null);
+    setHoveredImageIndex(null);
+  };
+
   // Check if products are available
   if (!products || products.length === 0) {
     return (
@@ -58,7 +74,11 @@ function ProductCard({ products, label }: ProductCardProps) {
           className="ssm:border-2 w-60"
         >
           <div className="mb-8 border-2 ssm:border-0 ssm:mb-0">
-            <div className="relative h-72">
+            <div
+              className="relative h-fit"
+              onMouseEnter={() => handleMouseEnter(product.id, 0)}
+              onMouseLeave={handleMouseLeave}
+            >
               {label && (
                 <p className="bg-red-600 px-4 h-8 rounded-full text-white w-fit flex justify-center items-center absolute top-2 left-2">
                   {label}
@@ -66,10 +86,18 @@ function ProductCard({ products, label }: ProductCardProps) {
               )}
               {product.imageUrls && product.imageUrls.length > 0 && (
                 <Image
-                  src={product.imageUrls[0]} // Use the first image URL from the imageUrls array
+                  src={
+                    product.imageUrls[
+                      hoveredProductIndex === product.id &&
+                      hoveredImageIndex !== null
+                        ? (hoveredImageIndex + 1) % product.imageUrls.length
+                        : 0
+                    ]
+                  } // Use the first image URL from the imageUrls array
                   width={1000}
                   height={500}
                   alt={product.name} // Use product name as alt text
+                  //className="h-40"
                 />
               )}
             </div>
