@@ -51,6 +51,8 @@ function Product() {
 
   const [isInWishlist, setIsInWishlist] = useState(false);
 
+  const [mainImage, setMainImage] = useState(productById?.imageUrls[0] || "");
+
   // Function to handle adding or deleting a product from the wishlist
   const handleToggleWishlist = () => {
     if (isInWishlist) {
@@ -94,20 +96,33 @@ function Product() {
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}
       <div className="md:mt-[230px] lg:mt-[240px] xl:mt-[260px] md:px-10 lg:px-20 xl:px-48 flex flex-col items-center md:items-start">
-        <div className="flex flex-col items-center pb-6 ssm:px-10 md:flex-row md:items-start  md:space-x-4  lg:space-x-6 xl:space-x-8">
-          <div className="border w-[80%] h-80 ml:h-96 mt-4 ssm2:h-[500px] md:mt-0 xl:h-[500px] xl:w-[60%]">
-            {productById &&
-              productById.imageUrls &&
-              productById.imageUrls.length > 0 && (
-                <Image
-                  src={productById.imageUrls[0]} // Access the first image in the array, or handle as needed
-                  alt="Product Image"
-                  className="w-full h-full"
-                  width={500}
-                  height={500} // Make sure to provide height to avoid layout shift
-                />
-              )}
+        <div className="flex flex-col items-center pb-6 ssm:px-10 md:flex-row md:items-start md:space-x-4 lg:space-x-6 xl:space-x-8">
+          <div className="flex flex-col mt-10 w-[90%] ml:w-[80%] md:mt-0 lg:flex-row-reverse">
+            <div className="w-full h-80 md:h-96 ssm2:h-[500px] xl:h-[500px] lg:ml-4">
+              <Image
+                src={mainImage}
+                alt="Product Image"
+                className="w-full h-full"
+                width={500}
+                height={500}
+              />
+            </div>
+            <div className="flex lg:flex-col lg:space-y-4 space-x-4 lg:space-x-0 md:mb-0 mb-4 mt-4 lg:mt-0">
+              {productById?.imageUrls &&
+                productById.imageUrls.map((url, index) => (
+                  <div key={index} onMouseEnter={() => setMainImage(url)}>
+                    <Image
+                      src={url}
+                      alt={`Thumbnail ${index + 1}`}
+                      className="w-16 h-20 border rounded cursor-pointer transition-opacity duration-300 ease-in-out hover:opacity-75"
+                      width={64}
+                      height={64}
+                    />
+                  </div>
+                ))}
+            </div>
           </div>
+
           <div className="w-[80%]">
             <h2 className="font-bold text-2xl">{productById?.name}</h2>
             <div className="flex">
