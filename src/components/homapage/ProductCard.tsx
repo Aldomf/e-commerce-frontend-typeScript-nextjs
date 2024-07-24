@@ -77,7 +77,7 @@ function ProductCard({ products, label }: ProductCardProps) {
         >
           <div className="mb-8 border-2 ssm:border-0 ssm:mb-0">
             <div
-              className="relative h-80 border border-red-500"
+              className="relative h-80"
               onMouseEnter={() => handleMouseEnter(product.id, 0)}
               onMouseLeave={handleMouseLeave}
             >
