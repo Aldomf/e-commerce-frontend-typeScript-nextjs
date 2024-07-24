@@ -99,7 +99,7 @@ function ProductCard({ products, label }: ProductCardProps) {
                   width={1000}
                   height={500}
                   alt={product.name} // Use product name as alt text
-                  className="h-full border-red-700 border"
+                  className="h-full"
                 />
               )}
             </div>
