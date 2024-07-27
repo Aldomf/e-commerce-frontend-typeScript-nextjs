@@ -11,9 +11,8 @@ import CartListSideBar from "../homapage/CartListSideBar";
 import { useAddProduct } from "@/context/AddProductContext";
 
 function LaptopHeader() {
-  const { updatedCartList } = useAddProduct();
+  const { updatedCartList, setIsSidebarOpen, isSidebarOpen } = useAddProduct();
   
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -94,7 +93,7 @@ function LaptopHeader() {
               <FavoriteIcon className="text-white w-7 h-7 hover:text-[#363F46] transition duration-500 ease-in-out" />
             </Link>
             <button
-              ref={buttonRef}
+              // ref={buttonRef}
               className="flex justify-center items-center"
               onClick={toggleSidebar}
             >

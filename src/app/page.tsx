@@ -36,7 +36,7 @@ const CartListSideBar = dynamic(
 function HomePage() {
   const isTabletOrLarger = useMediaQuery({ minWidth: 768 });
 
-  const { toggleSidebar, isSidebarOpen } = useAddProduct();
+  const { toggleSidebar, isSidebarOpen, setIsSidebarOpen } = useAddProduct();
 
   useEffect(() => {
     // Get the hash from the URL
@@ -75,6 +75,12 @@ function HomePage() {
       <NewProducts />
       <NewsLetter />
       <Footer />
+      {isSidebarOpen && (
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 z-50" 
+        onClick={() => setIsSidebarOpen(false)} 
+      />
+    )}
       <CartListSideBar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <Toaster />
     </>

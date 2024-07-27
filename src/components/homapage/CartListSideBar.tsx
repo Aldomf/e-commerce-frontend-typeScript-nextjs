@@ -27,7 +27,7 @@ const CartListSideBar = forwardRef<HTMLDivElement, CartListSideBarProps>(
         ref={ref}
         className={`fixed z-50 top-0 right-0 h-screen bg-white md:w-[45%] lg:w-[35%] xl:w-[25%] overflow-y-auto transition-transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } ease-in-out duration-500 shadow-left`}
+        } ease-in-out duration-500`}
         id="sidebar"
       >
         <div className="flex flex-col">
