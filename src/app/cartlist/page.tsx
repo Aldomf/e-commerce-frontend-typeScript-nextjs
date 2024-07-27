@@ -78,8 +78,6 @@ function CartList() {
     shippingAddressForm?.scrollIntoView({ behavior: "smooth" });
   };
 
-  console.log("hola", shippingAddress);
-
   return (
     <>
       {isTabletOrLarger ? <LaptopHeader /> : <MobileHeader />}

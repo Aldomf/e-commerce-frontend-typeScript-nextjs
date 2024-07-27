@@ -8,7 +8,7 @@ function SubHeaderLaptop() {
   const { categories } = useProduct();
 
   return (
-    <div className="py-4 flex justify-center items-center bg-white font-light lg:font-normal">
+    <div className="py-4 flex justify-center items-center bg-white font-light shadow-lg lg:font-normal">
       {categories.map((category) => (
         <Link
           key={category.id} // Ensure each Link has a unique key

@@ -99,13 +99,14 @@ function SearchForm() {
                     key={product.id}
                     className={`flex mb-4 ${index === 0 ? "product-link" : ""}`}
                   >
-                    <div className="w-20 h-20 mr-4">
+                    <div className="w-20 h-24 mr-4">
                       {product.imageUrls.length > 0 ? (
                         <Image
                           src={product.imageUrls[0]} // Display the first image URL
                           width={1000}
                           height={500}
                           alt={product.name} // Use product name as alt text
+                          className="h-full"
                         />
                       ) : (
                         <Image

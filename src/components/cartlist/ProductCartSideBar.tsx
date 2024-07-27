@@ -33,6 +33,7 @@ function ProductCartSideBar() {
                       width={1000}
                       height={500}
                       alt={product.name} // Use product name as alt text
+                      className="h-full"
                     />
                   )}
                 </Link>

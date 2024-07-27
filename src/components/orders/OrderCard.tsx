@@ -65,20 +65,16 @@ function OrderCard() {
               </div>
             </div>
             <div className="flex flex-wrap mb-6">
-              {/* Render images of products */}
               {order.products.map((product, index) => (
-                <div key={index} className="w-20 h-20 mb-2 mr-2">
+                <div key={index} className="w-20 h-24 mb-2 mr-2">
                   {product.imageUrls.length > 0 ? (
-                    product.imageUrls.map((url, index) => (
-                      <div key={index} className="w-20 h-20 mb-2 mr-2">
-                        <Image
-                          src={url} // Use each image URL from the array
-                          alt={`Image ${index + 1} of ${product.name}`} // Provide a descriptive alt text
-                          width={500}
-                          height={500}
-                        />
-                      </div>
-                    ))
+                    <Image
+                      src={product.imageUrls[0]} // Use the first image URL from the array
+                      alt={`Image 1 of ${product.name}`} // Provide a descriptive alt text
+                      width={500}
+                      height={500}
+                      className="h-full"
+                    />
                   ) : (
                     <div>No images available</div> // Display a fallback message or component
                   )}

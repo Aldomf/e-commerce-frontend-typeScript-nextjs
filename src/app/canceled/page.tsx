@@ -36,12 +36,6 @@ function PaymentCanceled() {
             >
               GO HOMEPAGE
             </Link>
-            <Link
-              href="/cartlist"
-              className="px-12 bg-gray-700 hover:bg-gray-600 text-white font-semibold py-3"
-            >
-              VIEW CART
-            </Link>
           </div>
         </div>
       </div>

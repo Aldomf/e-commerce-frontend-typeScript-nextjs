@@ -25,13 +25,13 @@ const CartListSideBar = forwardRef<HTMLDivElement, CartListSideBarProps>(
     return (
       <div
         ref={ref}
-        className={`fixed z-10 top-0 right-0 h-screen bg-white md:w-[45%] lg:w-[35%] xl:w-[25%] overflow-y-auto transition-transform ${
+        className={`fixed z-50 top-0 right-0 h-screen bg-white md:w-[45%] lg:w-[35%] xl:w-[25%] overflow-y-auto transition-transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } ease-in-out duration-500`}
+        } ease-in-out duration-500 shadow-left`}
         id="sidebar"
       >
         <div className="flex flex-col">
-          <div className="sticky top-0 right-0 left-0 z-10 flex flex-col text-white">
+          <div className="sticky top-0 right-0 left-0 z-10 flex flex-col text-white shadow-lg">
             <div className="flex items-center justify-between w-full bg-[#a3c9bc] h-28 xl:h-32 px-4">
               <MdKeyboardArrowRight
                 className="text-4xl cursor-pointer"
