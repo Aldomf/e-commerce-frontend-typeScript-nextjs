@@ -38,8 +38,18 @@ function Sale() {
               ""
             )}
             <div className="lg:w-[80%]">
-              <div className="ssll:grid ssll:grid-cols-2 ssll:gap-2 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4">
-                <ProductCard products={saleProducts} label="On Sale" />
+            <div
+                className={
+                  saleProducts && saleProducts.length > 0
+                    ? "ssll:grid ssll:grid-cols-2 ssll:gap-2 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4"
+                    : "flex justify-center items-center"
+                }
+              >
+                {saleProducts && saleProducts.length > 0 ? (
+                  <ProductCard products={saleProducts} label="On Sale"/>
+                ) : (
+                  <p className="text-4xl font-semibold">There are no products in this price range</p>
+                )}
               </div>
             </div>
           </div>

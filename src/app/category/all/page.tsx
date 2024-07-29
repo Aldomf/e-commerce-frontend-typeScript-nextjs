@@ -2,7 +2,7 @@
 import LaptopSidebar from "@/components/category/LaptopSideBar";
 import MobileSidebar from "@/components/category/MobileSideBar";
 import ProductCard from "@/components/homapage/ProductCard";
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "next/navigation";
 import { useProduct } from "@/context/ProductContext";
 import { useMediaQuery } from "react-responsive";
@@ -27,9 +27,7 @@ function All() {
           <h2 className="font-bold text-3xl mb-4 mt-6 md:text-5xl lg:text-6xl xl:text-7xl lg:py-10 text-center md:mb-10">
             All Products
           </h2>
-          <div className="">
-            {isTabletOrMobile ? <MobileSidebar /> : ""}
-          </div>
+          <div className="">{isTabletOrMobile ? <MobileSidebar /> : ""}</div>
           <div className="lg:flex">
             {!isTabletOrMobile ? (
               <div className="w-[20%] lg:pr-4 xl:pl-14">
@@ -39,8 +37,18 @@ function All() {
               ""
             )}
             <div className="lg:w-[80%]">
-              <div className="ssll:grid ssll:grid-cols-2 ssll:gap-2 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4">
-                <ProductCard products={filteredProducts} />
+              <div
+                className={
+                  filteredProducts && filteredProducts.length > 0
+                    ? "ssll:grid ssll:grid-cols-2 ssll:gap-2 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4"
+                    : "flex justify-center items-center"
+                }
+              >
+                {filteredProducts && filteredProducts.length > 0 ? (
+                  <ProductCard products={filteredProducts} />
+                ) : (
+                  <p className="text-4xl font-semibold">There are no products in this price range</p>
+                )}
               </div>
             </div>
           </div>

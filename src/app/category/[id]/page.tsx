@@ -50,8 +50,18 @@ function Category() {
               ""
             )}
             <div className="lg:w-[80%]">
-              <div className="ssll:grid ssll:grid-cols-2 ssll:gap-2 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4">
-                <ProductCard products={productsCategory} />
+            <div
+                className={
+                  productsCategory && productsCategory.length > 0
+                    ? "ssll:grid ssll:grid-cols-2 ssll:gap-2 lg:gap-3 xl:gap-10 lg:grid-cols-3 xl:grid-cols-4"
+                    : "flex justify-center items-center"
+                }
+              >
+                {productsCategory && productsCategory.length > 0 ? (
+                  <ProductCard products={productsCategory} />
+                ) : (
+                  <p className="text-4xl font-semibold">There are no products in this price range</p>
+                )}
               </div>
             </div>
           </div>
