@@ -2,17 +2,19 @@ import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import SearchForm from "@/components/homapage/SearchForm";
 import Link from "next/link";
-import AboveHeaderLaptop from "@/components/homapage/AboveHeaderLaptop";
-import SubHeaderLaptop from "@/components/homapage/SubHeaderLaptop";
 import { FaLocationDot } from "react-icons/fa6";
-import CartListSideBar from "../homapage/CartListSideBar";
 import { useAddProduct } from "@/context/AddProductContext";
+import dynamic from 'next/dynamic';
+
+// Dynamic imports
+const SearchForm = dynamic(() => import("@/components/homapage/SearchForm"));
+const AboveHeaderLaptop = dynamic(() => import("@/components/homapage/AboveHeaderLaptop"));
+const SubHeaderLaptop = dynamic(() => import("@/components/homapage/SubHeaderLaptop"));
+const CartListSideBar = dynamic(() => import("@/components/homapage/CartListSideBar"));
 
 function LaptopHeader() {
   const { updatedCartList, setIsSidebarOpen, isSidebarOpen } = useAddProduct();
-  
   const buttonRef = useRef<HTMLButtonElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -26,7 +28,6 @@ function LaptopHeader() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-
       setIsScrolled(currentScrollY > 400 && currentScrollY > prevScrollY);
       setPrevScrollY(currentScrollY);
     };
